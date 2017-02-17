@@ -1,0 +1,17 @@
+.charts {
+    border-style: solid;
+    border-color: black;
+    border-width: 2px;
+}
+
+#chart1_div {
+ overflow-x: scroll;  
+ overflow-y: hidden;
+ width: 1000px;
+}
+
+#chart2_div {
+ overflow-x: scroll; 
+ overflow-y: hidden;
+ width: 1000px;
+}
