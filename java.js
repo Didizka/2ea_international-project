@@ -2,7 +2,54 @@
 var app = angular.module("App", ['ngRoute']);
 
 app.controller('MainController', function ($scope, $http, $location, $routeParams) {   
-        
+    
+    $scope.loginPage = function(){  
+        $location.path("/login");   
+    }; 
+    $scope.registerPage = function(){  
+        $location.path("/register");   
+    }; 
+    $scope.contactPage = function(){  
+        $location.path("/contact");   
+    }; 
+    $scope.userPage = function(){  
+        $location.path("/userPage");   
+    }; 
+    $scope.homePage = function(){  
+        $location.path("/home");   
+    };    
+});
+
+app.controller('LoginController', function($scope, $http, $location, $routeParams){
+    
+});
+
+app.controller('ContactController', function($scope, $http, $location, $routeParams){
+    
+});
+
+app.controller('RegisterController', function($scope, $http, $location, $routeParams){
+    
+});
+
+app.controller('UserPageController', function($scope, $http, $location, $routeParams){
+            
+    $scope.loginPage = function(){  
+        $location.path("/login");   
+    }; 
+    $scope.registerPage = function(){  
+        $location.path("/register");   
+    }; 
+    $scope.contactPage = function(){  
+        $location.path("/contact");   
+    }; 
+    $scope.userPage = function(){  
+        $location.path("/userPage");   
+    }; 
+    $scope.homePage = function(){  
+        $location.path("/home");   
+    };
+    
     // Load the Visualization API and the corechart package.
       google.charts.load('current', {'packages':['corechart']});
 
@@ -31,8 +78,7 @@ app.controller('MainController', function ($scope, $http, $location, $routeParam
             data2.addRows([
                 [i.toString(), Math.random()*100]          
         ]);
-        }
-        
+        }        
 
         // Set chart options
         var options1 = {title:'My ECG 1',
@@ -55,38 +101,34 @@ app.controller('MainController', function ($scope, $http, $location, $routeParam
           
         var chart2 = new google.visualization.LineChart(document.getElementById('chart2_div'));
         chart2.draw(data2, options2);
-      }     
-});
-
-app.controller('LoginController', function($scope, $http, $location, $routeParams){
-    
-});
-
-app.controller('ContactController', function($scope, $http, $location, $routeParams){
-    
-});
-
-app.controller('RegisterController', function($scope, $http, $location, $routeParams){
-    
+      }  
 });
 
 app.config(function($routeProvider){
 $routeProvider
-.when('/',{
+    .when('/',{
+    templateUrl:'home.html',
+    controller:'MainController'
+    })
+    .when('/home',{
     templateUrl:'home.html',
     controller:'MainController'
     })
     .when('/login',{
     templateUrl:'login.html',
-    controller:'LoginController'
+    controller:'MainController'
     })
     .when('/contact',{
     templateUrl:'contact.html',
-    controller:'ContactController'
+    controller:'MainController'
     })
     .when('/register',{
     templateUrl:'register.html',
-    controller:'RegisterController'
+    controller:'MainController'
+    })
+    .when('/userPage',{
+    templateUrl:'userPage.html',
+    controller:'UserPageController'
     })
     .otherwise({
     redirectTo: '/' 
