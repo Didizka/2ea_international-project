@@ -1,7 +1,17 @@
 button:focus {outline:0;}
 
 body {
-    background-image:url("gplaypattern/gplaypattern_@2X.png");
+    background-image:url("ecg-pusle-wallpaper2.jpg");
+    margin-left:5%;
+    margin-right:5%; 
+    color:white;
+}
+
+footer {
+    padding:5 5;
+    height: 25px;
+    width: inherit;
+    background-color:gray;
 }
 
 .clear {
@@ -41,7 +51,7 @@ div.pagelinks {
     padding:5 5;
     height: 25px;
     width: inherit;
-    background-color:gray;
+    background-image:url("test.jpg");
 }
 
 .linkButton { 
@@ -49,12 +59,12 @@ div.pagelinks {
     float:right;
     margin: 0 5px;
     height:50px;
-    background-color:lightgray;
+    background-image:url("button.png");
     border-style: solid;
     border-width: 1px;
     border-color:gray;
     font-size: 20px;
-    font-weight: bold;
+    font-weight: bold;    
 }
 
 .linkButton2 { 
@@ -67,12 +77,13 @@ div.pagelinks {
     border-width: 1px;
     border-color:gray;
     font-size: 20px;
-    font-weight: bold;
+    font-weight: bold;    
+    
 }
 
 .linkButton:hover {
     background-color:darkgray;
-    color:lightgray;
+    color:white;
 }
 
 .linkButton2:hover {
@@ -81,8 +92,10 @@ div.pagelinks {
 }
 
 div.leftMenu {
+    color:black;
     margin-top:52px;
     float:left;
+    background-color:white;
     border-style: solid;
     border-color:black;
     border-width: 2px;
@@ -92,14 +105,11 @@ div.leftMenu {
 }
 
 div.login {
-    border-style:solid;
-    border-width:2px;
-    border-color:gray;
     padding:10px;
     margin-left:20%;
     margin-right:20%;
     margin-top:50px;
-    background-color:gray;
+    background-image:url("test.jpg");
     font-weight: bold;
     font-size: 20px;    
 }
@@ -107,6 +117,10 @@ div.login {
 .inputLogin {
     width:25%;
     margin: 0 15px;
+}
+
+.inputLogin:focus, input:focus {
+    border: 2px solid #00001a;
 }
 
 .test {
@@ -117,6 +131,47 @@ h1{
     text-align: center;
 }
 
+h2 {
+    text-align: center;
+}
+h3 {
+    text-align: center;
+}
+
 h1.main {
     font-size: 50px;
+}
+
+button.registerButton {
+    align-content: center;
+    margin: 0 5px;
+    height:50px;
+    width: 100px;
+    background-image:url("button.png");
+    border-style: solid;
+    border-width: 1px;
+    border-color:gray;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+button.registerButton:hover {
+    color: white;
+}
+
+.textBlock {
+    margin-top:50px;
+    padding:20px;
+    background-color:white;
+    color:black;
+}
+
+.form {
+    background-color:gray;
+    color: black;
+}
+
+.left {
+    float: left;
+    padding: 5 5px;
 }
