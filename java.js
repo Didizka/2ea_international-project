@@ -18,6 +18,9 @@ app.controller('MainController', function ($scope, $http, $location, $routeParam
     $scope.homePage = function(){  
         $location.path("/home");   
     };    
+    $scope.guidePage = function(){  
+        $location.path("/guide");   
+    };  
 });
 
 app.controller('LoginController', function($scope, $http, $location, $routeParams){
@@ -32,24 +35,12 @@ app.controller('RegisterController', function($scope, $http, $location, $routePa
     
 });
 
-app.controller('UserPageController', function($scope, $http, $location, $routeParams){
-            
-    $scope.loginPage = function(){  
-        $location.path("/login");   
-    }; 
-    $scope.registerPage = function(){  
-        $location.path("/register");   
-    }; 
-    $scope.contactPage = function(){  
-        $location.path("/contact");   
-    }; 
-    $scope.userPage = function(){  
-        $location.path("/userPage");   
-    }; 
-    $scope.homePage = function(){  
-        $location.path("/home");   
-    };
+app.controller('GuidePageController', function($scope, $http, $location, $routeParams){
     
+});
+
+app.controller('UserPageController', function($scope, $http, $location, $routeParams){
+      
     // Load the Visualization API and the corechart package.
       google.charts.load('current', {'packages':['corechart']});
 
@@ -129,6 +120,10 @@ $routeProvider
     .when('/userPage',{
     templateUrl:'userPage.html',
     controller:'UserPageController'
+    })
+    .when('/guide',{
+    templateUrl:'guide.html',
+    controller:'MainController'
     })
     .otherwise({
     redirectTo: '/' 
