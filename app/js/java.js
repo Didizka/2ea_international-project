@@ -98,31 +98,31 @@ app.controller('UserPageController', function($scope, $http, $location, $routePa
 app.config(function($routeProvider){
 $routeProvider
     .when('/',{
-    templateUrl:'home.html',
+    templateUrl:'views/home.html',
     controller:'MainController'
     })
     .when('/home',{
-    templateUrl:'home.html',
+    templateUrl:'views/home.html',
     controller:'MainController'
     })
     .when('/login',{
-    templateUrl:'login.html',
+    templateUrl:'views/login.html',
     controller:'MainController'
     })
     .when('/contact',{
-    templateUrl:'contact.html',
+    templateUrl:'views/contact.html',
     controller:'MainController'
     })
     .when('/register',{
-    templateUrl:'register.html',
+    templateUrl:'views/register.html',
     controller:'MainController'
     })
     .when('/userPage',{
-    templateUrl:'userPage.html',
+    templateUrl:'views/userPage.html',
     controller:'UserPageController'
     })
     .when('/guide',{
-    templateUrl:'guide.html',
+    templateUrl:'views/guide.html',
     controller:'MainController'
     })
     .otherwise({

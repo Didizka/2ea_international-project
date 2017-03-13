@@ -1,0 +1,21 @@
+{
+  "name": "ecg",
+  "version": "1.0.0",
+  "description": "ECG Internation Project",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://ChingizMizambekov@bitbucket.org/ChingizMizambekov/ecg.git"
+  },
+  "author": "Steven Dijcks, Chingiz Mizambekov",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/ChingizMizambekov/ecg#readme",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "mongoose": "^4.8.7"
+  }
+}
