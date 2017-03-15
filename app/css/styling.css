@@ -2,17 +2,14 @@ button:focus {outline:0;}
 
 body {
     /*background-image:url("ecg-pusle-wallpaper2.jpg");*/
-    background: green;
+    background-color: #004400;
     margin-left:5%;
     margin-right:5%; 
     color:white;
 }
 
 footer {
-    padding:5 5;
-    height: 25px;
-    width: inherit;
-    background-color:gray;
+    
 }
 
 .clear {
@@ -40,19 +37,20 @@ footer {
 }
 
 form {
+        background-color: #88CC88;
         margin-left:25%;
         margin-right:25%;
         padding:5px;
         border-style:solid;
         border-width: 2px;
         border-color: black;        
-    }
+}
 
 div.pagelinks {
     padding:5 5;
     height: 25px;
     width: inherit;
-    background-image:url("test.jpg");
+    background-color: #2D882D;
 }
 
 .linkButton { 
@@ -60,7 +58,7 @@ div.pagelinks {
     float:right;
     margin: 0 5px;
     height:50px;
-    background-image:url("button.png");
+    background-color: #55AA55;
     border-style: solid;
     border-width: 1px;
     border-color:gray;
@@ -73,7 +71,7 @@ div.pagelinks {
     float:right;
     margin: -50px 5px;
     height:50px;
-    background-color:lightgray;
+    background-color: #55AA55;
     border-style: solid;
     border-width: 1px;
     border-color:gray;
@@ -83,12 +81,12 @@ div.pagelinks {
 }
 
 .linkButton:hover {
-    background-color:darkgray;
+    background-color: #88CC88;
     color:white;
 }
 
 .linkButton2:hover {
-    background-color:darkgray;
+    background-color: #88CC88;
     color:lightgray;
 }
 
@@ -96,7 +94,7 @@ div.leftMenu {
     color:black;
     margin-top:52px;
     float:left;
-    background-color:white;
+    background-color: #88CC88;
     border-style: solid;
     border-color:black;
     border-width: 2px;
@@ -110,7 +108,7 @@ div.login {
     margin-left:20%;
     margin-right:20%;
     margin-top:50px;
-    background-image:url("test.jpg");
+    background-color: #88CC88;
     font-weight: bold;
     font-size: 20px;    
 }
@@ -145,14 +143,14 @@ h1.main {
 
 button.registerButton {
     align-content: center;
+    width:100px;
     margin: 0 5px;
     height:50px;
-    width: 100px;
-    background-image:url("button.png");
+    background-color: #55AA55;
     border-style: solid;
     border-width: 1px;
     border-color:gray;
-    font-size: 15px;
+    font-size: 20px;
     font-weight: bold;
 }
 
