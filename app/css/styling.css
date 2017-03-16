@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 button:focus {outline:0;}
 
 body {
@@ -175,4 +176,181 @@ button.registerButton:hover {
 .left {
     float: left;
     padding: 5 5px;
+=======
+button:focus {outline:0;}
+
+body {
+    /*background-image:url("ecg-pusle-wallpaper2.jpg");*/
+    background-color: #004400;
+    margin-left:5%;
+    margin-right:5%; 
+    color:white;
+}
+
+footer {
+    
+}
+
+.clear {
+    float:none;
+}
+
+.charts {
+    border-style: solid;
+    border-color: black;
+    border-width: 2px;
+    margin-top:50px;
+    margin-left:10px;
+    width:80%;
+    float:left;
+}
+
+#chart1_div {
+    overflow-x: scroll;  
+    overflow-y: hidden;
+}
+
+#chart2_div {
+    overflow-x: scroll; 
+    overflow-y: hidden;
+}
+
+form {
+        background-color: #88CC88;
+        margin-left:25%;
+        margin-right:25%;
+        padding:5px;
+        border-style:solid;
+        border-width: 2px;
+        border-color: black;        
+}
+
+div.pagelinks {
+    padding:5 5;
+    height: 25px;
+    width: inherit;
+    background-color: #2D882D;
+}
+
+.linkButton { 
+    width:100px;
+    float:right;
+    margin: 0 5px;
+    height:50px;
+    background-color: #55AA55;
+    border-style: solid;
+    border-width: 1px;
+    border-color:gray;
+    font-size: 20px;
+    font-weight: bold;    
+}
+
+.linkButton2 { 
+    width:100px;
+    float:right;
+    margin: -50px 5px;
+    height:50px;
+    background-color: #55AA55;
+    border-style: solid;
+    border-width: 1px;
+    border-color:gray;
+    font-size: 20px;
+    font-weight: bold;    
+    
+}
+
+.linkButton:hover {
+    background-color: #88CC88;
+    color:white;
+}
+
+.linkButton2:hover {
+    background-color: #88CC88;
+    color:lightgray;
+}
+
+div.leftMenu {
+    color:black;
+    margin-top:52px;
+    float:left;
+    background-color: #88CC88;
+    border-style: solid;
+    border-color:black;
+    border-width: 2px;
+    width:15%;
+    height: inherit;
+    padding:10px;
+}
+
+div.login {
+    padding:10px;
+    margin-left:20%;
+    margin-right:20%;
+    margin-top:50px;
+    background-color: #88CC88;
+    font-weight: bold;
+    font-size: 20px;    
+}
+
+.inputLogin {
+    width:25%;
+    margin: 0 15px;
+}
+
+.inputLogin:focus, input:focus {
+    border: 2px solid #00001a;
+}
+
+.test {
+    margin-left:20%;
+}
+
+h1{
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+}
+h3 {
+    text-align: center;
+}
+
+h1.main {
+    font-size: 50px;
+}
+
+button.registerButton {
+    align-content: center;
+    width:100px;
+    margin: 0 5px;
+    height:50px;
+    background-color: #55AA55;
+    border-style: solid;
+    border-width: 1px;
+    border-color:gray;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+button.registerButton:hover {
+    color: white;
+}
+
+.textBlock {
+    margin-top:50px;
+    padding:20px;
+    background-color:white;
+    color:black;
+}
+
+.form {
+    background-color:gray;
+    color: black;
+}
+
+.left {
+    float: left;
+    padding: 5 5px;
+>>>>>>> 64b0ca6a0bfceabc3f42e8225a75ce08596c3a90
 }
