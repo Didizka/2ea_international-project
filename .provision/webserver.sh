@@ -58,4 +58,6 @@ else
 	echo $'\e[32;1mECG project exists, pulling last version from BitBucket\033[0m'
 fi
 
+node server.js
+
 

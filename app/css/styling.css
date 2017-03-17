@@ -1,54 +1,23 @@
+<<<<<<< HEAD
 button:focus {outline:0;}
 
 body {
-    background-image:url("../images/gplaypattern.png");
-}
-
-header {
-    background-color:midnightblue;
-    text-align: center;
+    /*background-image:url("ecg-pusle-wallpaper2.jpg");*/
+    background: green;
+    margin-left:5%;
+    margin-right:5%; 
+    color:white;
 }
 
 footer {
-    
+    padding:5 5;
+    height: 25px;
+    width: inherit;
+    background-color:gray;
 }
 
 .clear {
     float:none;
-}
-
-.left {
-    float:left;
-}
-
-.right {
-    float:right;
-}
-
-div.main {
-    height: 50px;
-}
-
-.leftH1 {
-    color:aliceblue;
-    float:right;
-    margin-top:5px;
-}
-
-
-.link {
-    text-decoration: none;
-    color:aliceblue;
-    padding: 0 15 0;
-    font-size: 20px;
-    float:left;
-    margin-top:17px;
-}
-
-.link:hover {
-    color: dodgerblue;
-    text-decoration: none;
-    border-bottom:5px solid dodgerblue;
 }
 
 .charts {
@@ -71,16 +40,140 @@ div.main {
     overflow-y: hidden;
 }
 
-h1.h1Center {
+form {
+        margin-left:25%;
+        margin-right:25%;
+        padding:5px;
+        border-style:solid;
+        border-width: 2px;
+        border-color: black;        
+    }
+
+div.pagelinks {
+    padding:5 5;
+    height: 25px;
+    width: inherit;
+    background-image:url("test.jpg");
+}
+
+.linkButton { 
+    width:100px;
+    float:right;
+    margin: 0 5px;
+    height:50px;
+    background-image:url("button.png");
+    border-style: solid;
+    border-width: 1px;
+    border-color:gray;
+    font-size: 20px;
+    font-weight: bold;    
+}
+
+.linkButton2 { 
+    width:100px;
+    float:right;
+    margin: -50px 5px;
+    height:50px;
+    background-color:lightgray;
+    border-style: solid;
+    border-width: 1px;
+    border-color:gray;
+    font-size: 20px;
+    font-weight: bold;    
+    
+}
+
+.linkButton:hover {
+    background-color:darkgray;
+    color:white;
+}
+
+.linkButton2:hover {
+    background-color:darkgray;
+    color:lightgray;
+}
+
+div.leftMenu {
+    color:black;
+    margin-top:52px;
+    float:left;
+    background-color:white;
+    border-style: solid;
+    border-color:black;
+    border-width: 2px;
+    width:15%;
+    height: inherit;
+    padding:10px;
+}
+
+div.login {
+    padding:10px;
+    margin-left:20%;
+    margin-right:20%;
+    margin-top:50px;
+    background-image:url("test.jpg");
+    font-weight: bold;
+    font-size: 20px;    
+}
+
+.inputLogin {
+    width:25%;
+    margin: 0 15px;
+}
+
+.inputLogin:focus, input:focus {
+    border: 2px solid #00001a;
+}
+
+.test {
+    margin-left:20%;
+}
+
+h1{
     text-align: center;
 }
 
-hr.hr-1 {
-    border-top: 1px solid midnightblue;
-    margin-top:5px;
+h2 {
+    text-align: center;
+}
+h3 {
+    text-align: center;
 }
 
-div.reg-form {
-    margin-left: 5%;
-    margin-right: 5%;
+h1.main {
+    font-size: 50px;
+}
+
+button.registerButton {
+    align-content: center;
+    margin: 0 5px;
+    height:50px;
+    width: 100px;
+    background-image:url("button.png");
+    border-style: solid;
+    border-width: 1px;
+    border-color:gray;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+button.registerButton:hover {
+    color: white;
+}
+
+.textBlock {
+    margin-top:50px;
+    padding:20px;
+    background-color:white;
+    color:black;
+}
+
+.form {
+    background-color:gray;
+    color: black;
+}
+
+.left {
+    float: left;
+    padding: 5 5px;
 }
