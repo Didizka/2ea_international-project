@@ -1,9 +1,14 @@
 
-<button ng-Click="registerPage()" class="registerButton">Register</button>
-
-<div class="login">Username:
-    <input type="text" placeholder="username" class="inputLogin">Password:
-    <input type="password" placeholder="pass" class="inputLogin">
-    <button class="linkButton">LOGIN</button>
-</div>
+<button ng-Controller="MainController" ng-Click="registerPage()" class="registerButton">Register</button>
+<form class="form-horizontal" ng-submit="submit()">    
+    <label class="col-sm-2 control-label" for="formGroupInputSmall">Username:</label>
+    <div class="col-sm-10">
+      <input class="form-control" type="text" ng-model="username" placeholder="---">
+    </div>
+    <label class="col-sm-2 control-label" for="formGroupInputSmall">Password:</label>
+    <div class="col-sm-10">
+      <input class="form-control" type="password" ng-model="password" placeholder="---">
+    </div>
+    <input type="submit" id="submit" value="Submit">
+    </form>
 <hr class="test">

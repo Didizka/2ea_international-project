@@ -24,7 +24,23 @@ app.controller('MainController', function ($scope, $http, $location, $routeParam
 });
 
 app.controller('LoginController', function($scope, $http, $location, $routeParams){
+    $scope.userProfile = {
+        
+    };
     
+    $scope.submit = function() {
+        $scope.userProfile.username = $scope.username;
+        $scope.userProfile.password = $scope.password; 
+                
+        $http({
+            method:'GET',
+            url:'/api/users/:$scope.userProfile.username',
+            headers: {'Content-Type':'application/x-www-form-urlencoded'},
+            data: $scope.userProfile
+        })
+        .succes(function(){console.log("succeeded")})
+        .error(function(){console.log("failed")});
+    };
 });
 
 app.controller('ContactController', function($scope, $http, $location, $routeParams){
@@ -46,6 +62,7 @@ function convertDate(inputFormat) {
     }
     
     $scope.submit = function() {
+        $scope.userProfile.username = $scope.username;
         $scope.userProfile.firstname = $scope.firstname;
         $scope.userProfile.lastname = $scope.lastname;
         $scope.userProfile.email = $scope.email;  
@@ -75,7 +92,7 @@ app.controller('GuidePageController', function($scope, $http, $location, $routeP
 });
 
 app.controller('UserPageController', function($scope, $http, $location, $routeParams){
-      
+          
     // Load the Visualization API and the corechart package.
       google.charts.load('current', {'packages':['corechart']});
 
@@ -96,37 +113,57 @@ app.controller('UserPageController', function($scope, $http, $location, $routePa
         data2.addColumn('string', 'Time');
         data2.addColumn('number', 'Heart Rate');
           
-        for(var i = 1; i <= 5000; i+=10)
-        {          
-            data1.addRows([
-                [i.toString(), Math.random()*100]          
-        ]);  
-            data2.addRows([
-                [i.toString(), Math.random()*100]          
-        ]);
-        }        
+          var dataArray = [];
+          
+          function DrawChart1(){
+              
+          }
+          
+         $http.get('user_data/JsonDummy.json')
+            .success(function(data) {
+                dataArray = data.measurement1.sensor1;
+                console.log(data.measurement1.sensor1[5]);
+                for(var i = 1; i <= 5000; i++)
+                {   
+                    data1.addRows([
+                    [i.toString(), data.measurement1.sensor1[i] + 50]          
+                ]);  
+                    data2.addRows([
+                    [i.toString(), data.measurement1.sensor1[i] + 20]          
+                ]);
+                
+                } 
+             
+             var chart1 = new google.visualization.LineChart(document.getElementById('chart1_div'));
+        chart1.draw(data1, options1);
+          
+        var chart2 = new google.visualization.LineChart(document.getElementById('chart2_div'));
+        chart2.draw(data2, options2);
+             console.log(data.measurement1.sensor1[5]);
+                
+            })
+            .error(function() {
+                console.log("error");
+            });
+          
 
         // Set chart options
         var options1 = {title:'My ECG 1',
-                        width:5000,
+                        width:2500,
                         height:500,
                         lineWidth: 2,
                         chartArea: {width:'95%'}
                       };
 
         var options2 = {title:'My ECG 2',
-                        width:5000,
+                        width:2500,
                         height:500,
                         lineWidth: 2,
                         chartArea: {width:'95%'}
                       };
           
         // Instantiate and draw our chart, passing in some options.
-        var chart1 = new google.visualization.LineChart(document.getElementById('chart1_div'));
-        chart1.draw(data1, options1);
-          
-        var chart2 = new google.visualization.LineChart(document.getElementById('chart2_div'));
-        chart2.draw(data2, options2);
+        
       }  
 });
 
@@ -142,7 +179,7 @@ $routeProvider
     })
     .when('/login',{
     templateUrl:'views/login.html',
-    controller:'MainController'
+    controller:'LoginController'
     })
     .when('/contact',{
     templateUrl:'views/contact.html',
