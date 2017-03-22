@@ -58,6 +58,8 @@ function convertDate(inputFormat) {
         $scope.userProfile.smoker = $scope.smoker;
         
         $scope.test.push($scope.userProfile);
+        
+        $http.post
     };
 });
 
