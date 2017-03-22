@@ -82,8 +82,8 @@ function convertDate(inputFormat) {
             headers: {'Content-Type':'application/x-www-form-urlencoded'},
             data: $scope.userProfile
         })
-        .success(function(){console.log("succeeded")})
-        .error(function(){console.log("failed")});
+        .success(function(){$scope.test = "New user created"})
+        .error(function(){$scope.test = "error"});
     };
 });
 
@@ -113,11 +113,7 @@ app.controller('UserPageController', function($scope, $http, $location, $routePa
         data2.addColumn('string', 'Time');
         data2.addColumn('number', 'Heart Rate');
           
-          var dataArray = [];
-          
-          function DrawChart1(){
-              
-          }
+        var dataArray = [];
           
          $http.get('user_data/JsonDummy.json')
             .success(function(data) {
@@ -134,17 +130,15 @@ app.controller('UserPageController', function($scope, $http, $location, $routePa
                 
                 } 
              
-             var chart1 = new google.visualization.LineChart(document.getElementById('chart1_div'));
-        chart1.draw(data1, options1);
+            var chart1 = new google.visualization.LineChart(document.getElementById('chart1_div'));
+            chart1.draw(data1, options1);
           
-        var chart2 = new google.visualization.LineChart(document.getElementById('chart2_div'));
-        chart2.draw(data2, options2);
-             console.log(data.measurement1.sensor1[5]);
-                
+            var chart2 = new google.visualization.LineChart(document.getElementById('chart2_div'));
+            chart2.draw(data2, options2);
             })
             .error(function() {
                 console.log("error");
-            });
+        });
           
 
         // Set chart options
@@ -161,9 +155,6 @@ app.controller('UserPageController', function($scope, $http, $location, $routePa
                         lineWidth: 2,
                         chartArea: {width:'95%'}
                       };
-          
-        // Instantiate and draw our chart, passing in some options.
-        
       }  
 });
 
