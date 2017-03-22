@@ -33,6 +33,32 @@ app.controller('ContactController', function($scope, $http, $location, $routePar
 
 app.controller('RegisterController', function($scope, $http, $location, $routeParams){
     
+    $scope.test = [];
+    
+    $scope.userProfile = {
+        
+    };
+    
+function convertDate(inputFormat) {
+    function pad(s) { return (s < 10) ? '0' + s : s; }
+        var d = new Date(inputFormat);
+        return [pad(d.getDate()), pad(d.getMonth()+1),        d.getFullYear()].join('/');
+    }
+    
+    $scope.submit = function() {
+        $scope.userProfile.firstname = $scope.firstname;
+        $scope.userProfile.lastname = $scope.lastname;
+        $scope.userProfile.email = $scope.email;  
+        $scope.userProfile.password = $scope.password;
+        $scope.userProfile.birthday = convertDate($scope.birthday);        
+        $scope.userProfile.weight = $scope.weight;
+        $scope.userProfile.length = $scope.length;
+        $scope.userProfile.medication = $scope.medication;
+        $scope.userProfile.heartcondtion = $scope.heartcondition;
+        $scope.userProfile.smoker = $scope.smoker;
+        
+        $scope.test.push($scope.userProfile);
+    };
 });
 
 app.controller('GuidePageController', function($scope, $http, $location, $routeParams){
@@ -115,7 +141,7 @@ $routeProvider
     })
     .when('/register',{
     templateUrl:'views/register.html',
-    controller:'MainController'
+    controller:'RegisterController'
     })
     .when('/userPage',{
     templateUrl:'views/userPage.html',
