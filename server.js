@@ -39,36 +39,46 @@ router.get('/', function (req, res) {
 // CRUD for user
 router.route('/users')
 	.post(function (req, res) {
+			// Save temp username as unique
 			var tempUsername = req.body.username;
-			var unique = true;
+			var isUnique = true;
+			// Get all the users to check the uniqness of the username
 			User.find(function (err, users) {
 					if (err) console.log(err);			
 					users.forEach(function (user) {
-						if (user.username === tempUsername) {
-							unique = false;
+						if (user.username == tempUsername) {
+							console.log(user.username);
+							isUnique = false;
 						}
 					});		
-					res.json({records: users.length, message: unique});	
-			});
-				// var user = new User();
-			// user.firstname = req.body.firstname;
-			// user.lastname = req.body.lastname;
-			// user.username = req.body.username;
-			// user.password = req.body.password;
-			// user.birthdate = req.body.birthdate;
-			// user.email = req.body.email;
-			// user.weight = req.body.weight;
-			// user.length = req.body.length;
-			// user.medication = req.body.medication;
-			// user.heartConditions = req.body.heartConditions;
-			// user.coffeine = req.body.coffeine;
-			// user.smoker = req.body.smoker;
-			// user.save(function (err) {
-			// 	if (err) console.log(err);
-			// 	res.json({message: "POST: Register new user", 
-			// 				firstname: user.firstname, 
-			// 				lastname: user.lastname});
-			// });
+
+					if (isUnique) {
+						var user = new User();
+						user.firstname = req.body.firstname;
+						user.lastname = req.body.lastname;
+						user.username = req.body.username;
+						user.password = req.body.password;
+						user.birthdate = req.body.birthdate;
+						user.email = req.body.email;
+						user.weight = req.body.weight;
+						user.length = req.body.length;
+						user.medication = req.body.medication;
+						user.heartConditions = req.body.heartConditions;
+						user.coffeine = req.body.coffeine;
+						user.smoker = req.body.smoker;
+
+						user.save(function (err) {
+						if (err) console.log(err);
+						res.json({message: "New user created", 
+									firstname: user.firstname, 
+									lastname: user.lastname});
+						});
+				} else {
+					res.json({message: isUnique});
+			}
+				
+			});	
+			
 	});
 
 
