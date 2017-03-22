@@ -59,7 +59,14 @@ function convertDate(inputFormat) {
         
         $scope.test.push($scope.userProfile);
         
-        $http.post
+        $http({
+            method:'POST',
+            url:'/api/users',
+            headers: {'Content-Type':'application/x-www-form-urlencoded'},
+            data: $scope.userProfile
+        })
+        .succes(function(){console.log("succeeded")})
+        .error(function(){console.log("failed")});
     };
 });
 
