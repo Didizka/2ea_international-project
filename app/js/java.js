@@ -82,7 +82,7 @@ function convertDate(inputFormat) {
             headers: {'Content-Type':'application/x-www-form-urlencoded'},
             data: $scope.userProfile
         })
-        .succes(function(){console.log("succeeded")})
+        .success(function(){console.log("succeeded")})
         .error(function(){console.log("failed")});
     };
 });

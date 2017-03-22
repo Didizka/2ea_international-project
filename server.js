@@ -37,6 +37,7 @@ router.get('/', function (req, res) {
 });
 
 // CRUD for user
+// CREATE new user
 router.route('/users')
 	.post(function (req, res) {
 			// Save temp username as unique
@@ -44,7 +45,8 @@ router.route('/users')
 			var isUnique = true;
 			// Get all the users to check the uniqness of the username
 			User.find(function (err, users) {
-					if (err) console.log(err);			
+					if (err) console.log(err);		
+					// If the username already exists, set isUnique to false	
 					users.forEach(function (user) {
 						if (user.username == tempUsername) {
 							console.log(user.username);
@@ -52,6 +54,7 @@ router.route('/users')
 						}
 					});		
 
+					// If the username is unique, create a new user object and save it to the database
 					if (isUnique) {
 						var user = new User();
 						user.firstname = req.body.firstname;
@@ -74,22 +77,31 @@ router.route('/users')
 									lastname: user.lastname});
 						});
 				} else {
+					// Else display an error
 					res.json({message: isUnique});
-			}
-				
-			});	
-			
+				}					
+			});				
 	});
 
-
-router.route('/users/:username')
+// FIND existing user
+router.route('/users/:username/:password')
 	.get(function (req, res) {
-		User.find({name: req.body.username}, function (err, user) {
+		// Create temp user and set his username and password
+		var tempUser = new User();
+		tempUser.username = req.params.username;
+		tempUser.password = req.params.password;
+		// res.json({username: tempUser.username, password: tempUser.password});	
+
+		// Search database for given username
+		User.find({username: tempUser.username, password: tempUser.password}, function (err, user) {
 			if (err) console.log(err);
-			res.json({message: "GET user based on username", records: user.length, username: user[0].username});
-
-		});
-
+				if (user.length === 1) {
+					// Start session
+					res.json({user});
+				} else {					
+					res.json({message: "User not found"});
+				}				
+			});
 	})
 	.put(function (req, res) {
 		res.json({message: "UPDATE user based on username"});
