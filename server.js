@@ -3,9 +3,9 @@
 
 // Required packages
 var express 	= require('express'),
-	app 		= express(),
-	bodyParser 	= require('body-parser'),
-	mongoose	= require('mongoose');
+app 		= express(),
+bodyParser 	= require('body-parser'),
+mongoose	= require('mongoose');
 
 // Connect to the Database
 mongoose.connect('mongodb://127.0.0.1:27017/ecg');
@@ -39,14 +39,14 @@ router.get('/', function (req, res) {
 // CRUD for user
 // CREATE new user
 router.route('/users')
-	.post(function (req, res) {
+.post(function (req, res) {
 			// Save temp username as unique
 			var tempUsername = req.body.username;
 			var isUnique = true;
 			
 			// Get all the users to check the uniqness of the username
 			User.find(function (err, users) {
-					if (err) console.log(err);		
+				if (err) console.log(err);		
 					// If the username already exists, set isUnique to false	
 					users.forEach(function (user) {
 						if (user.username == tempUsername) {
@@ -77,18 +77,18 @@ router.route('/users')
 							return res.json({message: isUnique});
 						});
 
-				} else {
+					} else {
 					// Return false to the client for further user notification
 					return res.json({message: isUnique});
 				}			
-							
-			});		
 				
-	});
+			});		
+			
+		});
 
 // FIND existing user
 router.route('/users/:username/:password')
-	.get(function (req, res) {
+.get(function (req, res) {
 		// Create temp user and set his username and password
 		var userExists = true;
 		var tempUser = new User();
@@ -98,17 +98,21 @@ router.route('/users/:username/:password')
 		// Search database for given username: should return only 1 record
 		User.find({username: tempUser.username, password: tempUser.password}, function (err, users) {
 			if (err) console.log(err);
+			if (users.length != 0) {
 				if (users[0].username === tempUser.username && users[0].password === tempUser.password) {
 					// Start session & return true to the client
 					res.json({message: userExists});
 					console.log('found');
 				} else {		
 					// Return false to the client
-				    userExists = false;			
+					userExists = false;			
 					res.json({message: userExists});
 					console.log('not found');
-				}				
-			});
+				}	
+			} else {
+				res.json({message: userExists});
+			}		
+		});
 	})
 	// UPDATE existing user
 	.put(function (req, res) {
@@ -121,15 +125,15 @@ router.route('/users/:username/:password')
 
 // CRD for userdata. NO Update
 router.route('/data/:username')
-	.get(function(req, res){
-		res.json({message: "GET user graph"});
-	})
-	.post(function(req, res){
-		res.json({message: "POST user graph"});
-	})
-	.delete(function(req, res){
-		res.json({message: "DELETE user graph"});
-	});
+.get(function(req, res){
+	res.json({message: "GET user graph"});
+})
+.post(function(req, res){
+	res.json({message: "POST user graph"});
+})
+.delete(function(req, res){
+	res.json({message: "DELETE user graph"});
+});
 
 
 
