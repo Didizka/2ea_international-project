@@ -1,9 +1,8 @@
-
+// Main module
 var app = angular.module("App", ['ngRoute']);
 
 
-
-
+// Routes
 app.config(function($routeProvider){
 $routeProvider
     .when('/',{
@@ -16,7 +15,7 @@ $routeProvider
     })
     .when('/login',{
     templateUrl:'views/login.html',
-    controller:'MainController'
+    controller:'LoginController'
     })
     .when('/contact',{
     templateUrl:'views/contact.html',

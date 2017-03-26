@@ -41,11 +41,9 @@ router.get('/', function (req, res) {
 router.route('/users')
 	.post(function (req, res) {
 			// Save temp username as unique
-			// var tempUsername = req.body;
-			console.log(req.body.weight);
+			var tempUsername = req.body.username;
 			var isUnique = true;
-			return res.json({message: isUnique});
-			/*
+			
 			// Get all the users to check the uniqness of the username
 			User.find(function (err, users) {
 					if (err) console.log(err);		
@@ -56,7 +54,7 @@ router.route('/users')
 							isUnique = false;
 						}
 					});		
-
+					
 					// If the username is unique, create a new user object and save it to the database
 					if (isUnique) {
 						var user = new User();
@@ -75,36 +73,40 @@ router.route('/users')
 
 						user.save(function (err) {
 							if (err) console.log(err);
-							console.log("isUnique added" + isUnique);
+							// Return true to the client for further user notification
 							return res.json({message: isUnique});
 						});
 
 				} else {
-					// Else display an error
-					console.log("isUnique not added" + isUnique);
+					// Return false to the client for further user notification
 					return res.json({message: isUnique});
-				}					
+				}			
+							
 			});		
-			*/		
+				
 	});
 
 // FIND existing user
 router.route('/users/:username/:password')
 	.get(function (req, res) {
 		// Create temp user and set his username and password
+		var userExists = true;
 		var tempUser = new User();
 		tempUser.username = req.params.username;
 		tempUser.password = req.params.password;
-		// res.json({username: tempUser.username, password: tempUser.password});	
 
-		// Search database for given username
-		User.find({username: tempUser.username, password: tempUser.password}, function (err, user) {
+		// Search database for given username: should return only 1 record
+		User.find({username: tempUser.username, password: tempUser.password}, function (err, users) {
 			if (err) console.log(err);
-				if (user.length === 1) {
-					// Start session
-					res.json({user});
-				} else {					
-					res.json({message: "User not found"});
+				if (users[0].username === tempUser.username && users[0].password === tempUser.password) {
+					// Start session & return true to the client
+					res.json({message: userExists});
+					console.log('found');
+				} else {		
+					// Return false to the client
+				    userExists = false;			
+					res.json({message: userExists});
+					console.log('not found');
 				}				
 			});
 	})
