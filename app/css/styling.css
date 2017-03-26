@@ -2,7 +2,8 @@ button:focus {outline:0;}
 
 body {
     background-image: url(../images/gplaypattern.png);
-    
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
 .clear {

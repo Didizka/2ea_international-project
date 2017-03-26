@@ -49,8 +49,6 @@ app.controller('ContactController', function($scope, $http, $location, $routePar
 
 app.controller('RegisterController', function($scope, $http, $location, $routeParams){
     
-    $scope.test = [];
-    
     $scope.userProfile = {
         
     };
@@ -74,16 +72,21 @@ function convertDate(inputFormat) {
         $scope.userProfile.heartcondtion = $scope.heartcondition;
         $scope.userProfile.smoker = $scope.smoker;
         
-        $scope.test.push($scope.userProfile);
-        
-        $http({
+        if($scope.userProfile.username == null || $scope.userProfile.firstname == null || $scope.userProfile.lastname == null || $scope.userProfile.email == null || $scope.userProfile.password == null)
+        {
+            $scope.test = "please fill in the required fields";
+        }
+        else 
+        {
+            $http({
             method:'POST',
             url:'/api/users',
             headers: {'Content-Type':'application/x-www-form-urlencoded'},
             data: $scope.userProfile
-        })
-        .success(function(){$scope.test = "New user created"})
-        .error(function(){$scope.test = "error"});
+            })
+            .success(function(){$scope.test = "New user created"})
+            .error(function(){$scope.test = "error"});            
+        }
     };
 });
 
