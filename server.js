@@ -81,9 +81,15 @@ router.route('/users')
 					// Return false to the client for further user notification
 					return res.json({message: isUnique});
 				}			
+<<<<<<< HEAD
 
 			});		
 
+=======
+				
+			});		
+			
+>>>>>>> 09cc90aa51d98b31a9f290f10489d9e989e01321
 		});
 
 // FIND existing user
@@ -98,16 +104,30 @@ router.route('/users/:username/:password')
 		// Search database for given username: should return only 1 record
 		User.find({username: tempUser.username, password: tempUser.password}, function (err, users) {
 			if (err) console.log(err);
+<<<<<<< HEAD
 			if (users.length != 0 && users[0].username === tempUser.username && users[0].password === tempUser.password) {
+=======
+			if (users.length != 0) {
+				if (users[0].username === tempUser.username && users[0].password === tempUser.password) {
+>>>>>>> 09cc90aa51d98b31a9f290f10489d9e989e01321
 					// Start session & return true to the client
 					res.json({message: userExists});
 				} else {		
 					// Return false to the client
 					userExists = false;			
 					res.json({message: userExists});
+<<<<<<< HEAD
 				}	
 
 			});
+=======
+					console.log('not found');
+				}	
+			} else {
+				res.json({message: userExists});
+			}		
+		});
+>>>>>>> 09cc90aa51d98b31a9f290f10489d9e989e01321
 	})
 	// UPDATE existing user
 	.put(function (req, res) {
