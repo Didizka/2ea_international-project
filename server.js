@@ -41,8 +41,11 @@ router.get('/', function (req, res) {
 router.route('/users')
 	.post(function (req, res) {
 			// Save temp username as unique
-			var tempUsername = req.body.username;
+			// var tempUsername = req.body;
+			console.log(req.body.weight);
 			var isUnique = true;
+			return res.json({message: isUnique});
+			/*
 			// Get all the users to check the uniqness of the username
 			User.find(function (err, users) {
 					if (err) console.log(err);		
@@ -71,16 +74,18 @@ router.route('/users')
 						user.smoker = req.body.smoker;
 
 						user.save(function (err) {
-						if (err) console.log(err);
-						res.json({message: "New user created", 
-									firstname: user.firstname, 
-									lastname: user.lastname});
+							if (err) console.log(err);
+							console.log("isUnique added" + isUnique);
+							return res.json({message: isUnique});
 						});
+
 				} else {
 					// Else display an error
-					res.json({message: isUnique});
+					console.log("isUnique not added" + isUnique);
+					return res.json({message: isUnique});
 				}					
-			});				
+			});		
+			*/		
 	});
 
 // FIND existing user
@@ -103,12 +108,13 @@ router.route('/users/:username/:password')
 				}				
 			});
 	})
+	// UPDATE existing user
 	.put(function (req, res) {
 		res.json({message: "UPDATE user based on username"});
 	})
 	.delete(function (req, res) {
 		res.json({message: "DELETE user based on username"});
-	})
+	});
 
 
 // CRD for userdata. NO Update

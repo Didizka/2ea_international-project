@@ -4,51 +4,51 @@
     <div class="form-group form-group-sm">
     <label class="col-sm-2 control-label" for="formGroupInputSmall">Email:</label>
     <div class="col-sm-10">
-      <input class="form-control" type="text" ng-model="email" placeholder="example@info.com">
+      <input class="form-control" type="text" ng-model="userProfile.email" placeholder="example@info.com">
     </div> 
          <label class="col-sm-2 control-label" for="formGroupInputSmall">Username:</label>
     <div class="col-sm-10">
-      <input class="form-control" type="text" ng-model="username" placeholder="---">
+      <input class="form-control" type="text" ng-model="userProfile.username" placeholder="---">
     </div>
         <label class="col-sm-2 control-label" for="formGroupInputSmall">First Name:</label>
     <div class="col-sm-10">
-      <input class="form-control" type="text" ng-model="firstname" placeholder="---">
+      <input class="form-control" type="text" ng-model="userProfile.firstname" placeholder="---">
     </div>
         <label class="col-sm-2 control-label" for="formGroupInputSmall">Last Name:</label>
     <div class="col-sm-10">
-      <input class="form-control" type="text" ng-model="lastname" placeholder="---">
+      <input class="form-control" type="text" ng-model="userProfile.lastname" placeholder="---">
     </div>
         <label class="col-sm-2 control-label" for="formGroupInputSmall">Password:</label>
     <div class="col-sm-10">
-      <input class="form-control" type="password" ng-model="password" placeholder="---">
+      <input class="form-control" type="password" ng-model="userProfile.password" placeholder="---">
     </div>
         <label class="col-sm-2 control-label" for="formGroupInputSmall">Date of Birth:</label>
     <div class="col-sm-10">
-      <input class="form-control" type="date" ng-model="birthday" placeholder="">
+      <input class="form-control" type="date" ng-model="userProfile.birthday" placeholder="">
     </div>
         <label class="col-sm-2 control-label" for="formGroupInputSmall">Weight:</label>
     <div class="col-sm-10">
-      <input class="form-control" type="number" ng-model="weight" placeholder="in KG">
+      <input class="form-control" type="number" ng-model="userProfile.weight" placeholder="in KG">
     </div>
         <label class="col-sm-2 control-label" for="formGroupInputSmall">Length:</label>
     <div class="col-sm-10">
-      <input class="form-control" type="number" ng-model="length" placeholder="in CM">
+      <input class="form-control" type="number" ng-model="userProfile.length" placeholder="in CM">
     </div>
         <label class="col-sm-2 control-label" for="formGroupInputSmall">Medication:</label>
     <div class="col-sm-10">
-      <input class="form-control" type="text" ng-model="medication" placeholder="divide with spaces ">
+      <input class="form-control" type="text" ng-model="userProfile.medication" placeholder="divide with spaces ">
     </div>
         <label class="col-sm-2 control-label" for="formGroupInputSmall">Heart Conditions:</label>
     <div class="col-sm-10">
-      <input class="form-control" type="text" ng-model="heartcondition" placeholder="...">
+      <input class="form-control" type="text" ng-model="userProfile.heartcondition" placeholder="...">
     </div>
         <label class="col-sm-2 control-label" for="formGroupInputSmall">Smoker:</label>
     <div class="col-sm-10">
-      <input class="form-control" type="checkbox" ng-model="smoker" value="text">
+      <input class="form-control" type="checkbox" ng-model="userProfile.smoker" value="text">
     </div>
         <input type="submit" id="submit" value="Submit">
         
-        <pre>{{test}}</pre>
+        <div class="result">{{ result }}</div>
   </div>
 
 </form>
