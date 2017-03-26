@@ -8,7 +8,7 @@ bodyParser 	= require('body-parser'),
 mongoose	= require('mongoose');
 
 // Connect to the Database
-mongoose.connect('mongodb://127.0.0.1:27017/ecg');
+mongoose.connect('mongodb://localhost:27017/ecg');
 
 // Import user model
 var User = require(__dirname + '/app/js/models/user');

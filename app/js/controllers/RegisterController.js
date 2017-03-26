@@ -3,10 +3,7 @@ app.controller('RegisterController', function($scope, $http, $location, $routePa
 
     // Empty userProfile object
     $scope.userProfile = {        
-    };
-
-    
-    
+    };    
     
     function convertDate(inputFormat) {
         function pad(s) { return (s < 10) ? '0' + s : s; }
