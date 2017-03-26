@@ -20,15 +20,34 @@ app.controller('UserPageController', function($scope, $http, $location, $routePa
         data2.addColumn('string', 'Time');
         data2.addColumn('number', 'Heart Rate');
           
-        for(var i = 1; i <= 5000; i+=10)
-        {          
-            data1.addRows([
-                [i.toString(), Math.random()*100]          
-        ]);  
-            data2.addRows([
-                [i.toString(), Math.random()*100]          
-        ]);
-        }        
+          
+        var dataArray = [];
+          
+        $http.get('user_data/JsonDummy.json')
+          .success(function(data) {
+            dataArray = data.measurement1.sensor1;
+            console.log(data.measurement1.sensor1[5]);
+            for(var i = 1; i <= 5000; i++)
+            {   
+              data1.addRows([
+                [i.toString(), data.measurement1.sensor1[i] + 50]          
+              ]);  
+              data2.addRows([
+                [i.toString(), data.measurement1.sensor1[i] + 20]          
+              ]);
+                
+            } 
+             
+            var chart1 = new google.visualization.LineChart(document.getElementById('chart1_div'));
+            chart1.draw(data1, options1);
+          
+            var chart2 = new google.visualization.LineChart(document.getElementById('chart2_div'));
+            chart2.draw(data2, options2);
+            })
+            .error(function() {
+                console.log("error");
+        });
+          
 
         // Set chart options
         var options1 = {title:'My ECG 1',
@@ -44,12 +63,6 @@ app.controller('UserPageController', function($scope, $http, $location, $routePa
                         lineWidth: 2,
                         chartArea: {width:'95%'}
                       };
-          
-        // Instantiate and draw our chart, passing in some options.
-        var chart1 = new google.visualization.LineChart(document.getElementById('chart1_div'));
-        chart1.draw(data1, options1);
-          
-        var chart2 = new google.visualization.LineChart(document.getElementById('chart2_div'));
-        chart2.draw(data2, options2);
+        
       }  
 });
