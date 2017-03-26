@@ -3,9 +3,9 @@
 
 // Required packages
 var express 	= require('express'),
-	app 		= express(),
-	bodyParser 	= require('body-parser'),
-	mongoose	= require('mongoose');
+app 		= express(),
+bodyParser 	= require('body-parser'),
+mongoose	= require('mongoose');
 
 // Connect to the Database
 mongoose.connect('mongodb://127.0.0.1:27017/ecg');
@@ -39,13 +39,14 @@ router.get('/', function (req, res) {
 // CRUD for user
 // CREATE new user
 router.route('/users')
-	.post(function (req, res) {
+.post(function (req, res) {
 			// Save temp username as unique
 			var tempUsername = req.body.username;
 			var isUnique = true;
+			
 			// Get all the users to check the uniqness of the username
 			User.find(function (err, users) {
-					if (err) console.log(err);		
+				if (err) console.log(err);		
 					// If the username already exists, set isUnique to false	
 					users.forEach(function (user) {
 						if (user.username == tempUsername) {
@@ -53,7 +54,7 @@ router.route('/users')
 							isUnique = false;
 						}
 					});		
-
+					
 					// If the username is unique, create a new user object and save it to the database
 					if (isUnique) {
 						var user = new User();
@@ -71,57 +72,61 @@ router.route('/users')
 						user.smoker = req.body.smoker;
 
 						user.save(function (err) {
-						if (err) console.log(err);
-						res.json({message: "New user created", 
-									firstname: user.firstname, 
-									lastname: user.lastname});
+							if (err) console.log(err);
+							// Return true to the client for further user notification
+							return res.json({message: isUnique});
 						});
-				} else {
-					// Else display an error
-					res.json({message: isUnique});
-				}					
-			});				
-	});
+
+					} else {
+					// Return false to the client for further user notification
+					return res.json({message: isUnique});
+				}	
+			});		
+		});	
 
 // FIND existing user
 router.route('/users/:username/:password')
-	.get(function (req, res) {
+.get(function (req, res) {
 		// Create temp user and set his username and password
+		var userExists = true;
 		var tempUser = new User();
 		tempUser.username = req.params.username;
 		tempUser.password = req.params.password;
-		// res.json({username: tempUser.username, password: tempUser.password});	
 
-		// Search database for given username
-		User.find({username: tempUser.username, password: tempUser.password}, function (err, user) {
+		// Search database for given username: should return only 1 record
+		User.find({username: tempUser.username, password: tempUser.password}, function (err, users) {
 			if (err) console.log(err);
-				if (user.length === 1) {
-					// Start session
-					res.json({user});
-				} else {					
-					res.json({message: "User not found"});
-				}				
+			if (users.length != 0 && users[0].username === tempUser.username && users[0].password === tempUser.password) {
+					// Start session & return true to the client
+					res.json({message: userExists});
+				} else {		
+					// Return false to the client
+					userExists = false;			
+					res.json({message: userExists});
+				}	
 			});
 	})
+
+	// UPDATE existing user
 	.put(function (req, res) {
 		res.json({message: "UPDATE user based on username"});
 	})
 	.delete(function (req, res) {
 		res.json({message: "DELETE user based on username"});
-	})
+	});
 
 
 // CRD for userdata. NO Update
 router.route('/data/:username')
-	.get(function(req, res){
-		res.json({message: "GET user graph"});
-	})
-	.post(function(req, res){
-		res.json({message: "POST user graph"});
-	})
-	.delete(function(req, res){
-		res.json({message: "DELETE user graph"});
-	});
+.get(function(req, res){
+	res.json({message: "GET user graph"});
+})
+.post(function(req, res){
+	res.json({message: "POST user graph"});
+})
+.delete(function(req, res){
+	res.json({message: "DELETE user graph"});
+});
 
 
 

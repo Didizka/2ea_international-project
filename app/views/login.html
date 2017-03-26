@@ -1,14 +1,34 @@
 
-<button ng-Controller="MainController" ng-Click="registerPage()" class="registerButton">Register</button>
-<form class="form-horizontal" ng-submit="submit()">    
-    <label class="col-sm-2 control-label" for="formGroupInputSmall">Username:</label>
-    <div class="col-sm-10">
-      <input class="form-control" type="text" ng-model="username" placeholder="---">
+<div class="login-form">    
+  <div class="row">
+    <!-- FORM -->
+    <div class="col-md-4 col-md-offset-4">     
+
+    <!-- Prevent from auto validate the form  -->
+      <form id="loginForm" name="loginForm" novalidate>
+
+        <fieldset>
+          <legend>Login form <br>
+            <small>Don't have an account yet? Register <a href="#/register" "email me">here</a></small>
+          </legend>
+
+          <div class="form-group">
+            <label for="username">Username *</label>
+            <input type="text" class="form-control" id="username" ng-model="userProfile.username" placeholder="Username" required>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password *</label>
+            <input type="password" class="form-control" id="password" ng-model="userProfile.password" placeholder="Password" required>
+          </div>
+
+         
+
+          <button id="loginFormSubmit" class="btn btn-default" ng-click="submit()">Submit</button>
+
+        </fieldset>
+      </form>
     </div>
-    <label class="col-sm-2 control-label" for="formGroupInputSmall">Password:</label>
-    <div class="col-sm-10">
-      <input class="form-control" type="password" ng-model="password" placeholder="---">
-    </div>
-    <input type="submit" id="submit" value="Submit">
-    </form>
-<hr class="test">
+  </div>
+  <pre class="result">{{ feedback }}</pre>
+</div>
