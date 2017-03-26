@@ -33,6 +33,10 @@ $routeProvider
     templateUrl:'views/guide.html',
     controller:'MainController'
     })
+    .when('/hospitals',{
+    templateUrl:'views/hospitals.html',
+    controller:'HospitalsController'
+    })
     .otherwise({
     redirectTo: '/' 
     });

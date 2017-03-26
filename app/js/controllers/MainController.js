@@ -18,4 +18,7 @@ app.controller('MainController', function ($scope, $http, $location, $routeParam
     $scope.guidePage = function(){  
         $location.path("/guide");   
     };  
+    $scope.hospitalsPage = function(){  
+        $location.path("/hospitals");   
+    };  
 });

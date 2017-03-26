@@ -1,0 +1,24 @@
+
+	<table class="table">
+		<caption>Nearby hospitals in Antwerp</caption>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Street</th>
+				<th>Place</th>
+				<th>Link</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="hospital in hospitals">
+				<td>{{hospital.label}}</td>
+				<td>{{hospital.straatnaam}} {{hospital.huisnummer}}</td>
+				<td>{{hospital.postcode}} Antwerpen</td>
+				<td><a href="{{hospital.link}}" target="_blank">{{hospital.link}}</a></td>
+			</tr>
+		</tbody>
+	</table>
+
+
+
+
