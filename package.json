@@ -19,6 +19,9 @@
     "forever": "^0.15.3",
     "moment": "^2.18.1",
     "mongoose": "^4.8.7",
-    "normalize.css": "^5.0.0"
+    "normalize.css": "^5.0.0",
+    "browser-sync": "^2.18.8",
+    "gulp": "^3.9.1",
+    "gulp-nodemon": "^2.2.1"
   }
 }
