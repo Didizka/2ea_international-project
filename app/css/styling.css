@@ -29,26 +29,30 @@ body {
     overflow-y: hidden;
 }
 
-h1{
+/*h1{
     text-align: center;
-}
+}*/
 
 h1.leftH1 {
     text-align: center;
     color:white;
 }
 
-h2 {
+/*h2 {
     text-align: center;
 }
 h3 {
     text-align: center;
-}
+}*/
 
 
 header {
     background-color:midnightblue;
     height: 55px;
+}
+
+a {
+    cursor: pointer;
 }
 
 a.link {
@@ -64,4 +68,8 @@ a.link:hover {
     text-decoration: none;
     border-bottom: 5px solid white;
     color: white;
+}
+
+.dashboard-navigation {
+    list-style: none;
 }

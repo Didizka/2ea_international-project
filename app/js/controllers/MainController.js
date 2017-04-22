@@ -12,6 +12,9 @@ app.controller('MainController', function ($scope, $http, $location, $routeParam
     $scope.userPage = function(){  
         $location.path("/userPage");   
     }; 
+    $scope.dashboardPage = function(){  
+        $location.path("/dashboardPage");   
+    }; 
     $scope.homePage = function(){  
         $location.path("/home");   
     };    
