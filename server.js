@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + '/app'));
 
 // Try to set the port manually to 3000, if not available, set it automatically to a free port
-var port = process.env.PORT || 5000;
+var port = process.env.PORT || 3000;
 
 // API ROUTES
 // ============================================================================

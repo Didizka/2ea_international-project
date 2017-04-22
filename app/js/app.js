@@ -29,6 +29,14 @@ $routeProvider
     templateUrl:'views/userPage.html',
     controller:'UserPageController'
     })
+    .when('/dashboardPage',{
+    templateUrl:'views/dashboard.html',
+    controller:'DashboardController'
+    })
+    .when('/uploadPage',{
+    templateUrl:'views/uploadPage.html',
+    controller:'UploadPageController'
+    })
     .when('/guide',{
     templateUrl:'views/guide.html',
     controller:'MainController'
