@@ -1,1 +1,33 @@
 <h1>Profile</h1>
+<div class="row">
+	<div class="col-xs-3">Name</div>
+	<div class="col-xs-9">{{user.firstname}} {{user.lastname}}</div>
+</div>
+<div class="row">
+	<div class="col-xs-3">Email</div>
+	<div class="col-xs-9">{{user.email}}</div>
+</div>
+<div class="row">
+	<div class="col-xs-3">Age</div>
+	<div class="col-xs-9">{{user.age}}</div>
+</div>
+<div class="row">
+	<div class="col-xs-3">Length</div>
+	<div class="col-xs-9">{{user.length}}</div>
+</div>
+<div class="row">
+	<div class="col-xs-3">Weight</div>
+	<div class="col-xs-9">{{user.weight}}</div>
+</div>
+<div class="row">
+	<div class="col-xs-3">Coffeine</div>
+	<div class="col-xs-9">{{user.coffeine}} cups per day</div>
+</div>
+<div class="row">
+	<div class="col-xs-3">Medication</div>
+	<div class="col-xs-9"><span ng-repeat="medication in user.medication">{{medication}}</span></div>
+</div>
+<div class="row">
+	<div class="col-xs-3">Heart conditions</div>
+	<div class="col-xs-9">{{user.heartcondition}}</div>
+</div>
