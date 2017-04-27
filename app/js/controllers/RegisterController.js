@@ -5,11 +5,6 @@ app.controller('RegisterController', function($scope, $http, $location, $routePa
     $scope.userProfile = {        
     };    
     
-    function convertDate(inputFormat) {
-        function pad(s) { return (s < 10) ? '0' + s : s; }
-        var d = new Date(inputFormat);
-        return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/');
-    }
     
     // On register form submit (Works with button, not sumbit type to prevent default behaviour of the form)
     $scope.submit = function() {

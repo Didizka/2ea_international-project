@@ -11,7 +11,7 @@ var UserSchema = new Schema({
 	weight: Number,
 	length: Number,
 	medication: [String],
-	heartCondition: String,
+	heartcondition: String,
 	coffeine: Number,
 	smoker: Boolean
 });

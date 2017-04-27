@@ -45,6 +45,7 @@ router.get('/', function (req, res) {
 // CREATE new user
 router.route('/users')
 .post(function (req, res) {
+	console.log(req.body);
 			// Save temp username as unique
 			var tempUsername = req.body.username;
 			var isUnique = true;
@@ -63,6 +64,7 @@ router.route('/users')
 					// If the username is unique, create a new user object and save it to the database
 					if (isUnique) {
 						var user = new User();
+						// console.log(req.body);
 						user.firstname = req.body.firstname;
 						user.lastname = req.body.lastname;
 						user.username = req.body.username;
@@ -72,7 +74,7 @@ router.route('/users')
 						user.weight = req.body.weight;
 						user.length = req.body.length;
 						user.medication = req.body.medication;
-						user.heartConditions = req.body.heartConditions;
+						user.heartcondition = req.body.heartcondition;
 						user.coffeine = req.body.coffeine;
 						user.smoker = req.body.smoker;
 
@@ -139,7 +141,7 @@ router.route('/data/:username')
 
 // sessionStorage
 // ============================================================================
-// Check if session is started. If started, send the user object back without his password, otherwise return false
+// Check if session has been started. If started, send the user object back without his password (frontend), otherwise return false
 router.route('/session')
 .get(function(req, res){
 	sess = req.session;
@@ -164,8 +166,6 @@ router.route('/logout')
 		}
 	});
 });
-
-
 
 
 // REGISTER OUR ROUTES -------------------------------

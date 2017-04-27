@@ -1,5 +1,6 @@
 app.controller('DashboardController', function ($scope, $http, $location, $routeParams) {   
     
+    // Get user if he has successfully logged in and started a session
     $scope.askForSession = function() {
         $http({
             method:'GET',
@@ -7,24 +8,35 @@ app.controller('DashboardController', function ($scope, $http, $location, $route
             headers: {'Content-Type':'application/json'}
         })
         .then(function (data){ 
+        	// if session is started, get the user, otherwise redirect to login view
         	data.data.session ? $scope.user = data.data.session : $location.path("/login");
-        	console.log($scope.user);
+        	// Calculate users age based on the current date and his birthdate
+        	var birthdate = new Date($scope.user.birthdate);
+        	var currentDate = new Date();
+        	var age = currentDate - birthdate;
+        	$scope.user.age = Math.floor(age / (1000*60*60*24*365.25));
+        	// console.log($scope.user);
     	});
 
     }
 
-    $scope.askForSession();
-
+    
+    // Display the profile page
     $scope.profilePage = function() {
-    	$location.path("/profilePage");
+    	$scope.dashboardView = '/views/profilePage.html';
     };
 
+    // Display the user page
     $scope.userPage = function(){  
-        $location.path("/userPage"); 
+        $scope.dashboardView = '/views/userPage.html';
     };  
+
+    // Display the upload page
     $scope.uploadPage = function(){  
-        $location.path("/uploadPage");  
+        $scope.dashboardView = '/views/uploadPage.html';  
     };  
+
+    // Logout
     $scope.logout = function(){  
         $http({
             method:'GET',
@@ -32,7 +44,14 @@ app.controller('DashboardController', function ($scope, $http, $location, $route
             headers: {'Content-Type':'application/json'}
         })
         .then(function (data){ 
-        	if (data.data.logout) $location.path("/login");
+        	if (data.data.logout) {
+        		alert("You've been successfully logged out");
+        		$location.path("/login");        		
+        	}
     	}); 
     };  
+
+    // Get the user if logged in, redirect if not and display profile page as default view of the dashboard
+    $scope.askForSession();
+    $scope.profilePage();    
 });
