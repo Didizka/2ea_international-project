@@ -33,6 +33,10 @@ $routeProvider
     templateUrl:'views/dashboard.html',
     controller:'DashboardController'
     })
+    .when('/profilePage',{
+    templateUrl:'views/profilePage.html',
+    controller:'DashboardController'
+    })
     .when('/uploadPage',{
     templateUrl:'views/uploadPage.html',
     controller:'UploadPageController'

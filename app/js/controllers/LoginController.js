@@ -10,7 +10,7 @@ app.controller('LoginController', function($scope, $http, $location, $routeParam
         $scope.feedback = "";
 
         // Dump user profile object to the console for debugging
-        console.log($scope.userProfile);
+        // console.log($scope.userProfile);
 
         // Basic user input validation
         $scope.checkEmptyFields();
@@ -27,7 +27,10 @@ app.controller('LoginController', function($scope, $http, $location, $routeParam
             url:'/api/users/' + $scope.userProfile.username + '/' + $scope.userProfile.password,
             headers: {'Content-Type':'application/json'}
         })
-        .then(function (data){ data.data.message ? $scope.feedback = "Login successful, start session" : $scope.feedback = "Entered username-password combination doesn't exist"; } );
+        .then(function (data){ 
+        console.log(data);
+        data.data.message ? $location.path("/dashboardPage") : $scope.feedback = "Entered username-password combination doesn't exist";
+         } );
     }
 
     $scope.checkEmptyFields = function() {

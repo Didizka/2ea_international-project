@@ -15,13 +15,14 @@
   "homepage": "https://bitbucket.org/ChingizMizambekov/ecg#readme",
   "dependencies": {
     "body-parser": "^1.17.1",
+    "browser-sync": "^2.18.8",
     "express": "^4.15.2",
+    "express-session": "^1.15.2",
     "forever": "^0.15.3",
+    "gulp": "^3.9.1",
+    "gulp-nodemon": "^2.2.1",
     "moment": "^2.18.1",
     "mongoose": "^4.8.7",
-    "normalize.css": "^5.0.0",
-    "browser-sync": "^2.18.8",
-    "gulp": "^3.9.1",
-    "gulp-nodemon": "^2.2.1"
+    "normalize.css": "^5.0.0"
   }
 }

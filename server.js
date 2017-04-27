@@ -5,7 +5,8 @@
 var express 	= require('express'),
 app 		= express(),
 bodyParser 	= require('body-parser'),
-mongoose	= require('mongoose');
+mongoose	= require('mongoose'),
+session 	= require('express-session');
 
 // Connect to the Database
 mongoose.connect('mongodb://localhost:27017/ecg');
@@ -21,15 +22,19 @@ app.use(express.static(__dirname + '/app'));
 // Try to set the port manually to 3000, if not available, set it automatically to a free port
 var port = process.env.PORT || 3000;
 
+// Enable session variable
+app.use(session({secret: 'ecg'}));
+var sess;
+
 // API ROUTES
 // ============================================================================
 var router = express.Router();
 
 // Middleware to use for all requests
-router.use(function (req, res, next) {
-	console.log('middleware for router enabled');
-	next();
-});
+// router.use(function (req, res, next) {
+// 	console.log('middleware for router enabled');
+// 	next();
+// });
 
 // Test route to test everything is working
 router.get('/', function (req, res) {
@@ -88,7 +93,7 @@ router.route('/users')
 router.route('/users/:username/:password')
 .get(function (req, res) {
 		// Create temp user and set his username and password
-		var userExists = true;
+		var doesUserExist = true;
 		var tempUser = new User();
 		tempUser.username = req.params.username;
 		tempUser.password = req.params.password;
@@ -98,11 +103,13 @@ router.route('/users/:username/:password')
 			if (err) console.log(err);
 			if (users.length != 0 && users[0].username === tempUser.username && users[0].password === tempUser.password) {
 					// Start session & return true to the client
-					res.json({message: userExists});
+					sess = req.session;
+					sess.user = users[0];
+					res.json({message: doesUserExist});
 				} else {		
 					// Return false to the client
-					userExists = false;			
-					res.json({message: userExists});
+					doesUserExist = false;			
+					res.json({message: doesUserExist});
 				}	
 			});
 	})
@@ -127,6 +134,37 @@ router.route('/data/:username')
 .delete(function(req, res){
 	res.json({message: "DELETE user graph"});
 });
+
+
+
+// sessionStorage
+// ============================================================================
+// Check if session is started. If started, send the user object back without his password, otherwise return false
+router.route('/session')
+.get(function(req, res){
+	sess = req.session;
+	if (sess.user) {
+		delete sess.user.password;
+		res.json({session: sess.user});
+	} else {
+		res.json({session: false});
+	}
+});
+
+// Logout: destroy current session and send result back
+router.route('/logout')
+.get(function(req, res){
+	sess = null;
+	req.session.destroy(function(err) {
+		if(err) {
+			console.log(err);
+			res.json({logout: false});
+		} else {
+			res.json({logout: true});
+		}
+	});
+});
+
 
 
 
