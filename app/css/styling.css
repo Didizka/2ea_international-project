@@ -3,6 +3,8 @@ button:focus {outline:0;}
 
 body {
     background-image: url(../images/gplaypattern.png);
+    margin-left: 2%;
+    margin-right: 2%;
 }
 
 .clear {
@@ -23,53 +25,53 @@ body {
     overflow-x: scroll;  
     overflow-y: hidden;
 }
-
-#chart2_div {
-    overflow-x: scroll; 
-    overflow-y: hidden;
-}
-
-/*h1{
+h1.h1center {
+    font-size: 40px;
     text-align: center;
-}*/
+}
 
 h1.leftH1 {
-    text-align: center;
+    font-size: 50px;
     color:white;
+    float:left;
+    margin-top:5px;
+    margin-left: 10px;
 }
-
-/*h2 {
-    text-align: center;
-}
-h3 {
-    text-align: center;
-}*/
-
 
 header {
     background-color:midnightblue;
-    height: 55px;
+    height: 60px;
 }
 
 a {
     cursor: pointer;
 }
-
+a.leftHeader {
+    font-size: 50px;
+    color:white;
+    float:left;
+    margin-top: 0px;
+    margin-left: 10px;
+}
 a.link {
     font-size: 15px;
-    color:cadetblue;
+    color:white;
     text-decoration: none;
-    padding: 2 15 2 15;
-    float: left;
-    margin-top: -24px;
+    padding: 2px 15px 2px 15px;
+    float: right;
+    margin-top: 30px;
 }
 
 a.link:hover {
     text-decoration: none;
     border-bottom: 5px solid white;
-    color: white;
 }
 
 .dashboard-navigation {
     list-style: none;
+}
+
+p.box1 {
+    font-size: 20px;
+    text-align: center;
 }

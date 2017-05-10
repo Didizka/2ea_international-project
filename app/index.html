@@ -5,18 +5,16 @@
     </head>   
     <body ng-app="App">
     <header ng-controller="MainController">
-    <h1 class="leftH1">ECG at Home</h1>    
-    <a ng-Click="loginPage()" class="link">LOGIN</a>
+    <a ng-Click="homePage()" class="leftHeader">FinBel</a>
+    <a ng-Click="loginPage()" class="link">Login</a>
     <a ng-Click="contactPage()" class="link">Contact</a>
     <!-- <a ng-Click="userPage()" class="link">User</a> -->
     <!-- <a ng-Click="dashboardPage()" class="link">Dashboard</a> -->
-    <a ng-Click="guidePage()" class="link">Guide</a>
-    <a ng-Click="homePage()" class="link">Home</a>    
+    <!-- <a ng-Click="guidePage()" class="link">Guide</a> -->
     <a ng-Click="hospitalsPage()" class="link">Hospitals</a>    
     </header>
         <div class="clear">
         </div>
-        <hr class="hr-1">
         <div ng-view></div> 
 
     <!-- IMPORTS -->
