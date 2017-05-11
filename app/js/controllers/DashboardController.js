@@ -51,17 +51,36 @@ app.controller('DashboardController', ['$scope', '$http', '$location', 'Upload',
     	}); 
     };  
 
+    
+
     // Upload new ecg
-    $scope.uploadFile = function(file) {    
-        Upload.upload({
-            method: 'POST',
-            url: 'api/data/' + $scope.user.username,
-            file: file
-          }).then(function(res) {
-            // file is uploaded successfully
-            console.log(res);
-        }); 
+    // Get content from the file to construct the file name
+    // send username, filename & file to the server
+    $scope.submit = () => { 
+        var reader = new FileReader();
+        reader.readAsText($scope.file, "UTF-8");
+
+        reader.onload = function (evt) {
+            var fileContent = JSON.parse(evt.target.result);
+            var fileName = fileContent.measurement1.day + "-" + fileContent.measurement1.month + "-" + fileContent.measurement1.year + " " + fileContent.measurement1.hour + ":" + fileContent.measurement1.minute;
+            Upload.upload({
+                method: 'POST',
+                url: 'api/data/' + $scope.user.username,
+                data: { filename: fileName},
+                file: $scope.file
+            }).then(function(res) {
+                // file is uploaded successfully
+                console.log(res);
+            }); 
+        }
+        
+        reader.onerror = function (evt) {
+            console.log("error reading file");
+        }
+
+        
     };
+
 
     // Get the user if logged in, redirect if not and display profile page as default view of the dashboard
     $scope.askForSession();

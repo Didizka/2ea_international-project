@@ -10,18 +10,25 @@ session 	= require('express-session'),
 fs 			= require('fs'),
 multer		= require('multer');
 
+// Functions
+// ======================================================================
+// Multer
 var storage = multer.diskStorage({
 	destination: function (req, file, cb) {
-		console.log(req.params.username);
+		console.log('2');
+		console.log('2', req.body);
+		console.log('2', file);
 		cb(null, __dirname + '/app/user_data/' + req.params.username);
 	},
 	filename: function (req, file, cb) {
-		cb(null, file.originalname);
+		cb(null, req.body.filename + '.json');
 	}
 });
-
 var upload = multer({storage : storage});
 
+
+
+// Check if folder exists with given username for personal records, if no, create
 var checkUploadPath = function (req, res, next) {
 	var path = __dirname + '/app/user_data/' + req.params.username;
 	fs.exists(path, function (exists) {
@@ -37,6 +44,18 @@ var checkUploadPath = function (req, res, next) {
 			});
 		}
 	});
+}
+
+// Create home folder on new user creation
+var createHomeDir = function(username) {
+	var path = __dirname + '/app/user_data/' + username
+	// console.log(dir);
+	try {
+		fs.mkdirSync(path);
+		console.log('Home dir has been created: ' + path);
+	} catch (err) {
+		console.log(err);
+	}
 }
 
 // Connect to the Database
@@ -61,22 +80,7 @@ var sess;
 // ============================================================================
 var router = express.Router();
 
-var createHomeDir = function(username) {
-	var dir = __dirname + '/app/user_data/' + username
-	// console.log(dir);
-	try {
-		fs.mkdirSync(dir);
-		console.log('Home dir has been created: ' + dir);
-	} catch (err) {
-		console.log(err);
-	}
-	// if (!path.existsSync(dir)) {
-	// 	fs.mkdidrSync(dir);
-	// 	console.log('Home directory has been created');
-	// } else {
-	// 	console.log('Home directory already exists');
-	// }
-}
+
 
 // Test route to test everything is working
 router.get('/', function (req, res) {
@@ -176,6 +180,9 @@ router.route('/data/:username')
 	res.json({message: "GET user graph"});
 })
 .post(checkUploadPath, upload.single('file'), function(req, res){
+	console.log('1');
+	console.log('1', req.body);
+	console.log('1', req.file);
 	res.json({message: "POST user graph"});
 
 })

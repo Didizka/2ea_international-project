@@ -6,7 +6,7 @@
 </form> -->
 
 <form name="uploadForm" ng-controller="DashboardController">
-<div class="btn btn-default" name="file" ngf-select ngf-change="uploadFile($file)" accept=".json">
+<div class="btn btn-default" name="file" ngf-select ng-model='file' accept=".json">
       Upload File <span class="glyphicon glyphicon-file"></span>
         </div>
 <button type="submit" ng-click="submit()">submit</button>
