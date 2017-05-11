@@ -6,7 +6,8 @@ var express 	= require('express'),
 app 		= express(),
 bodyParser 	= require('body-parser'),
 mongoose	= require('mongoose'),
-session 	= require('express-session');
+session 	= require('express-session'),
+fs 			= require('fs');
 
 // Connect to the Database
 mongoose.connect('mongodb://localhost:27017/ecg');
@@ -30,11 +31,22 @@ var sess;
 // ============================================================================
 var router = express.Router();
 
-// Middleware to use for all requests
-// router.use(function (req, res, next) {
-// 	console.log('middleware for router enabled');
-// 	next();
-// });
+var createHomeDir = function(username) {
+	var dir = __dirname + '/app/user_data/' + username
+	// console.log(dir);
+	try {
+		fs.mkdirSync(dir);
+		console.log('Home dir has been created: ' + dir);
+	} catch (err) {
+		console.log(err);
+	}
+	// if (!path.existsSync(dir)) {
+	// 	fs.mkdidrSync(dir);
+	// 	console.log('Home directory has been created');
+	// } else {
+	// 	console.log('Home directory already exists');
+	// }
+}
 
 // Test route to test everything is working
 router.get('/', function (req, res) {
@@ -78,7 +90,9 @@ router.route('/users')
 						user.coffeine = req.body.coffeine;
 						user.smoker = req.body.smoker;
 
-						user.save(function (err) {
+						createHomeDir(user.username);
+
+						user.save(function (err) {							
 							if (err) console.log(err);
 							// Return true to the client for further user notification
 							return res.json({message: isUnique});
