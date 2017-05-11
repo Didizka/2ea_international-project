@@ -1,4 +1,4 @@
-app.controller('DashboardController', function ($scope, $http, $location, $routeParams) {   
+app.controller('DashboardController', ['$scope', '$http', '$location', 'Upload', function ($scope, $http, $location, Upload) {   
     
     // Get user if he has successfully logged in and started a session
     $scope.askForSession = function() {
@@ -51,7 +51,19 @@ app.controller('DashboardController', function ($scope, $http, $location, $route
     	}); 
     };  
 
+    // Upload new ecg
+    $scope.uploadFile = function(file) {    
+        Upload.upload({
+            method: 'POST',
+            url: 'api/data/' + $scope.user.username,
+            file: file
+          }).then(function(res) {
+            // file is uploaded successfully
+            console.log(res);
+        }); 
+    };
+
     // Get the user if logged in, redirect if not and display profile page as default view of the dashboard
     $scope.askForSession();
     $scope.profilePage();    
-});
+}]);

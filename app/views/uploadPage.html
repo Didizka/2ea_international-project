@@ -1,6 +1,16 @@
 <h1>Upload your recordings here</h1>
-<form action="" method="get" accept-charset="utf-8">
+<!-- <form action="" method="get" accept-charset="utf-8" ng-controller="UploadPageController">
 	<label for="upload">Choose your file</label>
-	<input type="file" id="upload" accept=".json">
-	<input type="submit" value="upload">
+	<input type="file" name="file" onchange="angular.element(this).scope().onFileUpload(this)"  accept=".json"/>
+	<input type="submit" value="upload" ng-click="uploadFile()">
+</form> -->
+
+<form name="uploadForm" ng-controller="DashboardController">
+<div class="btn btn-default" name="file" ngf-select ngf-change="uploadFile($file)" accept=".json">
+      Upload File <span class="glyphicon glyphicon-file"></span>
+        </div>
+<button type="submit" ng-click="submit()">submit</button>
 </form>
+
+
+

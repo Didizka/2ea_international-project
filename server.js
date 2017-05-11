@@ -7,7 +7,37 @@ app 		= express(),
 bodyParser 	= require('body-parser'),
 mongoose	= require('mongoose'),
 session 	= require('express-session'),
-fs 			= require('fs');
+fs 			= require('fs'),
+multer		= require('multer');
+
+var storage = multer.diskStorage({
+	destination: function (req, file, cb) {
+		console.log(req.params.username);
+		cb(null, __dirname + '/app/user_data/' + req.params.username);
+	},
+	filename: function (req, file, cb) {
+		cb(null, file.originalname);
+	}
+});
+
+var upload = multer({storage : storage});
+
+var checkUploadPath = function (req, res, next) {
+	var path = __dirname + '/app/user_data/' + req.params.username;
+	fs.exists(path, function (exists) {
+		if (exists) {
+			next();
+		} else {
+			fs.mkdir(path, function (err) {
+				if (err) {
+					console.log(err);
+					next();
+				}
+				next();
+			});
+		}
+	});
+}
 
 // Connect to the Database
 mongoose.connect('mongodb://localhost:27017/ecg');
@@ -139,13 +169,15 @@ router.route('/users/:username/:password')
 	});
 
 
+
 // CRD for userdata. NO Update
 router.route('/data/:username')
 .get(function(req, res){
 	res.json({message: "GET user graph"});
 })
-.post(function(req, res){
+.post(checkUploadPath, upload.single('file'), function(req, res){
 	res.json({message: "POST user graph"});
+
 })
 .delete(function(req, res){
 	res.json({message: "DELETE user graph"});
