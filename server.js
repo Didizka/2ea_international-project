@@ -184,8 +184,7 @@ router.route('/data/:username')
 .get(function(req, res){
 	var recordsPath = __dirname + '/app/user_data/' + req.params.username;
 
-	var records = fs.readdirSync(recordsPath)
-
+	var records = fs.readdirSync(recordsPath);
 	records.length ? res.json({records: records}) : res.json({records: false})
 })
 .post(checkUploadPath, upload.single('file'), function(req, res){

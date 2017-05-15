@@ -5,6 +5,11 @@
         <option ng-repeat="record in user.records">{{ record }}</option>
     </select>
     <h4>Personal Info</h4>
+    <h2>Select your record</h2>
+    <select  ng-model="selectedRecord" ng-change="displayGraph()">
+        <option ng-repeat="record in user.records">{{ record }}</option>
+    </select>
+    <h2>Personal Info</h2>
     <p class="infoText">Name: {{user.firstname}} {{user.lastname}}</p>
     <p class="infoText">Age: {{user.age}}</p>
     <p class="infoText">Email: {{user.email}}</p>
