@@ -1,88 +1,110 @@
-<div class="reg-form">    
-  <div class="row">
-    <!-- FORM -->
-    <div class="col-md-4 col-md-offset-4">     
+<!-- Contact Section -->
+    <section id="register">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>registration form</h2>
+                    <hr class="star-primary">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-lg-offset-3">
+                    <form id="registrationForm" name="registrationForm" novalidate>
 
-    <!-- Prevent from auto validate the form  -->
-      <form id="registrationForm" name="registrationForm" novalidate>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label for="firstname">First name *</label>
+                                <input type="text" class="form-control" id="firstname" ng-model="userProfile.firstname" placeholder="First name" required>
+                            </div>
+                        </div>
 
-        <fieldset>
-          <legend>Registration form <small>(fields with * are required)</small></legend>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label for="lastname">Last name *</label>
+                                <input type="text" class="form-control" id="lastname" ng-model="userProfile.lastname" placeholder="Last name" required>
+                            </div>
+                        </div>
+
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label for="email">Email *</label>
+                                <input type="email" class="form-control" id="email" ng-model="userProfile.email" placeholder="example@info.com" required>
+                            </div>
+                        </div>
+
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label for="username">Username *</label>
+                                <input type="text" class="form-control" id="username" ng-model="userProfile.username" placeholder="Username" required>
+                            </div>
+                        </div>
+
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label for="password">Password *</label>
+                                <input type="password" class="form-control" id="password" ng-model="userProfile.password" placeholder="Password" required>
+                            </div>
+                        </div>
+
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label for="passwordConfirm">Password Confirm *</label>
+                                <input type="password" class="form-control" id="passwordConfirm" ng-model="userProfile.passwordConfirm" placeholder="Password Confirm" required>
+                            </div>
+                        </div>
+
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label for="birthdate">Date of Birth</label>
+                                <input type="date" class="form-control" id="birthdate" ng-model="userProfile.birthdate">
+                            </div>
+                        </div>
+
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label for="weight">Weight</label>
+                                <input type="number" class="form-control" id="weight" ng-model="userProfile.weight" placeholder="Weight">
+                            </div>
+                        </div>
+
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label for="length">Length</label>
+                                <input type="number" class="form-control" id="length" ng-model="userProfile.length" placeholder="Length">
+                            </div>
+                        </div>
+
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label for="coffeine">Cups coffee per day</label>
+                                <input type="number" class="form-control" id="coffeine" ng-model="userProfile.coffeine" placeholder="Cups coffee per day">
+                            </div>
+                        </div>
+
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label for="medication">Medication</label>
+                                <input type="text" class="form-control" id="medication" ng-model="userProfile.medication" placeholder="Medication">
+                            </div>
+                        </div>
+
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label for="smoker">Are you a smoker?</label>
+                                <input type="checkbox" id="smoker" ng-model="userProfile.smoker">
+                            </div>
+                        </div>
+
+                        <br>
+                        <button id="registrationFormSubmit" class="btn btn-default" ng-click="submit()">Submit</button>
+
+                    </form>
+                    <br>
+                    <pre class="result">{{ feedback }}</pre>
+                </div>
+            </div>
+        </div>
+    </section>
 
 
-          <div class="form-group">
-            <label for="firstname">First name *</label>
-            <input type="text" class="form-control" id="firstname" ng-model="userProfile.firstname" placeholder="First name" required>
-          </div>
 
-          <div class="form-group">
-            <label for="lastname">Last name *</label>
-            <input type="text" class="form-control" id="lastname" ng-model="userProfile.lastname" placeholder="Last name" required>
-          </div>
-
-
-          <div class="form-group">
-            <label for="email">Email *</label>
-            <input type="email" class="form-control" id="email" ng-model="userProfile.email" placeholder="example@info.com" required>
-          </div>
-
-          <div class="form-group">
-            <label for="username">Username *</label>
-            <input type="text" class="form-control" id="username" ng-model="userProfile.username" placeholder="Username" required>
-          </div>
-
-          <div class="form-group">
-            <label for="password">Password *</label>
-            <input type="password" class="form-control" id="password" ng-model="userProfile.password" placeholder="Password" required>
-          </div>
-
-          <div class="form-group">
-            <label for="passwordConfirm">Password Confirm *</label>
-            <input type="password" class="form-control" id="passwordConfirm" ng-model="userProfile.passwordConfirm" placeholder="Password Confirm" required>
-          </div>
-
-          <div class="form-group">
-            <label for="birthdate">Date of Birth</label>
-            <input type="date" class="form-control" id="birthdate" ng-model="userProfile.birthdate">
-          </div>
-
-          <div class="form-group">
-            <label for="weight">Weight</label>
-            <input type="number" class="form-control" id="weight" ng-model="userProfile.weight" placeholder="Weight">
-          </div>
-
-          <div class="form-group">
-            <label for="length">Length</label>
-            <input type="number" class="form-control" id="length" ng-model="userProfile.length" placeholder="Length">
-          </div>
-
-          <div class="form-group">
-            <label for="coffeine">Cups coffee per day</label>
-            <input type="number" class="form-control" id="coffeine" ng-model="userProfile.coffeine" placeholder="Cups coffee per day">
-          </div>
-
-          <div class="form-group">
-            <label for="medication">Medication</label>
-            <input type="text" class="form-control" id="medication" ng-model="userProfile.medication" placeholder="Medication">
-          </div>
-
-          <div class="form-group">
-            <label for="heartcondition">Heart Conditions</label>
-            <input type="text" class="form-control" id="heartcondition" ng-model="userProfile.heartcondition" placeholder="Heart Conditions">
-          </div>
-
-
-          <div class="form-group">
-            <label for="smoker">Are you a smoker?</label>
-            <input type="checkbox" id="smoker" ng-model="userProfile.smoker">
-          </div>
-
-          <button id="registrationFormSubmit" class="btn btn-default" ng-click="submit()">Submit</button>
-
-        </fieldset>
-      </form>
-      <pre class="result">{{ feedback }}</pre>
-    </div>
-  </div>
-  
-</div>

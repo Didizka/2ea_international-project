@@ -9,10 +9,6 @@ $routeProvider
     templateUrl:'views/home.html',
     controller:'MainController'
     })
-    .when('/home',{
-    templateUrl:'views/home.html',
-    controller:'MainController'
-    })
     .when('/login',{
     templateUrl:'views/login.html',
     controller:'LoginController'
@@ -25,29 +21,21 @@ $routeProvider
     templateUrl:'views/register.html',
     controller:'RegisterController'
     })
-    .when('/userPage',{
-    templateUrl:'views/userPage.html',
-    controller:'UserPageController'
+    .when('/about',{
+    templateUrl:'views/about.html',
+    controller:'MainController'
     })
     .when('/dashboardPage',{
     templateUrl:'views/dashboard.html',
     controller:'DashboardController'
     })
-    .when('/profilePage',{
-    templateUrl:'views/profilePage.html',
-    controller:'DashboardController'
-    })
-    .when('/uploadPage',{
-    templateUrl:'views/uploadPage.html',
-    controller:'UploadPageController'
-    })
-    .when('/guide',{
-    templateUrl:'views/guide.html',
-    controller:'MainController'
-    })
     .when('/hospitals',{
     templateUrl:'views/hospitals.html',
     controller:'HospitalsController'
+    })
+    .when('/donate',{
+    templateUrl:'views/donate.html',
+    controller:'DonateController'
     })
     .otherwise({
     redirectTo: '/' 

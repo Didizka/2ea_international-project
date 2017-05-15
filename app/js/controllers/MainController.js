@@ -9,8 +9,8 @@ app.controller('MainController', function ($scope, $http, $location, $routeParam
     $scope.contactPage = function(){  
         $location.path("/contact");   
     }; 
-    $scope.userPage = function(){  
-        $location.path("/userPage");   
+    $scope.aboutPage = function(){  
+        $location.path("/about");   
     }; 
     $scope.dashboardPage = function(){  
         $location.path("/dashboardPage");   
@@ -18,10 +18,10 @@ app.controller('MainController', function ($scope, $http, $location, $routeParam
     $scope.homePage = function(){  
         $location.path("/home");   
     };    
-    $scope.guidePage = function(){  
-        $location.path("/guide");   
-    };  
     $scope.hospitalsPage = function(){  
         $location.path("/hospitals");   
+    };  
+    $scope.donatePage = function(){  
+        $location.path("/donate");   
     };  
 });

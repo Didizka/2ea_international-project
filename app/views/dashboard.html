@@ -1,13 +1,16 @@
-<div class="row">
-	<div class="container">
-	<h1>Welcome to your personalized dashboard, {{user.firstname}}!</h1>
-</div>
-</div>
-
-<div class="row">
-	<div class="col-md-3">
-		<h2>Menu</h2>
-		<nav>
+    <!-- Dashboard Section -->
+    <section id="dashboard">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Dashboard</h2>
+                    <hr class="star-primary">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3">
+                    <h3>Navigation</h3>
+		<nav id="dashboard">
 			<ul class="dashboard-navigation">
 				<li><a ng-Click="profilePage()">Profile</a></li>
 				<li><a ng-Click="uploadPage()">Add new record</a></li>
@@ -15,9 +18,12 @@
 				<li><a ng-Click="logout()">Logout</a></li>
 			</ul>
 		</nav>
-	</div>
+                </div>
+                <div class="col-lg-9">
+                    <ng-include src="dashboardView"></ng-include>
+                </div>
+            </div>
+        </div>
+    </section>
 
-	<div class="col-md-9">
-		<ng-include src="dashboardView"></ng-include>
-	</div>
-</div>
+
