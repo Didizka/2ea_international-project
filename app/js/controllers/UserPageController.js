@@ -1,4 +1,6 @@
-    app.controller('UserPageController', function($scope, $http, $location, $routeParams){
+    app.controller('UserPageController', function($scope, $http, $location, $routeParams, RecordName){
+
+      console.log(RecordName.getModel('record'));
 
     // Load the Visualization API and the corechart package.
       google.charts.load('current', {'packages':['corechart']});

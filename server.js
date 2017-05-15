@@ -8,7 +8,8 @@ bodyParser 	= require('body-parser'),
 mongoose	= require('mongoose'),
 session 	= require('express-session'),
 fs 			= require('fs'),
-multer		= require('multer');
+multer		= require('multer'),
+path 		= require('path');
 
 // Functions
 // ======================================================================
@@ -166,9 +167,13 @@ router.route('/users/:username/:password')
 
 	// UPDATE existing user
 	.put(function (req, res) {
+		// Update current users profil
 		res.json({message: "UPDATE user based on username"});
 	})
 	.delete(function (req, res) {
+		// delete current users profile
+		// delete his home folder with all records
+		// redirect him to the start page
 		res.json({message: "DELETE user based on username"});
 	});
 
@@ -177,14 +182,16 @@ router.route('/users/:username/:password')
 // CRD for userdata. NO Update
 router.route('/data/:username')
 .get(function(req, res){
-	res.json({message: "GET user graph"});
+	var recordsPath = __dirname + '/app/user_data/' + req.params.username;
+
+	var records = fs.readdirSync(recordsPath, function() {
+		return fs.statSync(recordsPath + '/' + record);
+	});
+
+	records.length ? res.json({records: records}) : res.json({records: false})
 })
 .post(checkUploadPath, upload.single('file'), function(req, res){
-	console.log('1');
-	console.log('1', req.body);
-	console.log('1', req.file);
-	res.json({message: "POST user graph"});
-
+	// Save new record 
 })
 .delete(function(req, res){
 	res.json({message: "DELETE user graph"});

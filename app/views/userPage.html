@@ -1,17 +1,16 @@
-<div ng-controller="UserPageController">
-    <h2>Menu</h2>
-<button ng-click="test()">test json</button>
-    <select>
-        <option value="Date:">Day 1</option>
-        <option value="Date:">Day 2</option>
-        <option value="Date:">Day 3</option>
-        <option value="Date:">Day 4</option>
+<!-- Get records when the view is loaded -->
+<div ng-controller="DashboardController" data-ng-init="getRecords()">
+    <h2>Select your record</h2>
+    <select  ng-model="selectedRecord" ng-change="displayGraph()">
+        <option ng-repeat="record in user.records">{{ record }}</option>
     </select>
     <h2>Personal Info</h2>
-    <p class="infoText">Name: Chingiz</p>
-    <p class="infoText">Age: 28</p>
-    <p class="infoText">Email: chinjka_m@hotmail.com</p>
+    <p class="infoText">Name: {{user.firstname}} {{user.lastname}}</p>
+    <p class="infoText">Age: {{user.age}}</p>
+    <p class="infoText">Email: {{user.email}}</p>
 </div>
-<div>
+
+
+    <div>
     <div id="chart1_div"></div>
 </div>

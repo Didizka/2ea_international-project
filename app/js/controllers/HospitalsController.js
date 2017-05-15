@@ -7,9 +7,7 @@ app.controller('HospitalsController', function($scope, $http, $location, $routeP
     })
     .then(function (data) {
         $scope.hospitals = data.data.data;
-        // console.log(data.data.data);
-    }); 
-    
+    });    
 
 
 });
