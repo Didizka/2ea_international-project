@@ -1,21 +1,29 @@
-<html>  
- <head>
-        <title>Dummy Website</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-    </head>   
-    <body ng-app="App">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>ECG International Project</title>
+</head>   
+
+<body ng-app="App">
     <header ng-controller="MainController">
-    <a ng-Click="homePage()" class="leftHeader">FinBel</a>
-    <a ng-Click="loginPage()" class="link">Login</a>
-    <a ng-Click="contactPage()" class="link">Contact</a>
-    <!-- <a ng-Click="userPage()" class="link">User</a> -->
-    <!-- <a ng-Click="dashboardPage()" class="link">Dashboard</a> -->
-    <!-- <a ng-Click="guidePage()" class="link">Guide</a> -->
-    <a ng-Click="hospitalsPage()" class="link">Hospitals</a>    
+        <a ng-Click="homePage()" class="leftHeader">FinBel</a>
+        <a ng-Click="loginPage()" class="link">Login</a>
+        <a ng-Click="contactPage()" class="link">Contact</a>
+        <!-- <a ng-Click="userPage()" class="link">User</a> -->
+        <!-- <a ng-Click="dashboardPage()" class="link">Dashboard</a> -->
+        <!-- <a ng-Click="guidePage()" class="link">Guide</a> -->
+        <a ng-Click="hospitalsPage()" class="link">Hospitals</a>    
     </header>
-        <div class="clear">
-        </div>
-        <div ng-view></div> 
+    <div class="clear">
+    </div>
+    <div ng-view></div> 
 
     <!-- IMPORTS -->
     <!-- NORMALIZE CSS -->
@@ -44,7 +52,7 @@
     <script type="text/javascript" src="js/controllers/DashboardController.js"></script>
     <!-- CUSTOM CSS  -->
     <link rel="stylesheet" href="css/styling.css">
-    </body>
-    
+</body>
+
 
 </html>
