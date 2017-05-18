@@ -73,7 +73,7 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
 
         reader.onload = (evt) => {
             var fileContent = JSON.parse(evt.target.result);
-            var fileName = fileContent.measurement1.day + "-" + fileContent.measurement1.month + "-" + fileContent.measurement1.year + " " + fileContent.measurement1.hour + ":" + fileContent.measurement1.minute;
+            var fileName = fileContent.measurement1.day + "-" + fileContent.measurement1.month + "-" + fileContent.measurement1.year + " " + fileContent.measurement1.hour + "-" + fileContent.measurement1.minute;
             Upload.upload({
                 method: 'POST',
                 url: 'api/data/' + $scope.user.username,
