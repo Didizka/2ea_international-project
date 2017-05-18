@@ -7,7 +7,7 @@ db:
 app:
  build: .
  volumes:
-  - ./:/ecg
+  - .:/ecg
  ports:
   - "3000:3000"
  links:

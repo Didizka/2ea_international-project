@@ -4,7 +4,7 @@ MAINTAINER Chingiz Mizambekov
 RUN mkdir -p /ecg
 WORKDIR /ecg
 
-COPY package.json /ecg
+COPY package.json /ecg/package.json
 COPY . /ecg
 RUN npm install
 
