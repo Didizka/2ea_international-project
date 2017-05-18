@@ -15,7 +15,7 @@ $routeProvider
     })
     .when('/contact',{
     templateUrl:'views/contact.html',
-    controller:'MainController'
+    controller:'ContactController'
     })
     .when('/register',{
     templateUrl:'views/register.html',

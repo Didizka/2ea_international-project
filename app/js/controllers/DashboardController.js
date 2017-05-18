@@ -68,26 +68,32 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
     // Get content from the file to construct the file name
     // send username, filename & file to the server
     $scope.submit = () => { 
-        var reader = new FileReader();
-        reader.readAsText($scope.file, "UTF-8");
+        if ($scope.file) {
+          var reader = new FileReader();
+          reader.readAsText($scope.file, "UTF-8");
 
-        reader.onload = (evt) => {
-            var fileContent = JSON.parse(evt.target.result);
-            var fileName = fileContent.measurement1.day + "-" + fileContent.measurement1.month + "-" + fileContent.measurement1.year + " " + fileContent.measurement1.hour + "-" + fileContent.measurement1.minute;
-            Upload.upload({
-                method: 'POST',
-                url: 'api/data/' + $scope.user.username,
-                data: { filename: fileName},
-                file: $scope.file
-            }).then(function(res) {
-                // file is uploaded successfully
-                console.log(res);
-            }); 
-        }
-        
-        reader.onerror = (evt) => {
-            console.log("error reading file");
-        }        
+          reader.onload = (evt) => {
+              var fileContent = JSON.parse(evt.target.result);
+              var fileName = fileContent.measurement1.day + "-" + fileContent.measurement1.month + "-" + fileContent.measurement1.year + " " + fileContent.measurement1.hour + "꞉" + fileContent.measurement1.minute;
+              Upload.upload({
+                  method: 'POST',
+                  url: 'api/data/' + $scope.user.username,
+                  data: { filename: fileName},
+                  file: $scope.file
+              }).then(function(res) {
+                  // file is uploaded successfully
+                  console.log(res.data.success);
+                  res.data.success ? $scope.feedbackUpload = "File has been successfully uploaded" : $scope.feedbackUpload = "Error occured while uploading the file";
+              }); 
+          }
+          
+          reader.onerror = (evt) => {
+              console.log("error reading file");
+          }    
+        }  else {
+          console.log("error");
+          $scope.feedbackUpload = "False";
+        }  
     };
 
     // Get records on 'view existing records' section load

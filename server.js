@@ -9,7 +9,8 @@ mongoose	= require('mongoose'),
 session 	= require('express-session'),
 fs 			= require('fs'),
 multer		= require('multer'),
-path 		= require('path');
+path 		= require('path'),
+sendmail	= require('sendmail')();
 
 // Functions
 // ======================================================================
@@ -189,7 +190,8 @@ router.route('/data/:username')
 	records.length ? res.json({records: records}) : res.json({records: false})
 })
 .post(checkUploadPath, upload.single('file'), function(req, res){
-	// Save new record 
+	var success = req.file.path.includes('/user_data/');
+	res.json({success: success});
 })
 .delete(function(req, res){
 	res.json({message: "DELETE user graph"});
@@ -225,6 +227,29 @@ router.route('/logout')
 	});
 });
 
+// Send mail if email was provided
+router.route('/contact')
+.post(function(req, res) {
+
+	if (req.body.email) {
+		// console.log(req.body)
+		var from = req.body.email,
+			to 	 = 'chinjka_m@hotmail.com',
+			subject = 'New contact from ECG webapp',
+			text = req.body.message + "\nFrom" + req.body.name;
+		sendmail({
+			from: from,
+			to: to,
+			subject: subject,
+			text: text
+		}, function (err, reply) {
+			if (err) console.log(err);
+			console.log(dir);
+		});
+	}
+	
+
+});
 
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
