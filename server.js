@@ -10,7 +10,7 @@ session 	= require('express-session'),
 fs 			= require('fs'),
 multer		= require('multer'),
 path 		= require('path'),
-sendmail	= require('sendmail')();
+nodemailer	= require('nodemailer');
 
 // Functions
 // ======================================================================
@@ -230,22 +230,34 @@ router.route('/logout')
 // Send mail if email was provided
 router.route('/contact')
 .post(function(req, res) {
+	let transporter = nodemailer.createTransport({
+		service: 'gmail',
+		auth: {
+			user: 'infoecgfinbel@gmail.com',
+			pass: 'ecgecg123'
+		}
+	});
+
+	let mailOptions = {
+		from: req.body.email,
+		to: 'chinjka_m@hotmail.com',
+		subject: 'New contact request via ECG webapp',
+		text: req.body.message
+	};
 
 	if (req.body.email) {
-		// console.log(req.body)
-		var from = req.body.email,
-			to 	 = 'chinjka_m@hotmail.com',
-			subject = 'New contact from ECG webapp',
-			text = req.body.message + "\nFrom" + req.body.name;
-		sendmail({
-			from: from,
-			to: to,
-			subject: subject,
-			text: text
-		}, function (err, reply) {
-			if (err) console.log(err);
-			console.log(dir);
-		});
+
+		transporter.sendMail(mailOptions, (err, info) => {
+			if (err) {
+				console.log(err)
+				res.json({success: false});
+			}
+
+			transporter.close();
+			res.json({success: true});
+		});		
+	} else {
+		res.json({success: false});
 	}
 	
 
