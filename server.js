@@ -227,6 +227,11 @@ router.route('/logout')
 	});
 });
 
+router.route('/test')
+.post(function(req, res){
+	res.json({success: true});
+});
+
 // Send mail if email was provided
 router.route('/contact')
 .post(function(req, res) {
@@ -259,9 +264,26 @@ router.route('/contact')
 	} else {
 		res.json({success: false});
 	}
-	
-
 });
+
+
+// link to share with the doctor: get user data without password
+// token hardcoded for testing purposes, should be auto generated and stored in a database
+router.route('/doctor/:id/:token')
+.get(function (req, res) {
+		if (req.params.token == "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9") {
+			User.findOne({_id: req.params.id}, function (err, user) {
+				if (err) console.log(err);
+				user = user.toObject();
+				delete user.password;
+				res.json({user: user});
+				
+			}).limit(1);
+			
+		} else {
+			res.json({user: false});
+		}
+	});
 
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api

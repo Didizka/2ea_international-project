@@ -13,7 +13,7 @@ app.factory('RecordName', function () {
 
 
 app.controller('DashboardController', ['RecordName', '$scope', '$http', '$location', 'Upload', function (RecordName, $scope, $http, $location, Upload) {   
-    
+
     // Get user if he has successfully logged in and started a session
     $scope.askForSession = () => { 
         $http({
@@ -62,7 +62,13 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
         	}
     	}); 
     };  
-    
+
+    $scope.throwError = (error) => {
+        $scope.feedbackUpload = error;
+        $("#uploadFormFeedback").removeClass('alert-success');
+        $("#uploadFormFeedback").addClass('alert-danger');
+    }
+
 
     // Upload new ecg
     // Get content from the file to construct the file name
@@ -80,21 +86,45 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
                   url: 'api/data/' + $scope.user.username,
                   data: { filename: fileName},
                   file: $scope.file
-              }).then(function(res) {
-                  // file is uploaded successfully
-                  console.log(res.data.success);
-                  res.data.success ? $scope.feedbackUpload = "File has been successfully uploaded" : $scope.feedbackUpload = "Error occured while uploading the file";
+              }).then(function(res) {                
+                  if (res.data.success) {
+                    $scope.feedbackUpload = "Your file has been successfully uploaded";
+                    $("#uploadFormFeedback").removeClass('alert-danger');
+                    $("#uploadFormFeedback").addClass('alert-success');
+                  } else {
+                    $scope.throwError('Error uploading your file.')
+                  }
               }); 
           }
           
           reader.onerror = (evt) => {
-              console.log("error reading file");
+              $scope.throwError('Error reading file');
           }    
         }  else {
-          console.log("error");
-          $scope.feedbackUpload = "False";
+          $scope.throwError('Please select a file for upload')
         }  
     };
+
+    $scope.share = () => {
+      var token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9';
+      var linkToShare = "http://84.196.228.4/#/dashboardPage?userid=" + $scope.user._id + "&token=" + token;
+      prompt('Please copy the following link and send it to your doctor, so that he can see your graphs online', linkToShare);
+      
+    }
+
+    $scope.getUserForDoctor = (userid, token) => {
+      var user = $http({
+            method:'GET',
+            url:'api/doctor/' + userid +  '/' + token
+        })
+        .then(function (resp) {            
+            console.log(resp.data.user);
+            $scope.user = resp.data.user;
+            return resp.data.user;         
+        });
+        return user;
+    }
+
 
     // Get records on 'view existing records' section load
     $scope.getRecords = () => {
@@ -309,7 +339,26 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
     }    
 
 
-    // Get the user if logged in, redirect if not and display profile page as default view of the dashboard
-    $scope.askForSession();
-    $scope.profilePage();
+    // Check how the page has been accessed:
+    // 1: login: session started? yes => OK, no => login page
+    // 2: doctor login with token? => OK
+    
+    var url = $location.path();
+    var params = $location.search();
+    console.log(params);
+    console.log('userid: ' + params.userid);
+    console.log('token: ' + params.token);
+    console.log(url);
+    if (url == "/dashboardPage" && !params.userid && !params.token) {
+      $scope.askForSession();
+      $scope.profilePage();
+    } else if (url == "/dashboardPage" && params.userid && params.token) {
+      $scope.isDoctorLoggedIn = true;
+      $scope.getUserForDoctor(params.userid, params.token).then(function(user) {
+        console.log(user);
+        $scope.userPage();
+      })
+    }
+
+    // http://localhost:7000/#/dashboardPage?userid=591380ff0e53f6393806fcec&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 }]);

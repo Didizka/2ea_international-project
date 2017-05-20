@@ -250,3 +250,17 @@ nav#dashboard ul{
   font-size: 1.5em;
   font-weight: bold;
 }
+
+nav#dashboard ul li a {
+  color: #233140;
+}
+
+nav#dashboard ul li a:hover {
+  color: #18BC9C;
+}
+
+.profile {
+  font-size: 2rem;
+}
+
+

@@ -1,5 +1,5 @@
     <!-- Dashboard Section -->
-    <section id="dashboard">
+    <section id="dashboard" ng-controller="DashboardController">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -10,14 +10,17 @@
             <div class="row">
                 <div class="col-lg-3">
                     <h3>Navigation</h3>
+
+
 		<nav id="dashboard">
-			<ul class="dashboard-navigation">
-				<li><a ng-Click="profilePage()">Profile</a></li>
-				<li><a ng-Click="uploadPage()">Add new record</a></li>
-				<li><a ng-Click="userPage()">View existing records</a></li>
-				<li><a ng-Click="logout()">Logout</a></li>
+			<ul class="nav">
+				<li><a ng-Click="profilePage()">Profile <i class="fa fa-user" aria-hidden="true"></i></a></li>
+				<li><a ng-Click="uploadPage()" ng-hide="isDoctorLoggedIn">Add new record <i class="fa fa-upload" aria-hidden="true"></i></a></li>
+				<li><a ng-Click="userPage()">View records <i class="fa fa-file" aria-hidden="true"></i></a></li>
+				<li><a ng-Click="logout()" ng-hide="isDoctorLoggedIn">Logout <i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
 			</ul>
 		</nav>
+
                 </div>
                 <div class="col-lg-9">
                     <ng-include src="dashboardView"></ng-include>

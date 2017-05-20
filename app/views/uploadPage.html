@@ -1,6 +1,6 @@
 <h3>Upload your recordings here</h3>
 
-<form name="uploadForm" ng-controller="DashboardController">
+<form name="uploadForm" name="uploadForm" ng-controller="DashboardController" novalidate>
 <div class="btn btn-success btn-lg btn-outline" name="file" ngf-select ng-model='file' accept=".json">
       Upload File <span class="glyphicon glyphicon-file"></span>
         </div>
@@ -8,8 +8,12 @@
 <button class="btn btn-success btn-lg btn-outline" type="submit" ng-click="submit()">Submit</button>
 </form>
 
-<div class="alert alert-danger">{{feedbackUpload}}</div>
-{{test}}
+
+<div class="row">
+<br>
+    <div class="col-xs-12 alert" id="uploadFormFeedback"><strong>{{feedbackUpload}}</strong></div>
+</div>
+
 
 
 

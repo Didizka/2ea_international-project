@@ -24,6 +24,12 @@ app.controller('RegisterController', function($scope, $http, $location, $routePa
         
     };
 
+    $scope.throwError = (error) => {
+        $scope.feedbackRegister = error;
+        $("#registerFormFeedback").removeClass('alert-success');
+        $("#registerFormFeedback").addClass('alert-danger');
+    }
+
 
     $scope.sendData = function() {
         $http({
@@ -32,19 +38,27 @@ app.controller('RegisterController', function($scope, $http, $location, $routePa
             headers: {'Content-Type':'application/json'},
             data: $scope.userProfile
         })
-        .then(function (data){ data.data.message ? $scope.feedback = "New user has been created" : $scope.feedback = "This username is already in use. Please choose another one"; } );
+        .then(function (res){ 
+            if(res.data.message) {
+                $scope.feedbackRegister = 'Thx! Your profile has been created';
+                $("#registerFormFeedback").removeClass('alert-danger');
+                $("#registerFormFeedback").addClass('alert-success');
+            } else {
+                $scope.throwError('This username is already in use. Please choose another one');
+            }
+        });
     }
 
     $scope.checkEmptyFields = function() {
         if (!$scope.userProfile.firstname || !$scope.userProfile.lastname || !$scope.userProfile.email || !$scope.userProfile.username || !$scope.userProfile.password || !$scope.userProfile.passwordConfirm) {
-            $scope.feedback += "Not all required fields are filled in\n";  
+            $scope.throwError('Not all required fields are filled in');
             $scope.isValid = false;  
         }
     }
 
     $scope.checkPasswordMatch = function() {
         if ($scope.userProfile.password !== $scope.userProfile.passwordConfirm) {
-            $scope.feedback += "Passwords don't match\n";
+            $scope.throwError("Passwords don't match");
             $scope.isValid = false; 
         }
     }

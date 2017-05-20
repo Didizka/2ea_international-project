@@ -1,17 +1,33 @@
 <!-- Get records when the view is loaded -->
-<div ng-controller="DashboardController" data-ng-init="getRecords()">
-    <h3>Your records</h3>
-    <select  ng-model="selectedRecord" ng-change="displayGraph()">
-        <option ng-repeat="record in user.records">{{ record }}</option>
-    </select>
-    <h4>Personal Info</h4>
-    
-    <p class="infoText">Name: {{user.firstname}} {{user.lastname}}</p>
-    <p class="infoText">Age: {{user.age}}</p>
-    <p class="infoText">Email: {{user.email}}</p>
+<div ng-controller="DashboardController" data-ng-init="getRecords()" class="row">
+    <div class="col-lg-12">
+        <h3>{{ isDoctorLoggedIn == true ? "Hello doctor, you are viewing ECGs of " + user.firstname + "  " + user.lastname: 'Your records'}}</h3>
+        <p>Please choose  an ECG to display</p>
+        <select  ng-model="selectedRecord" ng-change="displayGraph()">
+            <option ng-repeat="record in user.records">{{ record }}</option>
+        </select>
+        <h4>Personal Info</h4>
+
+        <div ng-hide="isDoctorLoggedIn">
+            <p class="infoText">Name: {{user.firstname}} {{user.lastname}}</p>
+            <p class="infoText">Age: {{user.age}}</p>
+            <p class="infoText">Email: {{user.email}}</p>            
+        </div>
+    </div>
+
+    <div class="col-lg-12">
+        <div id="chart1_div"></div>
+    </div>
+
+    <div class="col-lg-12">
+        <button class="btn btn-info btn-lg btn-outline" ng-click="share()" ng-hide="isDoctorLoggedIn">Share with the doctor</button>
+        <br>
+        <br>
+<!--         <div class="alert alert-warning linkToShare">
+            <p>Please copy the following link and send it to your doctor, so that he can see your graphs online</p>
+            <p>{{link}}</p>
+        </div> -->
+    </div>
 </div>
 
 
-    <div>
-    <div id="chart1_div" class="col-lg-12"></div>
-</div>
