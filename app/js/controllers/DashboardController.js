@@ -12,7 +12,15 @@ app.factory('RecordName', function () {
 });
 
 
-app.controller('DashboardController', ['RecordName', '$scope', '$http', '$location', 'Upload', function (RecordName, $scope, $http, $location, Upload) {   
+app.controller('DashboardController', ['RecordName', '$scope', '$http', '$location', 'Upload', '$rootScope', '$sce', function (RecordName, $scope, $http, $location, Upload, $rootScope, $sce) {   
+
+  // Calculate user age based on his birthdate
+  $scope.calculateAge = () => {
+    var birthdate = new Date($scope.user.birthdate);
+    var currentDate = new Date();
+    var age = currentDate - birthdate;
+    $scope.user.age = Math.floor(age / (1000*60*60*24*365.25));
+  }
 
     // Get user if he has successfully logged in and started a session
     $scope.askForSession = () => { 
@@ -25,11 +33,7 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
         	// if session is started, get the user, otherwise redirect to login view
         	data.data.session ? $scope.user = data.data.session : $location.path("/login");
         	// Calculate users age based on the current date and his birthdate
-        	var birthdate = new Date($scope.user.birthdate);
-        	var currentDate = new Date();
-        	var age = currentDate - birthdate;
-        	$scope.user.age = Math.floor(age / (1000*60*60*24*365.25));
-        	// console.log($scope.user);
+        	$scope.calculateAge();
     	});
     }
     
@@ -64,7 +68,9 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
     };  
 
     $scope.throwError = (error) => {
-        $scope.feedbackUpload = error;
+        // $("#uploadFormFeedback").prepend('<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>');
+        // $rootScope.feedback = error;
+        $rootScope.feedback = $sce.trustAsHtml('<strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> ' + error + '</strong>');
         $("#uploadFormFeedback").removeClass('alert-success');
         $("#uploadFormFeedback").addClass('alert-danger');
     }
@@ -73,7 +79,7 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
     // Upload new ecg
     // Get content from the file to construct the file name
     // send username, filename & file to the server
-    $scope.submit = () => { 
+    $scope.submit = () => {       
         if ($scope.file) {
           var reader = new FileReader();
           reader.readAsText($scope.file, "UTF-8");
@@ -88,7 +94,8 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
                   file: $scope.file
               }).then(function(res) {                
                   if (res.data.success) {
-                    $scope.feedbackUpload = "Your file has been successfully uploaded";
+                    $rootScope.feedback = $sce.trustAsHtml('<strong><i class="fa fa-check" aria-hidden="true"></i> Your file has been successfully uploaded</strong>');
+                    // $rootScope.feedback= "Your file has been successfully uploaded";
                     $("#uploadFormFeedback").removeClass('alert-danger');
                     $("#uploadFormFeedback").addClass('alert-success');
                   } else {
@@ -96,7 +103,6 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
                   }
               }); 
           }
-          
           reader.onerror = (evt) => {
               $scope.throwError('Error reading file');
           }    
@@ -118,7 +124,7 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
             url:'api/doctor/' + userid +  '/' + token
         })
         .then(function (resp) {            
-            console.log(resp.data.user);
+            // console.log(resp.data.user);
             $scope.user = resp.data.user;
             return resp.data.user;         
         });
@@ -345,17 +351,13 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
     
     var url = $location.path();
     var params = $location.search();
-    console.log(params);
-    console.log('userid: ' + params.userid);
-    console.log('token: ' + params.token);
-    console.log(url);
     if (url == "/dashboardPage" && !params.userid && !params.token) {
       $scope.askForSession();
       $scope.profilePage();
     } else if (url == "/dashboardPage" && params.userid && params.token) {
       $scope.isDoctorLoggedIn = true;
       $scope.getUserForDoctor(params.userid, params.token).then(function(user) {
-        console.log(user);
+        $scope.calculateAge();
         $scope.userPage();
       })
     }
