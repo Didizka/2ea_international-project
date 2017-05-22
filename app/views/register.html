@@ -13,97 +13,107 @@
 
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label for="firstname">First name *</label>
+                                <label for="firstname"><i class="fa fa-id-card-o" aria-hidden="true"></i> First name *</label>
                                 <input type="text" class="form-control" id="firstname" ng-model="userProfile.firstname" placeholder="First name" required>
                             </div>
                         </div>
 
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label for="lastname">Last name *</label>
+                                <label for="lastname"><i class="fa fa-id-card-o" aria-hidden="true"></i> Last name *</label>
                                 <input type="text" class="form-control" id="lastname" ng-model="userProfile.lastname" placeholder="Last name" required>
                             </div>
                         </div>
 
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label for="email">Email *</label>
+                                <label for="email"><i class="fa fa-envelope-o" aria-hidden="true"></i> Email *</label>
                                 <input type="email" class="form-control" id="email" ng-model="userProfile.email" placeholder="example@info.com" required>
                             </div>
                         </div>
 
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label for="username">Username *</label>
+                                <label for="username"><i class="fa fa-user" aria-hidden="true"></i> Username *</label>
                                 <input type="text" class="form-control" id="username" ng-model="userProfile.username" placeholder="Username" required>
                             </div>
                         </div>
 
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label for="password">Password *</label>
+                                <label for="password"><i class="fa fa-key" aria-hidden="true"></i> Password *</label>
                                 <input type="password" class="form-control" id="password" ng-model="userProfile.password" placeholder="Password" required>
                             </div>
                         </div>
 
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label for="passwordConfirm">Password Confirm *</label>
+                                <label for="passwordConfirm"><i class="fa fa-key" aria-hidden="true"></i> Password Confirm *</label>
                                 <input type="password" class="form-control" id="passwordConfirm" ng-model="userProfile.passwordConfirm" placeholder="Password Confirm" required>
                             </div>
                         </div>
 
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label for="birthdate">Date of Birth</label>
+                                <label for="birthdate"><i class="fa fa-calendar" aria-hidden="true"></i> Date of Birth</label>
                                 <input type="date" class="form-control" id="birthdate" ng-model="userProfile.birthdate">
                             </div>
                         </div>
 
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label for="weight">Weight</label>
+                                <label for="weight"><i class="fa fa-user" aria-hidden="true"></i> Weight</label>
                                 <input type="number" class="form-control" id="weight" ng-model="userProfile.weight" placeholder="Weight">
                             </div>
                         </div>
 
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label for="length">Length</label>
+                                <label for="length"><i class="fa fa-text-height" aria-hidden="true"></i> Length</label>
                                 <input type="number" class="form-control" id="length" ng-model="userProfile.length" placeholder="Length">
                             </div>
                         </div>
 
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label for="coffeine">Cups coffee per day</label>
+                                <label for="coffeine"><i class="fa fa-coffee" aria-hidden="true"></i> Cups coffee per day</label>
                                 <input type="number" class="form-control" id="coffeine" ng-model="userProfile.coffeine" placeholder="Cups coffee per day">
                             </div>
                         </div>
 
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label for="medication">Medication</label>
+                                <label for="medication"><i class="fa fa-medkit" aria-hidden="true"></i> Medication</label>
                                 <input type="text" class="form-control" id="medication" ng-model="userProfile.medication" placeholder="Medication">
                             </div>
                         </div>
 
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label for="smoker">Are you a smoker?</label>
+                                <label for="medication"><i class="fa fa-heartbeat" aria-hidden="true"></i> Heart conditions</label>
+                                <input type="text" class="form-control" id="heartcondition" ng-model="userProfile.heartcondition" placeholder="Heart conditions">
+                            </div>
+                        </div>
+
+
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label for="smoker"><i class="fa fa-fire" aria-hidden="true"></i> Are you a smoker?</label>
                                 <input type="checkbox" id="smoker" ng-model="userProfile.smoker">
                             </div>
                         </div>
 
                         <br>
-                        <button id="registrationFormSubmit" class="btn btn-default" ng-click="submit()">Submit</button>
+                        <button id="registrationFormSubmit" class="btn btn-success btn-lg btn-outline" ng-click="submit()">Submit <i class="fa fa-plus" aria-hidden="true"></i></button>
 
                     </form>
-                    <br>
-                    <pre class="result">{{ feedback }}</pre>
+                     <br>
+                <div class="col-xs-12 alert" id="registerFormFeedback"><strong>{{feedbackRegister}}</strong></div>
+            </div>
+                    
                 </div>
             </div>
-        </div>
+
     </section>
 
 

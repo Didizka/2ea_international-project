@@ -9,7 +9,8 @@ mongoose	= require('mongoose'),
 session 	= require('express-session'),
 fs 			= require('fs'),
 multer		= require('multer'),
-path 		= require('path');
+path 		= require('path'),
+nodemailer	= require('nodemailer');
 
 // Functions
 // ======================================================================
@@ -189,7 +190,8 @@ router.route('/data/:username')
 	records.length ? res.json({records: records}) : res.json({records: false})
 })
 .post(checkUploadPath, upload.single('file'), function(req, res){
-	// Save new record 
+	var success = req.file.path.includes('/user_data/');
+	res.json({success: success});
 })
 .delete(function(req, res){
 	res.json({message: "DELETE user graph"});
@@ -225,6 +227,63 @@ router.route('/logout')
 	});
 });
 
+router.route('/test')
+.post(function(req, res){
+	res.json({success: true});
+});
+
+// Send mail if email was provided
+router.route('/contact')
+.post(function(req, res) {
+	let transporter = nodemailer.createTransport({
+		service: 'gmail',
+		auth: {
+			user: 'infoecgfinbel@gmail.com',
+			pass: 'ecgecg123'
+		}
+	});
+
+	let mailOptions = {
+		from: req.body.email,
+		to: 'chinjka_m@hotmail.com',
+		subject: 'New contact request via ECG webapp',
+		text: req.body.message
+	};
+
+	if (req.body.email) {
+
+		transporter.sendMail(mailOptions, (err, info) => {
+			if (err) {
+				console.log(err)
+				res.json({success: false});
+			}
+
+			transporter.close();
+			res.json({success: true});
+		});		
+	} else {
+		res.json({success: false});
+	}
+});
+
+
+// link to share with the doctor: get user data without password
+// token hardcoded for testing purposes, should be auto generated and stored in a database
+router.route('/doctor/:id/:token')
+.get(function (req, res) {
+		if (req.params.token == "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9") {
+			User.findOne({_id: req.params.id}, function (err, user) {
+				if (err) console.log(err);
+				user = user.toObject();
+				delete user.password;
+				res.json({user: user});
+				
+			}).limit(1);
+			
+		} else {
+			res.json({user: false});
+		}
+	});
 
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api

@@ -13,22 +13,22 @@
                     <form id="loginForm" name="loginForm" novalidate>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label for="username">Username *</label>
+                                <label for="username"><i class="fa fa-user" aria-hidden="true"></i> Username *</label>
                                 <input type="text" class="form-control" id="username" ng-model="userProfile.username" placeholder="Username" required>
                             </div>
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label for="email">Password *</label>
+                                <label for="email"><i class="fa fa-key" aria-hidden="true"></i> Password  *</label>
                                 <input type="password" class="form-control" id="password" ng-model="userProfile.password" placeholder="Password" required>
                             </div>
                         </div>
                         <br>
-                        <button id="loginFormSubmit" class="btn btn-success" ng-click="submit()">Submit</button>
+                        <button id="loginFormSubmit" class="btn btn-success btn-lg btn-outline" ng-click="submit()"><i class="fa fa-sign-in" aria-hidden="true"></i> Submit</button>
 
                     </form>
                     <br>
-                    <div class="alert alert-danger" ng-show="loginError">{{isValid}}</div>
+                    <div class="alert alert-danger" ng-if="isValid"><strong>{{feedback}}</strong></div>
                 </div>
             </div>
         </div>

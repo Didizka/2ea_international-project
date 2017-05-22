@@ -2,16 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b4b0beb8-d696-40d8-9651-c30486d51e74" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/user_data/chizzy/16-5-2017 17:50.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/user_data/chizzy/24-4-2017 16:19.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/user_data/chizzy/28-4-2017 12:48.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/user_data/chizzy/3-5-2017 18:41.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/user_data/chizzy/8-5-2017 18:39.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/user_data/chizzy/9-5-2017 21:15.json" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/ecg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/user_data/chizzy/19-5-2017 14꞉48.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/user_data/upload_test_files/marko.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/css/styling.css" afterPath="$PROJECT_DIR$/app/css/styling.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/index.html" afterPath="$PROJECT_DIR$/app/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/js/app.js" afterPath="$PROJECT_DIR$/app/js/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/js/controllers/ContactController.js" afterPath="$PROJECT_DIR$/app/js/controllers/ContactController.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/js/controllers/DashboardController.js" afterPath="$PROJECT_DIR$/app/js/controllers/DashboardController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/js/controllers/UserPageController.js" afterPath="$PROJECT_DIR$/app/js/controllers/UserPageController.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/js/controllers/HospitalsController.js" afterPath="$PROJECT_DIR$/app/js/controllers/HospitalsController.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/js/controllers/MainController.js" afterPath="$PROJECT_DIR$/app/js/controllers/MainController.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/js/controllers/RegisterController.js" afterPath="$PROJECT_DIR$/app/js/controllers/RegisterController.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/user_data/chizzy/16-5-2017 17꞉50.json" afterPath="$PROJECT_DIR$/app/user_data/chizzy/16-5-2017 17꞉50.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/user_data/steven/3-3-2013 3꞉3.json" afterPath="$PROJECT_DIR$/app/user_data/steven/3-3-2013 3꞉3.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/contact.html" afterPath="$PROJECT_DIR$/app/views/contact.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/dashboard.html" afterPath="$PROJECT_DIR$/app/views/dashboard.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/home.html" afterPath="$PROJECT_DIR$/app/views/home.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/login.html" afterPath="$PROJECT_DIR$/app/views/login.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/profilePage.html" afterPath="$PROJECT_DIR$/app/views/profilePage.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/register.html" afterPath="$PROJECT_DIR$/app/views/register.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/uploadPage.html" afterPath="$PROJECT_DIR$/app/views/uploadPage.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/userPage.html" afterPath="$PROJECT_DIR$/app/views/userPage.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server.js" afterPath="$PROJECT_DIR$/server.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -36,38 +49,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DashboardController.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DashboardController.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/js/controllers/DashboardController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="193">
-              <caret line="633" column="32" lean-forward="false" selection-start-line="633" selection-start-column="32" selection-end-line="633" selection-end-column="32" />
-              <folding>
-                <element signature="e#5427#6383#0" expanded="false" />
-                <element signature="e#6424#7165#0" expanded="false" />
-                <element signature="e#7211#7651#0" expanded="false" />
-                <element signature="e#7692#8283#0" expanded="false" />
-                <element signature="e#8324#8906#0" expanded="false" />
-                <element signature="e#8956#11527#0" expanded="false" />
-                <element signature="e#17506#17657#0" expanded="false" />
-                <element signature="e#17717#18007#0" expanded="false" />
-                <element signature="e#18847#19110#0" expanded="false" />
-                <element signature="e#19158#19730#0" expanded="false" />
-                <element signature="e#19775#20766#0" expanded="false" />
-                <element signature="e#20811#21247#0" expanded="false" />
-                <element signature="e#22018#22751#0" expanded="false" />
-                <element signature="e#22797#23043#0" expanded="false" />
-                <element signature="e#23087#23392#0" expanded="false" />
-                <element signature="e#23441#23709#0" expanded="false" />
-              </folding>
+            <state relative-caret-position="969">
+              <caret line="81" column="0" lean-forward="false" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="userPage.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="userPage.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/userPage.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="29" column="18" lean-forward="false" selection-start-line="29" selection-start-column="18" selection-end-line="29" selection-end-column="18" />
+            <state relative-caret-position="0">
+              <caret line="0" column="44" lean-forward="false" selection-start-line="0" selection-start-column="44" selection-end-line="0" selection-end-column="44" />
               <folding />
             </state>
           </provider>
@@ -86,9 +82,14 @@
       <file leaf-file-name="dashboard.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/dashboard.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="64" lean-forward="false" selection-start-line="14" selection-start-column="64" selection-end-line="14" selection-end-column="64" />
-              <folding />
+            <state relative-caret-position="272">
+              <caret line="16" column="64" lean-forward="false" selection-start-line="16" selection-start-column="64" selection-end-line="16" selection-end-column="64" />
+              <folding>
+                <marker date="1495443135027" expanded="true" signature="967:989" ph="..." />
+                <marker date="1495443135027" expanded="true" signature="967:1136" ph="..." />
+                <marker date="1495443135027" expanded="true" signature="967:1151" ph="..." />
+                <marker date="1495443135027" expanded="true" signature="1028:1117" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -109,6 +110,7 @@
     <findStrings>
       <find>ink</find>
       <find>displaygr</find>
+      <find>http.get</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -124,8 +126,8 @@
         <option value="$PROJECT_DIR$/app/views/login.html" />
         <option value="$PROJECT_DIR$/app/js/controllers/UserPageController.js" />
         <option value="$PROJECT_DIR$/app/views/dashboard.html" />
-        <option value="$PROJECT_DIR$/app/views/userPage.html" />
         <option value="$PROJECT_DIR$/app/js/controllers/DashboardController.js" />
+        <option value="$PROJECT_DIR$/app/views/userPage.html" />
       </list>
     </option>
   </component>
@@ -327,12 +329,12 @@
       <updated>1494415259409</updated>
       <workItem from="1494415261949" duration="12364000" />
       <workItem from="1495396589116" duration="918000" />
-      <workItem from="1495440494895" duration="1738000" />
+      <workItem from="1495440494895" duration="2234000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15020000" />
+    <option name="totallyTimeSpent" value="15516000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -399,7 +401,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="14" column="64" lean-forward="false" selection-start-line="14" selection-start-column="64" selection-end-line="14" selection-end-column="64" />
-          <folding />
+          <folding>
+            <marker date="1495443135027" expanded="true" signature="967:989" ph="..." />
+            <marker date="1495443135027" expanded="true" signature="967:1136" ph="..." />
+            <marker date="1495443135027" expanded="true" signature="967:1151" ph="..." />
+            <marker date="1495443135027" expanded="true" signature="1028:1117" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -415,24 +422,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="8585">
           <caret line="687" column="4" lean-forward="false" selection-start-line="687" selection-start-column="4" selection-end-line="687" selection-end-column="4" />
-          <folding>
-            <element signature="e#5427#6383#0" expanded="false" />
-            <element signature="e#6424#7165#0" expanded="false" />
-            <element signature="e#7211#7651#0" expanded="false" />
-            <element signature="e#7692#8283#0" expanded="false" />
-            <element signature="e#8324#8906#0" expanded="false" />
-            <element signature="e#8956#11527#0" expanded="false" />
-            <element signature="e#17506#17657#0" expanded="false" />
-            <element signature="e#17717#18007#0" expanded="false" />
-            <element signature="e#18847#19110#0" expanded="false" />
-            <element signature="e#19158#19730#0" expanded="false" />
-            <element signature="e#19775#20766#0" expanded="false" />
-            <element signature="e#20811#21247#0" expanded="false" />
-            <element signature="e#22018#22751#0" expanded="false" />
-            <element signature="e#22797#23043#0" expanded="false" />
-            <element signature="e#23087#23392#0" expanded="false" />
-            <element signature="e#23441#23709#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -554,17 +544,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/dashboard.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="64" lean-forward="false" selection-start-line="14" selection-start-column="64" selection-end-line="14" selection-end-column="64" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/userPage.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="29" column="18" lean-forward="false" selection-start-line="29" selection-start-column="18" selection-end-line="29" selection-end-column="18" />
-          <folding />
+        <state relative-caret-position="272">
+          <caret line="16" column="64" lean-forward="false" selection-start-line="16" selection-start-column="64" selection-end-line="16" selection-end-column="64" />
+          <folding>
+            <marker date="1495443135027" expanded="true" signature="967:989" ph="..." />
+            <marker date="1495443135027" expanded="true" signature="967:1136" ph="..." />
+            <marker date="1495443135027" expanded="true" signature="967:1151" ph="..." />
+            <marker date="1495443135027" expanded="true" signature="1028:1117" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -578,26 +565,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/js/controllers/DashboardController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="633" column="32" lean-forward="false" selection-start-line="633" selection-start-column="32" selection-end-line="633" selection-end-column="32" />
-          <folding>
-            <element signature="e#5427#6383#0" expanded="false" />
-            <element signature="e#6424#7165#0" expanded="false" />
-            <element signature="e#7211#7651#0" expanded="false" />
-            <element signature="e#7692#8283#0" expanded="false" />
-            <element signature="e#8324#8906#0" expanded="false" />
-            <element signature="e#8956#11527#0" expanded="false" />
-            <element signature="e#17506#17657#0" expanded="false" />
-            <element signature="e#17717#18007#0" expanded="false" />
-            <element signature="e#18847#19110#0" expanded="false" />
-            <element signature="e#19158#19730#0" expanded="false" />
-            <element signature="e#19775#20766#0" expanded="false" />
-            <element signature="e#20811#21247#0" expanded="false" />
-            <element signature="e#22018#22751#0" expanded="false" />
-            <element signature="e#22797#23043#0" expanded="false" />
-            <element signature="e#23087#23392#0" expanded="false" />
-            <element signature="e#23441#23709#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="969">
+          <caret line="81" column="0" lean-forward="false" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/userPage.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="44" lean-forward="false" selection-start-line="0" selection-start-column="44" selection-end-line="0" selection-end-column="44" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -21,7 +21,7 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span/>Menu <i class="fa fa-bars"></i>
                 </button>
-                <a ng-Click="homePage()" class="navbar-brand" href="#page-top">FinBel ECG</a>
+                <a ng-Click="homePage()" class="navbar-brand" href="#page-top"><i class="fa fa-heartbeat" aria-hidden="true"></i> FinBel ECG </a>
             </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -31,19 +31,19 @@
                         <a href="#page-top"></a>
                     </li>
                     <li class="page-scroll">
-                        <a ng-Click="loginPage()" class="link">Login</a>
+                        <a ng-Click="loginPage()" class="link"><i class="fa fa-user" aria-hidden="true"></i> Login</a>
                     </li>
                      <li class="page-scroll">
-                        <a ng-Click="aboutPage()" class="link">About</a>
+                        <a ng-Click="aboutPage()" class="link"><i class="fa fa-question-circle"></i> About</a>
                     </li>
                     <li class="page-scroll">
-                        <a ng-Click="contactPage()" class="link">Contact</a>
+                        <a ng-Click="contactPage()" class="link"><i class="fa fa-envelope-o" aria-hidden="true"></i> Contact</a>
                     </li>
                     <li class="page-scroll">
-                        <a ng-Click="hospitalsPage()" class="link">Hospitals</a>
+                        <a ng-Click="hospitalsPage()" class="link"><i class="fa fa-hospital-o" aria-hidden="true"></i> Hospitals</a>
                     </li>
                     <li class="page-scroll">
-                        <a ng-Click="donatePage()" class="link">Donate</a>
+                        <a ng-Click="donatePage()" class="link"><i class="fa fa-money" aria-hidden="true"></i> Donate</a>
                     </li>
                 </ul>
             </div>
@@ -71,7 +71,7 @@
 
    <div class="container">
        <div class="row">
-           <div class="col-lg-12" ng-view>
+           <div class="col-lg-12" id="view" ng-view>
                         
             </div>     
        </div>

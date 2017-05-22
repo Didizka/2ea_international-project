@@ -12,8 +12,16 @@ app.factory('RecordName', function () {
 });
 
 
-app.controller('DashboardController', ['RecordName', '$scope', '$http', '$location', 'Upload', function (RecordName, $scope, $http, $location, Upload) {   
-    
+app.controller('DashboardController', ['RecordName', '$scope', '$http', '$location', 'Upload', '$rootScope', '$sce', function (RecordName, $scope, $http, $location, Upload, $rootScope, $sce) {   
+
+  // Calculate user age based on his birthdate
+  $scope.calculateAge = () => {
+    var birthdate = new Date($scope.user.birthdate);
+    var currentDate = new Date();
+    var age = currentDate - birthdate;
+    $scope.user.age = Math.floor(age / (1000*60*60*24*365.25));
+  }
+
     // Get user if he has successfully logged in and started a session
     $scope.askForSession = () => { 
         $http({
@@ -25,11 +33,7 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
         	// if session is started, get the user, otherwise redirect to login view
         	data.data.session ? $scope.user = data.data.session : $location.path("/login");
         	// Calculate users age based on the current date and his birthdate
-        	var birthdate = new Date($scope.user.birthdate);
-        	var currentDate = new Date();
-        	var age = currentDate - birthdate;
-        	$scope.user.age = Math.floor(age / (1000*60*60*24*365.25));
-        	// console.log($scope.user);
+        	$scope.calculateAge();
     	});
     }
     
@@ -62,33 +66,72 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
         	}
     	}); 
     };  
-    
+
+    $scope.throwError = (error) => {
+        // $("#uploadFormFeedback").prepend('<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>');
+        // $rootScope.feedback = error;
+        $rootScope.feedback = $sce.trustAsHtml('<strong><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> ' + error + '</strong>');
+        $("#uploadFormFeedback").removeClass('alert-success');
+        $("#uploadFormFeedback").addClass('alert-danger');
+    }
+
 
     // Upload new ecg
     // Get content from the file to construct the file name
     // send username, filename & file to the server
-    $scope.submit = () => { 
-        var reader = new FileReader();
-        reader.readAsText($scope.file, "UTF-8");
+    $scope.submit = () => {
+        if ($scope.file) {
+          var reader = new FileReader();
+          reader.readAsText($scope.file, "UTF-8");
 
-        reader.onload = (evt) => {
-            var fileContent = JSON.parse(evt.target.result);
-            var fileName = fileContent.measurement1.day + "-" + fileContent.measurement1.month + "-" + fileContent.measurement1.year + " " + fileContent.measurement1.hour + "꞉" + fileContent.measurement1.minute;
-            Upload.upload({
-                method: 'POST',
-                url: 'api/data/' + $scope.user.username,
-                data: { filename: fileName},
-                file: $scope.file
-            }).then(function(res) {
-                // file is uploaded successfully
-                console.log(res);
-            }); 
-        }
-        
-        reader.onerror = (evt) => {
-            console.log("error reading file");
-        }        
+          reader.onload = (evt) => {
+              var fileContent = JSON.parse(evt.target.result);
+              var fileName = fileContent.measurement1.day + "-" + fileContent.measurement1.month + "-" + fileContent.measurement1.year + " " + fileContent.measurement1.hour + "꞉" + fileContent.measurement1.minute;
+              Upload.upload({
+                  method: 'POST',
+                  url: 'api/data/' + $scope.user.username,
+                  data: { filename: fileName},
+                  file: $scope.file
+              }).then(function(res) {                
+                  if (res.data.success) {
+                    $rootScope.feedback = $sce.trustAsHtml('<strong><i class="fa fa-check" aria-hidden="true"></i> Your file has been successfully uploaded</strong>');
+                    // $rootScope.feedback= "Your file has been successfully uploaded";
+                    $("#uploadFormFeedback").removeClass('alert-danger');
+                    $("#uploadFormFeedback").addClass('alert-success');
+                  } else {
+                    $scope.throwError('Error uploading your file.')
+                  }
+              }); 
+          }
+          reader.onerror = (evt) => {
+              $scope.throwError('Error reading file');
+          }    
+        }  else {
+          $scope.throwError('Please select a file for upload')
+        }  
+>>>>>>> 27449615783a7ce3771953bfa33008651d13de29
     };
+
+    $scope.share = () => {
+      var token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9';
+      var linkToShare = "http://84.196.228.4/#/dashboardPage?userid=" + $scope.user._id + "&token=" + token;
+      prompt('Please copy the following link and send it to your doctor, so that he can see your graphs online', linkToShare);
+      
+    }
+
+    $scope.getUserForDoctor = (userid, token) => {
+      var user = $http({
+            method:'GET',
+            url:'api/doctor/' + userid +  '/' + token
+        })
+        .then(function (resp) {            
+            // console.log(resp.data.user);
+            $scope.user = resp.data.user;
+            return resp.data.user;         
+        });
+        return user;
+    }
+
 
     // Get records on 'view existing records' section load
     $scope.getRecords = () => {
@@ -752,7 +795,22 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
         }
     }
 
-    // Get the user if logged in, redirect if not and display profile page as default view of the dashboard
-    $scope.askForSession();
-    $scope.profilePage();
+    // Check how the page has been accessed:
+    // 1: login: session started? yes => OK, no => login page
+    // 2: doctor login with token? => OK
+    
+    var url = $location.path();
+    var params = $location.search();
+    if (url == "/dashboardPage" && !params.userid && !params.token) {
+      $scope.askForSession();
+      $scope.profilePage();
+    } else if (url == "/dashboardPage" && params.userid && params.token) {
+      $scope.isDoctorLoggedIn = true;
+      $scope.getUserForDoctor(params.userid, params.token).then(function(user) {
+        $scope.calculateAge();
+        $scope.userPage();
+      })
+    }
+
+    // http://localhost:7000/#/dashboardPage?userid=591380ff0e53f6393806fcec&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 }]);
