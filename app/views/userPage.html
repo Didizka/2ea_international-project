@@ -29,22 +29,22 @@
                     <tr>
                         <td>PR Interval</td>
                         <td>0.12 - 0.20 seconds</td>
-                        <td id="_PR"><img src="../images/loading.png"></td>
+                        <td id="_PR" ng-class="!odd_PR ? 'alert-success':'alert-danger'" class="alert"><img src="../images/ajax_loader.gif"></td>
                     </tr>
                     <tr>
                         <td>QRS Complex</td>
                         <td>up to 0.10 seconds</td>
-                        <td id="_QRS"><img src="../images/loading.png"></td>
+                        <td id="_QRS" ng-class="!odd_QRS ? 'alert-success':'alert-danger'" class="alert"><img src="../images/ajax_loader.gif"></td>
                     </tr>
                     <tr>
                         <td>R-R Interval</td>
                         <td>0.6 - 1.2 second</td>
-                        <td id="_RR"><img src="../images/loading.png"></td>
+                        <td id="_RR" ng-class="!odd_RR ? 'alert-success':'alert-danger'" class="alert"><img src="../images/ajax_loader.gif"></td>
                     </tr>
                     <tr>
                         <td>BPM</td>
                         <td>60 - 100 Beats per Minute</td>
-                        <td id="_BPM"><img src="../images/loading.png"></td>
+                        <td id="_BPM" ng-class="!odd_BPM ? 'alert-success':'alert-danger'" class="alert"><img src="../images/ajax_loader.gif"></td>
                     </tr>
                     <tr>
                         <td>Axis</td>
@@ -54,39 +54,49 @@
                 </table>
                 <h2>Interpretation:</h2>
                 <!--Image of one heart beat-->
-                <div class="panel panel-default">
+                <div class="panel panel-default text-center">
+
                     <img src="../images/SinusRhythm.png">
-                    <!--followed by corresponding text-->
-                    <hr>
-                    <p id="_PR_text">
-                        Here comes text regarding the PR
-                    </p>
-                    <hr>
-                    <p id="_QRS_text">
-                        Here comes text regarding the QRS complex
-                    </p>
-                    <hr>
-                    <p id="_RR_text">
-                        Here comes text regarding the R-R interval
-                    </p>
-                    <hr>
-                    <p id="_BPM_text">
-                        Here comes text regarding the BPM
-                    </p>
-                    <hr>
-                    <p id="_None_text">
-                        Arrythmia's
-                    </p>
+                    </div>
+                <div>
+                    <table class="table table-bordered">
+                        <tr>
+                            <th class="norm_head">Event/Interval/Segment</th>
+                            <th class="norm_head">Interpretation</th>
+                        </tr>
+                        <tr>
+                            <td>PR Interval</td>
+                            <td id="_PR_text" ng-class="!odd_PR ? 'alert-success':'alert-danger'" class="alert"><img src="../images/ajax_loader.gif"></td>
+                        </tr>
+                        <tr>
+                            <td>QRS Complex</td>
+                            <td id="_QRS_text" ng-class="!odd_QRS ? 'alert-success':'alert-danger'" class="alert"><img src="../images/ajax_loader.gif"></td>
+                        </tr>
+                        <tr>
+                            <td>R-R Interval</td>
+                            <td id="_RR_text" ng-class="!odd_RR ? 'alert-success':'alert-danger'" class="alert"><img src="../images/ajax_loader.gif"></td>
+                        </tr>
+                        <tr>
+                            <td>BPM</td>
+                            <td id="_BPM_text" ng-class="!odd_BPM ? 'alert-success':'alert-danger'" class="alert"><img src="../images/ajax_loader.gif"></td>
+                        </tr>
+                        <tr>
+                            <td>Conclusion:</td>
+                            <td id="_Conclusion_text" ng-class="!odd_Arr ? 'alert-success':'alert-danger'" class="alert"><img src="../images/ajax_loader.gif"></td>
+                        </tr>
+                    </table>
                 </div>
                 <!--Image of heart with axes/chambers-->
                 <div class="panel panel-default">
+                    <div class="panel panel-head text-center">
                     <img src="../images/HeartChambers.jpg">
+                    </div>
                     <!--followed by corresponding text-->
                     <p>
                         Based on the QRS complex, we can determine whether the Heart beat is coming from the Atrium or from the Ventricles.
                         <br>
                         <br>
-                        This is an import piece of information, since we can determine which area of the heart will be needing treatment regarding a specific Arrhythmia.
+                        This is an important piece of information, since we can determine which area of the heart will be needing treatment regarding a specific Arrhythmia.
                         <br>
                         <br>
                         Atrial based arrythmias have a smaller QRS complex whereas Ventricular Arrhythmias have a longer QRS complex.
@@ -105,5 +115,3 @@
             <p>{{link}}</p>
         </div> -->
     </div>
-</div>
-
