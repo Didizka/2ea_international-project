@@ -169,18 +169,20 @@
     }
 
         // Set chart options
-    var options1 = {title:'ECG',
-          hAxis:{
-           title: 'Samples'
-          },
-           vAxis: {
-           title: 'mV'
-          },
-           width:750,
-           height:250,
-           lineWidth: 2,
-           chartArea: {width:'95%'},
-           colors:['#a52714', '#097138', '#f1f442']
+        var options1 = {title:'ECG',
+            explorer: {axis: 'horizontal',keepInBounds: true},
+            hAxis:{
+                title: 'Samples',
+            },
+            vAxis: {
+                title: 'mV',
+            },
+            width:1000,
+            height:500,
+            lineWidth: 2,
+            chartArea: {width:'100%'},
+            colors:['#a52714', '#097138', '#f1f442'],
+            legend: { position: 'top' }
         };
-      }  
+    }
     });
