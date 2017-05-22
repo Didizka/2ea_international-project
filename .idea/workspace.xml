@@ -2,14 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b4b0beb8-d696-40d8-9651-c30486d51e74" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/user_data/upload_test_files/24-4-2017 16:19.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/user_data/upload_test_files/28-4-2017 12:48.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/user_data/upload_test_files/3-5-2017 18:41.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/user_data/upload_test_files/8-5-2017 18:39.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/user_data/upload_test_files/9-5-2017 21:15.json" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/css/styling.css" afterPath="$PROJECT_DIR$/app/css/styling.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/js/controllers/DashboardController.js" afterPath="$PROJECT_DIR$/app/js/controllers/DashboardController.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/userPage.html" afterPath="$PROJECT_DIR$/app/views/userPage.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -35,21 +27,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DashboardController.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DashboardController.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/js/controllers/DashboardController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="193">
+            <state relative-caret-position="295">
               <caret line="388" column="97" lean-forward="false" selection-start-line="388" selection-start-column="97" selection-end-line="388" selection-end-column="97" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="userPage.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="userPage.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/userPage.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="70" column="30" lean-forward="false" selection-start-line="70" selection-start-column="28" selection-end-line="70" selection-end-column="30" />
+            <state relative-caret-position="-790">
+              <caret line="31" column="138" lean-forward="false" selection-start-line="31" selection-start-column="138" selection-end-line="31" selection-end-column="138" />
               <folding />
             </state>
           </provider>
@@ -80,6 +72,7 @@
       <find>odd</find>
       <find>rr</find>
       <find>rr_inter</find>
+      <find>Math.max.apply(null, r</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -95,8 +88,8 @@
         <option value="$PROJECT_DIR$/app/js/controllers/UserPageController.js" />
         <option value="$PROJECT_DIR$/app/views/dashboard.html" />
         <option value="$PROJECT_DIR$/app/css/styling.css" />
-        <option value="$PROJECT_DIR$/app/views/userPage.html" />
         <option value="$PROJECT_DIR$/app/js/controllers/DashboardController.js" />
+        <option value="$PROJECT_DIR$/app/views/userPage.html" />
       </list>
     </option>
   </component>
@@ -317,15 +310,15 @@
       <workItem from="1494415261949" duration="12364000" />
       <workItem from="1495396589116" duration="918000" />
       <workItem from="1495440494895" duration="2398000" />
-      <workItem from="1495445583922" duration="2388000" />
+      <workItem from="1495445583922" duration="3425000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18068000" />
+    <option name="totallyTimeSpent" value="19105000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -602,6 +595,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/js/controllers/DashboardController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="295">
+          <caret line="388" column="97" lean-forward="false" selection-start-line="388" selection-start-column="97" selection-end-line="388" selection-end-column="97" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/js/controllers/UserPageController.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="181">
@@ -612,16 +613,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/userPage.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="70" column="30" lean-forward="false" selection-start-line="70" selection-start-column="28" selection-end-line="70" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/js/controllers/DashboardController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="388" column="97" lean-forward="false" selection-start-line="388" selection-start-column="97" selection-end-line="388" selection-end-column="97" />
+        <state relative-caret-position="-790">
+          <caret line="31" column="138" lean-forward="false" selection-start-line="31" selection-start-column="138" selection-end-line="31" selection-end-column="138" />
           <folding />
         </state>
       </provider>
