@@ -776,7 +776,7 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
                 });
 
             // Set chart options
-            var options1 = {title:'ECG',
+            var options1 = {title: $scope.selectedRecord,
                 explorer: {axis: 'horizontal',keepInBounds: true},
                 hAxis:{
                     title: 'Samples',
