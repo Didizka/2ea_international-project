@@ -109,7 +109,6 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
         }  else {
           $scope.throwError('Please select a file for upload')
         }  
->>>>>>> 27449615783a7ce3771953bfa33008651d13de29
     };
 
     $scope.share = () => {
