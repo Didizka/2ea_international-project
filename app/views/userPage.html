@@ -9,9 +9,83 @@
     <p class="infoText">Name: {{user.firstname}} {{user.lastname}}</p>
     <p class="infoText">Age: {{user.age}}</p>
     <p class="infoText">Email: {{user.email}}</p>
-</div>
-
 
     <div>
-    <div id="chart1_div" class="col-lg-12"></div>
-</div>
+        <div>
+            <div id="chart1_div"></div>
+            <p id="display_values"></p>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <tr>
+                        <th class="norm_head">Event/Interval/Segment</th>
+                        <th class="norm_head">Normal range</th>
+                        <th class="norm_head">Actual values</th>
+                    </tr>
+                    <tr>
+                        <td>PR Interval</td>
+                        <td>0.12 - 0.20 seconds</td>
+                        <td id="_PR"><img src="../images/loading.png"></td>
+                    </tr>
+                    <tr>
+                        <td>QRS Complex</td>
+                        <td>up to 0.10 seconds</td>
+                        <td id="_QRS"><img src="../images/loading.png"></td>
+                    </tr>
+                    <tr>
+                        <td>R-R Interval</td>
+                        <td>0.6 - 1.2 second</td>
+                        <td id="_RR"><img src="../images/loading.png"></td>
+                    </tr>
+                    <tr>
+                        <td>BPM</td>
+                        <td>60 - 100 Beats per Minute</td>
+                        <td id="_BPM"><img src="../images/loading.png"></td>
+                    </tr>
+                    <tr>
+                        <td>Axis</td>
+                        <td>Atrial / Ventricular</td>
+                        <td id="_Axis"><img src="../images/loading.png"></td>
+                    </tr>
+                </table>
+                <h2>Interpretation:</h2>
+                <!--Image of one heart beat-->
+                <div class="panel panel-default">
+                    <img src="../images/SinusRhythm.png">
+                    <!--followed by corresponding text-->
+                    <hr>
+                    <p id="_PR_text">
+                        Here comes text regarding the PR
+                    </p>
+                    <hr>
+                    <p id="_QRS_text">
+                        Here comes text regarding the QRS complex
+                    </p>
+                    <hr>
+                    <p id="_RR_text">
+                        Here comes text regarding the R-R interval
+                    </p>
+                    <hr>
+                    <p id="_BPM_text">
+                        Here comes text regarding the BPM
+                    </p>
+                    <hr>
+                    <p id="_None_text">
+                        Arrythmia's
+                    </p>
+                </div>
+                <!--Image of heart with axes/chambers-->
+                <div class="panel panel-default">
+                    <img src="../images/HeartChambers.jpg">
+                    <!--followed by corresponding text-->
+                    <p>
+                        Based on the QRS complex, we can determine whether the Heart beat is coming from the Atrium or from the Ventricles.
+                        <br>
+                        <br>
+                        This is an import piece of information, since we can determine which area of the heart will be needing treatment regarding a specific Arrhythmia.
+                        <br>
+                        <br>
+                        Atrial based arrythmias have a smaller QRS complex whereas Ventricular Arrhythmias have a longer QRS complex.
+                    </p>
+                </div>
+
+            </div>

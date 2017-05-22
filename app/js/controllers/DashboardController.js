@@ -73,7 +73,7 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
 
         reader.onload = (evt) => {
             var fileContent = JSON.parse(evt.target.result);
-            var fileName = fileContent.measurement1.day + "-" + fileContent.measurement1.month + "-" + fileContent.measurement1.year + " " + fileContent.measurement1.hour + ":" + fileContent.measurement1.minute;
+            var fileName = fileContent.measurement1.day + "-" + fileContent.measurement1.month + "-" + fileContent.measurement1.year + " " + fileContent.measurement1.hour + "꞉" + fileContent.measurement1.minute;
             Upload.upload({
                 method: 'POST',
                 url: 'api/data/' + $scope.user.username,
@@ -117,191 +117,640 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
         // Path to current record file
         var recordPath = 'user_data/' + $scope.user.username + '/' + $scope.selectedRecord + '.json';
 
-
         // Load the Visualization API and the corechart package.
-      google.charts.load('current', {'packages':['corechart']});
+        google.charts.load('current', {'packages':['corechart']});
 
-      // Set a callback to run when the Google Visualization API is loaded.
-      google.charts.setOnLoadCallback(drawChart);
+        // Set a callback to run when the Google Visualization API is loaded.
+        google.charts.setOnLoadCallback(drawChart);
 
-      // Callback that creates and populates a data table,
-      // instantiates the pie chart, passes in the data and
-      // draws it.
-   
-     var r_Value = [];
-     var r_Index = [];
-     var q_Value = [];
-     var q_Index = [];
-     var s_Value = [];
-     var s_Index = [];
-     var qrs_Duration = [];
+        var r_Value = [];
+        var r_Index = [];
+        var q_Value = [];
+        var q_Index = [];
+        var s_Value = [];
+        var s_Index = [];
+        var p_Index = [];
+        var qrs_Duration = [];
+        var rr_Interval = [];
+        var pr_Duration = [];
 
-     var r_filter = 95;
-     var r_offset = 100;
-     var qs_offset = 200;
+        var averageArray = [];
 
-     var timePerSample;
+        var secInMin = 60;
+        var r_filter = 70;
+        var r_offset = 500;
+        var qs_offset = 100;
+        var p_offset = 500;
+        var slope_offset = 20;
+        var sampleOffsetLow = 1700;
+        var sampleOffsetHigh = 2425;
+        var extra_peak_offset = 1060;
 
-    function calc_R(array) {
-      //calculates R values for QRS
-      var newNumber;
-      var oldNumber = 0;
-      var nextNumber;
-        
-      for(var i = 0; i <= array.length; i++)
-      {
-       newNumber = array[i];
-       if(newNumber > r_filter)
-       {
-        if(newNumber > oldNumber)
+        var count_extra_beats = 0;
+
+        //var jsonFile = '../user_data/Normal_Sinus.json';
+        //var jsonFile = '../user_data/Premature_Beat.json';
+        var jsonFile = 'user_data/Marko_Ecg.json';
+        //var jsonFile = '../user_data/Bradycardia.json';
+        //var jsonFile = '../user_data/Tachycardia.json';
+
+        var low_filter = 57;
+
+        var timePerSample;
+        var BPM;
+
+        var p_Wave = false;
+        var odd_PR = false;
+        var odd_BPM = false;
+        var odd_QRS = false;
+        var odd_RR = false;
+
+        var axis;
+
+        function calc_R(array)
         {
-          nextNumber = array[i+3];
-          if(newNumber >= nextNumber)
-          {
-              r_Value.push(newNumber);
-              r_Index.push(i);
-              i += r_offset;
-              oldNumber = 0;
-             // console.log(i);
-          }
-          else
-          {
-              oldNumber = newNumber;
-          }
-       }
-      }
-     }
-    }
+            //calculates R values for QRS
+            var newNumber;
+            var oldNumber = 0;
+            var nextNumber;
 
-    function calc_Q(array){
-        //Get lowest point left and lowest point right of each peak
-        //R values = Peaks
-        //Use the index of the peaks
-
-        var q_value;
-        var q_index;
-
-        for(var i = 0; i < r_Index.length; i++)
-        {
-            var newArray = [];
-            for(var j = (r_Index[i]-qs_offset);j < r_Index[i]; j++)
+            for(var i = 0; i <= (array.length -1); i++)
             {
-                newArray.push(array[j]);
-            }
-
-            q_value = Math.min.apply(Math,newArray);
-            q_index = newArray.indexOf(q_value);
-            q_index = q_index + r_Index[i] - qs_offset;
-
-            q_Value.push(q_value);
-            q_Index.push(q_index);
-        }
-    }
-
-    function calc_S(array){
-     var s_value;
-     var s_index;
-
-     for(var i = 0; i < r_Index.length; i++)
-     {
-       var newArray = [];
-       for(var j = r_Index[i];j <= (r_Index[i] + qs_offset); j++)
-       {
-           newArray.push(array[j]);
-       }
-
-       s_value = Math.min.apply(Math,newArray);
-       s_index = newArray.indexOf(s_value);
-       s_index = s_index + r_Index[i];
-
-       s_Value.push(s_value);
-       s_Index.push(s_index);
-     }
-    }
-
-    function drawChart() {
-
-        // Create the data table.
-        var data1 = new google.visualization.DataTable();
-        data1.addColumn('number', 'Time');
-        data1.addColumn('number', 'EKG');
-
-        var dataArray = [];
-        var averageArray = [];  
-
-        $http.get(recordPath)
-          .success(function(data) {
-            dataArray = data.measurement1.sensor1;
-            for(var i = 1; i <= 10000; i++)
-            {   
-              averageArray[i] = (data.measurement1.sensor1[i] + data.measurement1.sensor2[i]) / 2
-
-              data1.addRows([
-                [i, averageArray[i]]          
-              ]);                
-            }
-
-            var chart1 = new google.visualization.LineChart(document.getElementById('chart1_div'));
-            chart1.draw(data1, options1);
-            
-            get_QRS(data);
-          });
-
-    function get_QRS(data) {            
-            $scope.record = data.measurement1;
-                console.log($scope.record);
-                for(var i = 1; i <= 10000; i++)
-                {   
-                  averageArray[i] = (data.measurement1.sensor1[i] + data.measurement1.sensor2[i]) / 2;                
+                newNumber = array[i];
+                if(newNumber > r_filter)
+                {
+                    if(newNumber > oldNumber)
+                    {
+                        nextNumber = array[i+3];
+                        if(newNumber >= nextNumber)
+                        {
+                            r_Value.push(newNumber.toFixed(2));
+                            r_Index.push(i);
+                            i += r_offset;
+                            oldNumber = 0;
+                            // console.log(i);
+                        }
+                        else
+                        {
+                            oldNumber = newNumber;
+                        }
+                    }
                 }
+            }
+        }
 
-            averageArray[i] = (data.measurement1.sensor1[i] + data.measurement1.sensor2[i]) / 2; 
+        function calc_P(array)
+        {
+            for(var index = 1; index < r_Index.length; index++)
+            {
+                for(var i = (r_Index[index] - p_offset); i < r_Index[index]; i++)
+                {
+                    if(array[i] > (low_filter))
+                    {
+                        var slope = (array[(i + slope_offset)] - array[i]) / ((i + slope_offset) - i);
+                        //console.log(slope + " index: " + i);
+                        if(slope > 0.01)
+                        {
+                            p_Wave = true;
+                            p_Index.push(i);
+                            //console.log(i);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
 
-            var test = averageArray.length / data.measurement1.frequency;
-            timePerSample = test / averageArray.length;
+        function calc_PR_Duration()
+        {
+            //check if there is a P wave at the first peak
+            //if yes return yes else no
+            //take peak 1: r_Index[0]
+            //check between Q and Zero for a fluctuation
+            var pr_inSec;
+            for(var i = 0; i < p_Index.length; i++)
+            {
+                pr_inSec = (q_Index[(i+1)] - p_Index[i]) * timePerSample;
+                pr_Duration.push(pr_inSec.toFixed(2));
+            }
+        }
 
-            calc_R(averageArray);
-            calc_Q(averageArray);
-            calc_S(averageArray);
-
-                
-            calc_QRS_time();
+        function calc_Q(array)
+        {
+            var q_value;
+            var q_index;
 
             for(var i = 0; i < r_Index.length; i++)
             {
-                console.log("Value: Q: "+ q_Value[i] + ", R: "+ r_Value[i] + ", S: " + s_Value[i]);
-                console.log("Index: Q: "+ q_Index[i] + ", R: "+ r_Index[i] + ", S: " + s_Index[i]);
-                console.log("-------------------------------------------");
-                console.log("QRS Duration: "+ qrs_Duration[i]);
-            }        }
-        
-    function calc_QRS_time(){
+                var newArray = [];
+                for(var j = (r_Index[i]-qs_offset);j < r_Index[i]; j++)
+                {
+                    newArray.push(array[j]);
+                }
 
-        console.log(timePerSample + " sec per sample");
-        var qrs_duration;
-        for(var i = 0; i < r_Index.length; i++){
-            qrs_duration = ((s_Index[i] - q_Index[i]) * timePerSample);
-            qrs_Duration.push(qrs_duration);
+                q_value = Math.min.apply(Math,newArray);
+                q_index = newArray.indexOf(q_value);
+                q_index = q_index + r_Index[i] - qs_offset;
+
+                q_Value.push(q_value.toFixed(2));
+                q_Index.push(q_index);
+            }
+        }
+
+        function calc_S(array)
+        {
+            var s_value;
+            var s_index;
+
+            for(var i = 0; i < r_Index.length; i++)
+            {
+                var newArray = [];
+                for(var j = r_Index[i];j <= (r_Index[i] + qs_offset); j++)
+                {
+                    newArray.push(array[j]);
+                }
+
+                s_value = Math.min.apply(Math,newArray);
+                s_index = newArray.indexOf(s_value);
+                s_index = s_index + r_Index[i];
+
+                s_Value.push(s_value.toFixed(2));
+                s_Index.push(s_index);
+            }
+        }
+
+        function check_Irregularities()
+        {
+            var qrs_max = Math.max.apply(null, qrs_Duration);
+            var pr_max = Math.max.apply(null, pr_Duration);
+
+            //PR
+            for(var i = 0; i < pr_Duration.length; i++)
+            {
+                if(pr_Duration[i] < 0.12 || pr_Duration > 0.2)
+                {
+                    odd_PR = true;
+                    break;
+                }
+                else
+                {
+                    odd_PR = false;
+                }
+            }
+            document.getElementById("_PR").innerHTML = pr_max +" seconds";
+
+            //QRS
+            // 0.6 - 0.1s
+            for(var i = 0; i < qrs_Duration.length; i++)
+            {
+                if(qrs_Duration[i] > 0.1)
+                {
+                    console.log(qrs_Duration[i]);
+                    odd_QRS = true;
+                    break;
+                }
+                else
+                {
+                    odd_QRS = false;
+                }
+            }
+            document.getElementById("_QRS").innerHTML = qrs_max +" seconds";
+
+            //Heart Axis: atrial or ventricular?
+            var max_QRS = Math.max.apply(null,qrs_Duration);
+            if(max_QRS < 0.10)
+            {
+                axis = "Atrial/Supraventricular";
+                document.getElementById("_Axis").innerHTML = "Atrial/Supraventricular";
+            }
+            else if(max_QRS > 0.10)
+            {
+                axis = "Ventricular";
+                document.getElementById("_Axis").innerHTML = "Ventricular";
+            }
+
+            //R-R intervals odd? value x up to value y , not odd? show highest value
+            for(var i = 0; i < rr_Interval.length; i++)
+            {
+                if(rr_Interval[i] >= 0.6 && rr_Interval[i] <= 1.2)
+                {
+                    //normal range
+                    odd_RR = false;
+                }
+                else if(rr_Interval[i] < 0.6 || rr_Interval[i] > 1.2)
+                {
+                    //odd range
+                    odd_RR = true;
+                    break;
+                }
+            }
+            document.getElementById("_RR").innerHTML = Math.max.apply(null, rr_Interval)+ " seconds";
+
+            //BPM
+            if(BPM < 60)
+            {
+                //brady
+                odd_BPM = true;
+            }
+            else if(BPM > 100)
+            {
+                //tachy
+                odd_BPM = true;
+            }
+            else
+            {
+                odd_BPM = false;
+            }
+
+            document.getElementById("_BPM").innerHTML = BPM;
+        }
+
+        function check_bpm()
+        {
+            if(BPM < 60)
+            {
+                console.log(axis + " Bradycardia");
+                document.getElementById("_BPM_text").innerHTML = "The Beats per Minte are lower than 60, this can be associated with the following Arrhythmia:"
+                    +"<br>"+axis+" Bradycardia";
+            }
+            else if(BPM > 100 && BPM < 250)
+            {
+                console.log(axis + " Tachycardia");
+                document.getElementById("_BPM_text").innerHTML = "The Beats per Minute are higher than 100, this can be associated with the following Arrhythmia:"
+                    +"<br>"+axis+" Tachycardia";
+            }
+            else if(BPM > 250)
+            {
+                //possibly flutter (> 250)
+                document.getElementById("_BPM_text").innerHTML = "Your BPM is: " + BPM + " this may indicate an extreme form of Tachycardia, namely: Flutter";
+            }
+        }
+
+        function check_premature_beats()
+        {
+            //No more than two odd R-R intervals -> premature atrial/ventricular beat
+            //Only check for a short R-R below 0.6, since extra beat
+            for (var i = 0; i < rr_Interval.length; i++) {
+                //console.log(rr_Interval[i]);
+
+                if (rr_Interval[i] < 0.6) {
+                    count_extra_beats += 1;
+                }
+            }
+            if (count_extra_beats > 0 && count_extra_beats < 3)
+            {
+                document.getElementById("_RR_text").innerHTML = "There is one premature beat, this can be associated with the following Arrhythmia:"+"" +
+                    "<br>"+"Premature " + axis + " Complex";
+            }
+            else if(count_extra_beats >= 3)
+            {
+                document.getElementById("_RR_text").innerHTML = "There are several premature beats detected, this can be assoicated with the following Arrhythmia:"
+                    +"<br>"+ axis + " Tachycardia, note: this is only the case, if the BPM is higher than 100";
+            }
+        }
+
+        function check_any_beats()
+        {
+            if(r_Index.length == 0)
+            {
+                //No measurable heart beat
+                //Asystole
+                document.getElementById("_RR_text").innerHTML = "there are no visible beats, this may indicate the following Arrhythmia:"+"<br>"+"Asystole";
+            }
+        }
+
+        function check_prolonged_beats()
+        {
+            if(Math.max.apply(null, rr_Interval) > 1.2)
+            {
+                document.getElementById("_RR_text").innerHTML = "The R-R intervals are prolonged";
+            }
+        }
+
+        function check_PR_interval()
+        {
+            if(Math.max.apply(null, pr_Duration) < 0.12)
+            {
+                document.getElementById("_PR_text").innerHTML = "The PR interval is lower than 0.12 seconds, which means there is a shortened P wave."+"<br>"
+                    +"This can be associated with the following Arrhythmia:"+"<br>"
+                    +"A Junctional rhythm";
+            }
+            if(Math.max.apply(null, pr_Duration) > 0.2)
+            {
+                document.getElementById("_PR_text").innerHTML = "The PR interval is higher than 0.20 seconds, which means there is a prolonged P wave."+"<br>"
+                    +"This can be associated with the following Arrhythmia:"+"<br>"
+                    +"A first degree Heart block";
+            }
+        }
+
+        function check_QRS_complex()
+        {
+            if(Math.max.apply(null, qrs_Duration) > 0.1)
+            {
+                document.getElementById("_QRS_text").innerHTML = "The QRS complex is higher than 0.1 seconds, which can be assoicated with the following Arrhythmia:"
+                    +"<br>"+"The BBB: Bundle Branch Block";
+            }
+        }
+
+        function Arrhythmia_Text()
+        {
+
+            console.log(odd_QRS);
+            console.log("RR: "+odd_RR);
+            //No odd values
+            if (odd_PR == false && odd_QRS == false && odd_BPM == false && odd_RR == false) {
+                //no arrhythmia detected
+                document.getElementById("_RR_text").innerHTML = "The R-R intervals are Regular";
+                document.getElementById("_BPM_text").innerHTML = "The Beats per Minute are Regular";
+                document.getElementById("_PR_text").innerHTML = "The PR interval is Regular";
+                document.getElementById("_QRS_text").innerHTML = "The QRS complex is Regular";
+                document.getElementById("_None_text").innerHTML = "NO Cardiac Arrhythmia's were found";
+            }
+            else
+            {
+                if(odd_RR == true)
+                {
+                    check_any_beats();
+                    check_premature_beats();
+                    check_prolonged_beats();
+                }
+                else if(odd_RR == false)
+                {
+                    document.getElementById("_RR_text").innerHTML = "The R-R intervals are Regular";
+                }
+
+                if(odd_BPM == true)
+                {
+                    check_bpm();
+                }
+                else if(odd_BPM == false)
+                {
+                    document.getElementById("_BPM_text").innerHTML = "The Beats per Minute are Regular";
+                }
+
+                if(odd_PR == true)
+                {
+                    check_PR_interval();
+                }
+                else if(odd_PR == false)
+                {
+                    document.getElementById("_PR_text").innerHTML = "The PR interval is Regular";
+                }
+
+                if(odd_QRS == true)
+                {
+                    check_QRS_complex();
+                }
+                else if(odd_QRS == false)
+                {
+                    document.getElementById("_QRS_text").innerHTML = "The QRS complex is Regular";
+                }
+            }
+
+
+        }
+
+        function calc_timePerSample(array, data)
+        {
+            var total_time = (array.length - 1) / data.measurement1.frequency;
+            timePerSample = total_time / (array.length - 1);
+        }
+
+        function smoothArray( values, smoothing )
+        {
+            var value = values[0]; // start with the first input
+            for (var i=1, len=values.length; i<len; ++i){
+                var currentValue = values[i];
+                value += (currentValue - value) / smoothing;
+                values[i] = value;
+            }
+        }
+
+        function average_OfSensors(data)
+        {
+            if(data.measurement1.test_value == 1)
+            {
+                normal_sinus_rhythm(data);
+            }
+            else if(data.measurement1.test_value == 2)
+            {
+                premature_beat(data);
+            }
+            else if(data.measurement1.test_value == 3)
+            {
+                tachycardia(data);
+            }
+            else if(data.measurement1.test_value == 4)
+            {
+                bradycardia(data);
+            }
+            else if(data.measurement1.test_value == 5)
+            {
+                asystole(data);
+            }
+            else
+            {
+                normal_sinus_rhythm(data);
+            }
+
+            smoothArray(averageArray,100);
+        }
+
+        function normal_sinus_rhythm(data)
+        {
+            for(var i = 0; i < data.measurement1.sensor1.length; i++)
+            {
+                var average_sensors = data.measurement1.sensor1[i] + data.measurement1.sensor2[i];
+                averageArray[i] = average_sensors / 2;
+            }
+        }
+
+        function premature_beat(data)
+        {
+            for(var i = 0; i < data.measurement1.sensor1.length; i++)
+            {
+                if(i >= sampleOffsetLow && i <= sampleOffsetHigh)
+                {
+                    averageArray[i] = (data.measurement1.sensor1[i+extra_peak_offset] + data.measurement1.sensor2[i+extra_peak_offset]) / 2;
+
+                }
+                else
+                {
+                    var average_sensors = data.measurement1.sensor1[i] + data.measurement1.sensor2[i];
+                    averageArray[i] = average_sensors / 2;
+                }
+            }
+        }
+
+        function tachycardia(data)
+        {
+            for(var i = 0; i < data.measurement1.sensor1.length; i++)
+            {
+                if(i >= sampleOffsetLow && i <= sampleOffsetHigh)
+                {
+                    averageArray[i] = (data.measurement1.sensor1[i+extra_peak_offset] + data.measurement1.sensor2[i+extra_peak_offset]) / 2;
+
+                }
+                //extra secondary peak
+                else if(i >= 5500 && i <= 6225)
+                {
+                    averageArray[i] = (data.measurement1.sensor1[i+extra_peak_offset] + data.measurement1.sensor2[i+extra_peak_offset]) / 2;
+                }
+                else
+                {
+                    var average_sensors = data.measurement1.sensor1[i] + data.measurement1.sensor2[i];
+                    averageArray[i] = average_sensors / 2;
+                    /*if(averageArray[i] <= low_filter)
+                     {
+                     averageArray[i] = low_filter;
+                     }*/
+                }
+            }
+        }
+
+        function bradycardia(data)
+        {
+            for(var i = 0; i < data.measurement1.sensor1.length; i++)
+            {
+                if(i >= 8700)
+                {
+                    averageArray[i] = 57;
+                }
+                else
+                {
+                    var average_sensors = data.measurement1.sensor1[i] + data.measurement1.sensor2[i];
+                    averageArray[i] = average_sensors / 2;
+                }
+            }
+        }
+
+        function asystole(data)
+        {
+
+        }
+
+        function calculations()
+        {
+            $http.get(recordPath)
+                .success(function(data) {
+
+                    calc_timePerSample(averageArray, data);
+                    calc_R(averageArray);
+                    calc_Q(averageArray);
+                    calc_S(averageArray);
+                    calc_P(averageArray);
+
+                    calc_QRS_inSec();
+                    calc_RR_interval();
+                    calc_BPM(averageArray,data);
+                    calc_PR_Duration(averageArray);
+
+                    log_Values();
+
+                    check_Irregularities();
+                    Arrhythmia_Text();
+                });
+        }
+
+        function log_Values()
+        {
+            console.log("--------");
+            console.log("R index: " + r_Index);
+            console.log("R values: " + r_Value);
+            console.log("--------");
+            console.log("Q index: " + q_Index);
+            console.log("Q values: " + q_Value);
+            console.log("--------");
+            console.log("S index: " + s_Index);
+            console.log("S values: " + s_Value);
+            console.log("--------");
+            console.log("PR duration: " + pr_Duration);
+            console.log("--------");
+            console.log("RR intervals: " + rr_Interval);
+            console.log("--------");
+            console.log("QRS durations: " + qrs_Duration);
+            console.log("--------");
+        }
+
+        function calc_RR_interval()
+        {
+            var rr_interval;
+            for(var i = 0; i < (r_Index.length-1); i++){
+                rr_interval = ((r_Index[i+1] - r_Index[i]) * timePerSample);
+                rr_Interval.push(rr_interval.toFixed(2));
+            }
+        }
+
+        function calc_QRS_inSec()
+        {
+
+            console.log(timePerSample + " sec per sample");
+            var qrs_duration;
+            for(var i = 0; i < r_Index.length; i++){
+                qrs_duration = ((s_Index[i] - q_Index[i]) * timePerSample);
+                qrs_Duration.push(qrs_duration.toFixed(2));
+            }
+        }
+
+        function calc_BPM(array, data)
+        {
+            var bpm;
+            var samples = (array.length - 1);
+            var freq = data.measurement1.frequency;
+            var amount_QRS = r_Index.length;
+            bpm = (secInMin/(samples/freq)) * amount_QRS;
+            BPM = Math.floor(bpm);
+        }
+
+        function drawChart() {
+
+            // Create the data table.
+            var data1 = new google.visualization.DataTable();
+            data1.addColumn('number', 'Time');
+            data1.addColumn('number', 'EKG');
+
+            $http.get(recordPath)
+                .success(function(data) {
+
+                    average_OfSensors(data);
+
+                    for(var i = 0; i < averageArray.length; i++)
+                    {
+                        data1.addRows([
+                            [i, averageArray[i]]
+                        ]);
+                    }
+
+                    var chart1 = new google.visualization.LineChart(document.getElementById('chart1_div'));
+
+                    chart1.draw(data1, options1);
+
+                    // google.visualization.events.addListener(chart1, 'ready', function () {
+                    //       document["imageTest"].src = chart1.getImageURI();
+                    //   });
+
+
+                    calculations();
+                });
+
+            // Set chart options
+            var options1 = {title:'ECG',
+                explorer: {axis: 'horizontal',keepInBounds: true},
+                hAxis:{
+                    title: 'Samples',
+                },
+                vAxis: {
+                    title: 'mV',
+                },
+                width:1000,
+                height:500,
+                lineWidth: 2,
+                chartArea: {width:'100%'},
+                colors:['#a52714', '#097138', '#f1f442'],
+                legend: { position: 'top' }
+            };
         }
     }
-
-        // Set chart options
-    var options1 = {title: $scope.selectedRecord,
-          hAxis:{
-           title: 'Samples'
-          },
-           vAxis: {
-           title: 'mV'
-          },
-           width:750,
-           height:250,
-           lineWidth: 2,
-           chartArea: {width:'95%'},
-           colors:['#a52714', '#097138', '#f1f442']
-        };
-      }  
-    }    
-
 
     // Get the user if logged in, redirect if not and display profile page as default view of the dashboard
     $scope.askForSession();
