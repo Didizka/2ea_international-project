@@ -347,14 +347,13 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
 
     // Check how the page has been accessed:
     // 1: login: session started? yes => OK, no => login page
-    // 2: doctor login with token? => OK
-    
+    // 2: doctor login with token? => OK    
     var url = $location.path();
     var params = $location.search();
     if (url == "/dashboardPage" && !params.userid && !params.token) {
       $scope.askForSession();
       $scope.profilePage();
-    } else if (url == "/dashboardPage" && params.userid && params.token) {
+    } else if (url == "/dashboardPage" && params.userid && params.token == "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9") {
       $scope.isDoctorLoggedIn = true;
       $scope.getUserForDoctor(params.userid, params.token).then(function(user) {
         $scope.calculateAge();
