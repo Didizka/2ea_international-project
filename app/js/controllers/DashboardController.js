@@ -201,11 +201,11 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
         var timePerSample;
         var BPM;
 
-        var p_Wave = false;
-        var odd_PR = false;
-        var odd_BPM = false;
-        var odd_QRS = false;
-        var odd_RR = false;
+        $scope.p_Wave = false;
+        $scope.odd_PR = false;
+        $scope.odd_BPM = false;
+        $scope.odd_QRS = false;
+        $scope.odd_RR = false;
 
         var axis;
 
@@ -331,12 +331,12 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
             {
                 if(pr_Duration[i] < 0.12 || pr_Duration > 0.2)
                 {
-                    odd_PR = true;
+                    $scope.odd_PR = true;
                     break;
                 }
                 else
                 {
-                    odd_PR = false;
+                    $scope.odd_PR = false;
                 }
             }
             document.getElementById("_PR").innerHTML = pr_max +" seconds";
@@ -347,13 +347,13 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
             {
                 if(qrs_Duration[i] > 0.1)
                 {
-                    console.log(qrs_Duration[i]);
-                    odd_QRS = true;
+                    //console.log(qrs_Duration[i]);
+                    $scope.odd_QRS = true;
                     break;
                 }
                 else
                 {
-                    odd_QRS = false;
+                    $scope.odd_QRS = false;
                 }
             }
             document.getElementById("_QRS").innerHTML = qrs_max +" seconds";
@@ -362,13 +362,13 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
             var max_QRS = Math.max.apply(null,qrs_Duration);
             if(max_QRS < 0.10)
             {
-                axis = "Atrial/Supraventricular";
-                document.getElementById("_Axis").innerHTML = "Atrial/Supraventricular";
+                axis = "Atrial";
+                document.getElementById("_Axis").innerHTML = axis;
             }
             else if(max_QRS > 0.10)
             {
                 axis = "Ventricular";
-                document.getElementById("_Axis").innerHTML = "Ventricular";
+                document.getElementById("_Axis").innerHTML = axis;
             }
 
             //R-R intervals odd? value x up to value y , not odd? show highest value
@@ -377,31 +377,31 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
                 if(rr_Interval[i] >= 0.6 && rr_Interval[i] <= 1.2)
                 {
                     //normal range
-                    odd_RR = false;
+                    $scope.odd_RR = false;
                 }
                 else if(rr_Interval[i] < 0.6 || rr_Interval[i] > 1.2)
                 {
                     //odd range
-                    odd_RR = true;
+                    $scope.odd_RR = true;
                     break;
                 }
             }
-            document.getElementById("_RR").innerHTML = Math.max.apply(null, rr_Interval)+ " seconds";
+            document.getElementById("_RR").innerHTML = Math.min.apply(null, rr_Interval) + " - "+ Math.max.apply(null, rr_Interval)+ " seconds";
 
             //BPM
             if(BPM < 60)
             {
                 //brady
-                odd_BPM = true;
+                $scope.odd_BPM = true;
             }
             else if(BPM > 100)
             {
                 //tachy
-                odd_BPM = true;
+                $scope.odd_BPM = true;
             }
             else
             {
-                odd_BPM = false;
+                $scope.odd_BPM = false;
             }
 
             document.getElementById("_BPM").innerHTML = BPM;
@@ -411,13 +411,13 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
         {
             if(BPM < 60)
             {
-                console.log(axis + " Bradycardia");
+                //console.log(axis + " Bradycardia");
                 document.getElementById("_BPM_text").innerHTML = "The Beats per Minte are lower than 60, this can be associated with the following Arrhythmia:"
                     +"<br>"+axis+" Bradycardia";
             }
             else if(BPM > 100 && BPM < 250)
             {
-                console.log(axis + " Tachycardia");
+                //console.log(axis + " Tachycardia");
                 document.getElementById("_BPM_text").innerHTML = "The Beats per Minute are higher than 100, this can be associated with the following Arrhythmia:"
                     +"<br>"+axis+" Tachycardia";
             }
@@ -446,8 +446,8 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
             }
             else if(count_extra_beats >= 3)
             {
-                document.getElementById("_RR_text").innerHTML = "There are several premature beats detected, this can be assoicated with the following Arrhythmia:"
-                    +"<br>"+ axis + " Tachycardia, note: this is only the case, if the BPM is higher than 100";
+                document.getElementById("_RR_text").innerHTML = "There are several premature beats detected, this can be associated with the following Arrhythmia's:"
+                    +"<br>"+"Premature " + axis + " Complex and " + axis + " Tachycardia, note: Tachycardia can only be the case, if the BPM is higher than 100";
             }
         }
 
@@ -496,11 +496,10 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
 
         function Arrhythmia_Text()
         {
-
-            console.log(odd_QRS);
-            console.log("RR: "+odd_RR);
+            //console.log(odd_QRS);
+            //console.log("RR: "+odd_RR);
             //No odd values
-            if (odd_PR == false && odd_QRS == false && odd_BPM == false && odd_RR == false) {
+            if ($scope.odd_PR == false && $scope.odd_QRS == false && $scope.odd_BPM == false && $scope.odd_RR == false) {
                 //no arrhythmia detected
                 document.getElementById("_RR_text").innerHTML = "The R-R intervals are Regular";
                 document.getElementById("_BPM_text").innerHTML = "The Beats per Minute are Regular";
@@ -510,40 +509,40 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
             }
             else
             {
-                if(odd_RR == true)
+                if($scope.odd_RR == true)
                 {
                     check_any_beats();
                     check_premature_beats();
                     check_prolonged_beats();
                 }
-                else if(odd_RR == false)
+                else if($scope.odd_RR == false)
                 {
                     document.getElementById("_RR_text").innerHTML = "The R-R intervals are Regular";
                 }
 
-                if(odd_BPM == true)
+                if($scope.odd_BPM == true)
                 {
                     check_bpm();
                 }
-                else if(odd_BPM == false)
+                else if($scope.odd_BPM == false)
                 {
                     document.getElementById("_BPM_text").innerHTML = "The Beats per Minute are Regular";
                 }
 
-                if(odd_PR == true)
+                if($scope.odd_PR == true)
                 {
                     check_PR_interval();
                 }
-                else if(odd_PR == false)
+                else if($scope.odd_PR == false)
                 {
                     document.getElementById("_PR_text").innerHTML = "The PR interval is Regular";
                 }
 
-                if(odd_QRS == true)
+                if($scope.odd_QRS == true)
                 {
                     check_QRS_complex();
                 }
-                else if(odd_QRS == false)
+                else if($scope.odd_QRS == false)
                 {
                     document.getElementById("_QRS_text").innerHTML = "The QRS complex is Regular";
                 }
@@ -687,7 +686,7 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
                     calc_BPM(averageArray,data);
                     calc_PR_Duration(averageArray);
 
-                    log_Values();
+                    //log_Values();
 
                     check_Irregularities();
                     Arrhythmia_Text();
@@ -726,7 +725,7 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
         function calc_QRS_inSec()
         {
 
-            console.log(timePerSample + " sec per sample");
+            //console.log(timePerSample + " sec per sample");
             var qrs_duration;
             for(var i = 0; i < r_Index.length; i++){
                 qrs_duration = ((s_Index[i] - q_Index[i]) * timePerSample);
