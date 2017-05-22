@@ -29,27 +29,27 @@
                     <tr>
                         <td>PR Interval</td>
                         <td>0.12 - 0.20 seconds</td>
-                        <td id="_PR" ng-class="!odd_PR ? 'alert-success':'alert-danger'" class="alert"><img src="../images/ajax_loader.gif"></td>
+                        <td id="_PR" ng-class="!odd_PR ? 'alert-success':'alert-danger'" class="alert"><img src="../images/loading.gif"></td>
                     </tr>
                     <tr>
                         <td>QRS Complex</td>
                         <td>up to 0.10 seconds</td>
-                        <td id="_QRS" ng-class="!odd_QRS ? 'alert-success':'alert-danger'" class="alert"><img src="../images/ajax_loader.gif"></td>
+                        <td id="_QRS" ng-class="!odd_QRS ? 'alert-success':'alert-danger'" class="alert"><img src="../images/loading.gif"></td>
                     </tr>
                     <tr>
                         <td>R-R Interval</td>
                         <td>0.6 - 1.2 second</td>
-                        <td id="_RR" ng-class="!odd_RR ? 'alert-success':'alert-danger'" class="alert"><img src="../images/ajax_loader.gif"></td>
+                        <td id="_RR" ng-class="!odd_RR ? 'alert-success':'alert-danger'" class="alert"><img src="../images/loading.gif"></td>
                     </tr>
                     <tr>
                         <td>BPM</td>
                         <td>60 - 100 Beats per Minute</td>
-                        <td id="_BPM" ng-class="!odd_BPM ? 'alert-success':'alert-danger'" class="alert"><img src="../images/ajax_loader.gif"></td>
+                        <td id="_BPM" ng-class="!odd_BPM ? 'alert-success':'alert-danger'" class="alert"><img src="../images/loading.gif"></td>
                     </tr>
                     <tr>
                         <td>Axis</td>
                         <td>Atrial / Ventricular</td>
-                        <td id="_Axis"><img src="../images/loading.png"></td>
+                        <td id="_Axis"><img src="../images/loading.gif"></td>
                     </tr>
                 </table>
                 <h2>Interpretation:</h2>
@@ -66,23 +66,19 @@
                         </tr>
                         <tr>
                             <td>PR Interval</td>
-                            <td id="_PR_text" ng-class="!odd_PR ? 'alert-success':'alert-danger'" class="alert"><img src="../images/ajax_loader.gif"></td>
+                            <td id="_PR_text" ng-class="!odd_PR ? 'alert-success':'alert-danger'" class="alert"><img src="../images/loading.gif"></td>
                         </tr>
                         <tr>
                             <td>QRS Complex</td>
-                            <td id="_QRS_text" ng-class="!odd_QRS ? 'alert-success':'alert-danger'" class="alert"><img src="../images/ajax_loader.gif"></td>
+                            <td id="_QRS_text" ng-class="!odd_QRS ? 'alert-success':'alert-danger'" class="alert"><img src="../images/loading.gif"></td>
                         </tr>
                         <tr>
                             <td>R-R Interval</td>
-                            <td id="_RR_text" ng-class="!odd_RR ? 'alert-success':'alert-danger'" class="alert"><img src="../images/ajax_loader.gif"></td>
+                            <td id="_RR_text" ng-class="!odd_RR ? 'alert-success':'alert-danger'" class="alert"><img src="../images/loading.gif"></td>
                         </tr>
                         <tr>
                             <td>BPM</td>
-                            <td id="_BPM_text" ng-class="!odd_BPM ? 'alert-success':'alert-danger'" class="alert"><img src="../images/ajax_loader.gif"></td>
-                        </tr>
-                        <tr>
-                            <td>Conclusion:</td>
-                            <td id="_Conclusion_text" ng-class="!odd_Arr ? 'alert-success':'alert-danger'" class="alert"><img src="../images/ajax_loader.gif"></td>
+                            <td id="_BPM_text" ng-class="!odd_BPM ? 'alert-success':'alert-danger'" class="alert"><img src="../images/loading.gif"></td>
                         </tr>
                     </table>
                 </div>
@@ -92,22 +88,24 @@
                     <img src="../images/HeartChambers.jpg">
                     </div>
                     <!--followed by corresponding text-->
-                    <p>
+                    <p class="panel panel-footer">
                         Based on the QRS complex, we can determine whether the Heart beat is coming from the Atrium or from the Ventricles.
                         <br>
                         <br>
-                        This is an important piece of information, since we can determine which area of the heart will be needing treatment regarding a specific Arrhythmia.
+                        This is an important piece of information, since we can determine which area of the heart will be needing treatment when an Arrhythmia is detected.
                         <br>
                         <br>
-                        Atrial based arrythmias have a smaller QRS complex whereas Ventricular Arrhythmias have a longer QRS complex.
+                        Atrial based arrhythmia's have a smaller QRS complex whereas Ventricular arrhythmia's have a longer QRS complex.
                     </p>
+                         <p id="_Axis_text" class="panel panel-body"></p>
+
                 </div>
 
             </div>
     </div>
 
     <div class="col-lg-12">
-        <button class="btn btn-info btn-lg btn-outline" ng-click="share()" ng-hide="isDoctorLoggedIn">Share with the doctor</button>
+        <button class="btn btn-info btn-lg btn-outline" ng-click="share()" ng-hide="isDoctorLoggedIn" style="position:fixed;bottom:20px;right:20px">Share with your doctor</button>
         <br>
         <br>
 <!--         <div class="alert alert-warning linkToShare">

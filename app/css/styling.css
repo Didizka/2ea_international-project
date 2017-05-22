@@ -268,4 +268,8 @@ nav#dashboard ul li a:hover {
   background-color:#2C3E50;
 }
 
+position: fixed;
+bottom: 0;
+right: 0;
+
 

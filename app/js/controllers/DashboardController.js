@@ -182,9 +182,9 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
         var averageArray = [];
 
         var secInMin = 60;
-        var r_filter = 70;
+        var r_filter = 69;
         var r_offset = 500;
-        var qs_offset = 100;
+        var qs_offset = 125;
         var p_offset = 500;
         var slope_offset = 20;
         var sampleOffsetLow = 1700;
@@ -474,13 +474,13 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
 
         function check_PR_interval()
         {
-            if(Math.max.apply(null, pr_Duration) < 0.12)
+            if(Math.min.apply(null, pr_Duration) < 0.12)
             {
                 document.getElementById("_PR_text").innerHTML = "The PR interval is lower than 0.12 seconds, which means there is a shortened P wave."+"<br>"
                     +"This can be associated with the following Arrhythmia:"+"<br>"
                     +"A Junctional rhythm";
             }
-            if(Math.max.apply(null, pr_Duration) > 0.2)
+            else if(Math.max.apply(null, pr_Duration) > 0.2)
             {
                 document.getElementById("_PR_text").innerHTML = "The PR interval is higher than 0.20 seconds, which means there is a prolonged P wave."+"<br>"
                     +"This can be associated with the following Arrhythmia:"+"<br>"
@@ -551,7 +551,7 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
                 }
             }
 
-
+            document.getElementById("_Axis_text").innerHTML = "Based on the QRS Complex, we can conclude that the Heart Beat originates from the "+axis+ " Axis";
         }
 
         function calc_timePerSample(array, data)
@@ -689,7 +689,7 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
                     calc_BPM(averageArray,data);
                     calc_PR_Duration(averageArray);
 
-                    //log_Values();
+                    log_Values();
 
                     check_Irregularities();
                     Arrhythmia_Text();
