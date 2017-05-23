@@ -180,12 +180,12 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
 
         var secInMin = 60;
         var r_filter = 72;
-        var r_offset = 500;
+        var r_offset = 350;
         var qs_offset = 100;
         var p_offset = 500;
         var slope_offset = 20;
-        var sampleOffsetLow = 5700;
-        var sampleOffsetHigh = 6425;
+        var sampleOffsetLow = 3500;//5700;
+        var sampleOffsetHigh = 4425;//6425;
         var extra_peak_offset = 1060;
 
         var count_extra_beats = 0;
@@ -321,6 +321,7 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
 
         function check_Irregularities()
         {
+            var qrs_min = Math.min.apply(null, qrs_Duration);
             var qrs_max = Math.max.apply(null, qrs_Duration);
             var pr_min = Math.min.apply(null, pr_Duration);
             var pr_max = Math.max.apply(null, pr_Duration);
@@ -338,7 +339,15 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
                     $scope.odd_PR = false;
                 }
             }
-            document.getElementById("_PR").innerHTML = pr_min + " - " + pr_max +" seconds";
+            if(pr_min == pr_max)
+            {
+                document.getElementById("_PR").innerHTML = pr_max +" seconds";
+            }
+            else if(pr_min != pr_max)
+            {
+                document.getElementById("_PR").innerHTML = pr_min + " - " + pr_max +" seconds";
+            }
+
 
             //QRS
             // 0.6 - 0.1s
@@ -355,7 +364,15 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
                     $scope.odd_QRS = false;
                 }
             }
-            document.getElementById("_QRS").innerHTML = qrs_max +" seconds";
+            if(qrs_min == qrs_max)
+            {
+                document.getElementById("_QRS").innerHTML = qrs_max +" seconds";
+            }
+            else if(qrs_min != qrs_max)
+            {
+                document.getElementById("_QRS").innerHTML = qrs_min + " - " + qrs_max +" seconds";
+            }
+
 
             //R-R intervals odd? value x up to value y , not odd? show highest value
             for(var i = 0; i < rr_Interval.length; i++)
@@ -484,7 +501,6 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
                 document.getElementById("_BPM_text").innerHTML = "The Beats per Minute are Regular";
                 document.getElementById("_PR_text").innerHTML = "The PR interval is Regular";
                 document.getElementById("_QRS_text").innerHTML = "The QRS complex is Regular";
-                document.getElementById("_None_text").innerHTML = "NO Cardiac Arrhythmia's were found";
             }
             else
             {
@@ -584,7 +600,6 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
                     averageArray.push(average_sensors / 2);
                 }
             }
-
         }
 
         function premature_beat(data)
