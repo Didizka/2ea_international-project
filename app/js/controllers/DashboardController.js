@@ -184,8 +184,8 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
         var qs_offset = 100;
         var p_offset = 500;
         var slope_offset = 20;
-        var sampleOffsetLow = 1700;
-        var sampleOffsetHigh = 2425;
+        var sampleOffsetLow = 5700;
+        var sampleOffsetHigh = 6425;
         var extra_peak_offset = 1060;
 
         var count_extra_beats = 0;
@@ -322,6 +322,7 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
         function check_Irregularities()
         {
             var qrs_max = Math.max.apply(null, qrs_Duration);
+            var pr_min = Math.min.apply(null, pr_Duration);
             var pr_max = Math.max.apply(null, pr_Duration);
 
             //PR
@@ -337,7 +338,7 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
                     $scope.odd_PR = false;
                 }
             }
-            document.getElementById("_PR").innerHTML = pr_max +" seconds";
+            document.getElementById("_PR").innerHTML = pr_min + " - " + pr_max +" seconds";
 
             //QRS
             // 0.6 - 0.1s
@@ -592,9 +593,17 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
             {
                 for(var i = 0; i < data.measurement1.sensor1.length; i++)
                 {
-                    if(i >= sampleOffsetLow && i <= sampleOffsetHigh)
+                    if(j < 1)
                     {
-                        averageArray.push((data.measurement1.sensor1[i+extra_peak_offset] + data.measurement1.sensor2[i+extra_peak_offset]) / 2);
+                        if(i >= sampleOffsetLow && i <= sampleOffsetHigh)
+                        {
+                            averageArray.push((data.measurement1.sensor1[i+extra_peak_offset] + data.measurement1.sensor2[i+extra_peak_offset]) / 2);
+                        }
+                        else
+                        {
+                            var average_sensors = data.measurement1.sensor1[i] + data.measurement1.sensor2[i];
+                            averageArray.push(average_sensors / 2);
+                        }
                     }
                     else
                     {
