@@ -179,9 +179,9 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
         var averageArray = [];
 
         var secInMin = 60;
-        var r_filter = 69;
+        var r_filter = 72;
         var r_offset = 500;
-        var qs_offset = 125;
+        var qs_offset = 100;
         var p_offset = 500;
         var slope_offset = 20;
         var sampleOffsetLow = 1700;
@@ -206,8 +206,6 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
         $scope.odd_BPM = false;
         $scope.odd_QRS = false;
         $scope.odd_RR = false;
-
-        var axis;
 
         function calc_R(array)
         {
@@ -358,19 +356,6 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
             }
             document.getElementById("_QRS").innerHTML = qrs_max +" seconds";
 
-            //Heart Axis: atrial or ventricular?
-            var max_QRS = Math.max.apply(null,qrs_Duration);
-            if(max_QRS < 0.10)
-            {
-                axis = "Atrial";
-                document.getElementById("_Axis").innerHTML = axis;
-            }
-            else if(max_QRS > 0.10)
-            {
-                axis = "Ventricular";
-                document.getElementById("_Axis").innerHTML = axis;
-            }
-
             //R-R intervals odd? value x up to value y , not odd? show highest value
             for(var i = 0; i < rr_Interval.length; i++)
             {
@@ -411,15 +396,13 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
         {
             if(BPM < 60)
             {
-                //console.log(axis + " Bradycardia");
                 document.getElementById("_BPM_text").innerHTML = "The Beats per Minte are lower than 60, this can be associated with the following Arrhythmia:"
-                    +"<br>"+axis+" Bradycardia";
+                    +"<br>"+" Bradycardia";
             }
             else if(BPM > 100 && BPM < 250)
             {
-                //console.log(axis + " Tachycardia");
                 document.getElementById("_BPM_text").innerHTML = "The Beats per Minute are higher than 100, this can be associated with the following Arrhythmia:"
-                    +"<br>"+axis+" Tachycardia";
+                    +"<br>"+" Tachycardia";
             }
             else if(BPM > 250)
             {
@@ -439,15 +422,10 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
                     count_extra_beats += 1;
                 }
             }
-            if (count_extra_beats > 0 && count_extra_beats < 3)
+            if (count_extra_beats > 0)
             {
                 document.getElementById("_RR_text").innerHTML = "There is one premature beat, this can be associated with the following Arrhythmia:"+"" +
-                    "<br>"+"Premature " + axis + " Complex";
-            }
-            else if(count_extra_beats >= 3)
-            {
-                document.getElementById("_RR_text").innerHTML = "There are several premature beats detected, this can be associated with the following Arrhythmia's:"
-                    +"<br>"+"Premature " + axis + " Complex and " + axis + " Tachycardia, note: Tachycardia can only be the case, if the BPM is higher than 100";
+                    "<br>"+"Premature Complex";
             }
         }
 
@@ -547,8 +525,6 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
                     document.getElementById("_QRS_text").innerHTML = "The QRS complex is Regular";
                 }
             }
-
-            document.getElementById("_Axis_text").innerHTML = "Based on the QRS Complex, we can conclude that the Heart Beat originates from the "+axis+ " Axis";
         }
 
         function calc_timePerSample(array, data)
@@ -599,26 +575,32 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
 
         function normal_sinus_rhythm(data)
         {
-            for(var i = 0; i < data.measurement1.sensor1.length; i++)
+            for(var j = 0; j < 2; j++)
             {
-                var average_sensors = data.measurement1.sensor1[i] + data.measurement1.sensor2[i];
-                averageArray[i] = average_sensors / 2;
+                for(var i = 0; i < data.measurement1.sensor1.length; i++)
+                {
+                    var average_sensors = data.measurement1.sensor1[i] + data.measurement1.sensor2[i];
+                    averageArray.push(average_sensors / 2);
+                }
             }
+
         }
 
         function premature_beat(data)
         {
-            for(var i = 0; i < data.measurement1.sensor1.length; i++)
+            for(var j = 0; j < 2; j++)
             {
-                if(i >= sampleOffsetLow && i <= sampleOffsetHigh)
+                for(var i = 0; i < data.measurement1.sensor1.length; i++)
                 {
-                    averageArray[i] = (data.measurement1.sensor1[i+extra_peak_offset] + data.measurement1.sensor2[i+extra_peak_offset]) / 2;
-
-                }
-                else
-                {
-                    var average_sensors = data.measurement1.sensor1[i] + data.measurement1.sensor2[i];
-                    averageArray[i] = average_sensors / 2;
+                    if(i >= sampleOffsetLow && i <= sampleOffsetHigh)
+                    {
+                        averageArray.push((data.measurement1.sensor1[i+extra_peak_offset] + data.measurement1.sensor2[i+extra_peak_offset]) / 2);
+                    }
+                    else
+                    {
+                        var average_sensors = data.measurement1.sensor1[i] + data.measurement1.sensor2[i];
+                        averageArray.push(average_sensors / 2);
+                    }
                 }
             }
         }
@@ -629,22 +611,18 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
             {
                 if(i >= sampleOffsetLow && i <= sampleOffsetHigh)
                 {
-                    averageArray[i] = (data.measurement1.sensor1[i+extra_peak_offset] + data.measurement1.sensor2[i+extra_peak_offset]) / 2;
+                    averageArray.push((data.measurement1.sensor1[i+extra_peak_offset] + data.measurement1.sensor2[i+extra_peak_offset]) / 2);
 
                 }
                 //extra secondary peak
                 else if(i >= 5500 && i <= 6225)
                 {
-                    averageArray[i] = (data.measurement1.sensor1[i+extra_peak_offset] + data.measurement1.sensor2[i+extra_peak_offset]) / 2;
+                    averageArray.push((data.measurement1.sensor1[i+extra_peak_offset] + data.measurement1.sensor2[i+extra_peak_offset]) / 2);
                 }
                 else
                 {
                     var average_sensors = data.measurement1.sensor1[i] + data.measurement1.sensor2[i];
-                    averageArray[i] = average_sensors / 2;
-                    /*if(averageArray[i] <= low_filter)
-                     {
-                     averageArray[i] = low_filter;
-                     }*/
+                    averageArray.push(average_sensors / 2);
                 }
             }
         }
@@ -660,7 +638,7 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
                 else
                 {
                     var average_sensors = data.measurement1.sensor1[i] + data.measurement1.sensor2[i];
-                    averageArray[i] = average_sensors / 2;
+                    averageArray.push(average_sensors / 2);
                 }
             }
         }
