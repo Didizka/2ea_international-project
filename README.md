@@ -59,3 +59,11 @@ There are 3 possibilities to deploy the app from the repo:
 
 ### List of required components ###
 [List of components](https://bitbucket.org/ChingizMizambekov/ecg/src/0cd166b0810a7870958a1a7d6bf1be43da7afc3d/Hardware/ECG_Device_PCB/Parts_List_ECG_Device.txt?at=master&fileviewer=file-view-default)
+
+## Deployment ##
+* Build the device
+* Insert micro SD card
+* Attach the electrodes
+* Press the start button to start the measurement
+* When finished, eject the SD card and insert it into a computer
+* Upload to your personalized dashboard
