@@ -807,6 +807,7 @@ app.controller('DashboardController', ['RecordName', '$scope', '$http', '$locati
     } else if (url == "/dashboardPage" && params.userid && params.token == "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9") {
       $scope.isDoctorLoggedIn = true;
       $scope.getUserForDoctor(params.userid, params.token).then(function(user) {
+        $scope.getRecords();
         $scope.calculateAge();
         $scope.userPage();
       })
