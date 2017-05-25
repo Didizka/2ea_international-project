@@ -45,9 +45,14 @@ There are 3 possibilities to deploy the app from the repo:
 
 ## Hardware ##
 ### Arduino sketch ###
+[Sketch](https://bitbucket.org/ChingizMizambekov/ecg/src/0cd166b0810a7870958a1a7d6bf1be43da7afc3d/Hardware/ECG_Device_Arduino_Code/ECG_Device_Arduino_Code.ino?at=master&fileviewer=file-view-default)
+
 
 ### Schematics ###
+[Schematics](https://bitbucket.org/ChingizMizambekov/ecg/src/0cd166b0810a7870958a1a7d6bf1be43da7afc3d/Hardware/ECG_Device_PCB/Schematic_Pcb.sch?at=master&fileviewer=file-view-default)
 
 ### PCB Design ###
+![Screenshot_Pcb_Design.png](https://bitbucket.org/repo/LooGLEM/images/2601417041-Screenshot_Pcb_Design.png)
 
-### List of components ###
+### List of required components ###
+[List of components](https://bitbucket.org/ChingizMizambekov/ecg/src/0cd166b0810a7870958a1a7d6bf1be43da7afc3d/Hardware/ECG_Device_PCB/Parts_List_ECG_Device.txt?at=master&fileviewer=file-view-default)
