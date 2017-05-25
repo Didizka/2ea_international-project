@@ -1,0 +1,60 @@
+Partlist
+
+Exported from updated_schema.sch at 24.5.2017 15:26
+
+EAGLE Version 8.1.0 Copyright (c) 1988-2017 Autodesk, Inc.
+
+Assembly variant: 
+
+Part        Value          Device          Package      Library    Sheet
+
+C13         4.89nF         C-EU025-030X050 C025-030X050 resistor   1
+C14         48.9nF         C-EU025-030X050 C025-030X050 resistor   1
+C15         207nF          C-EU025-030X050 C025-030X050 resistor   1
+C16         207nF          C-EU025-030X050 C025-030X050 resistor   1
+C17         100nF          C-EU025-030X050 C025-030X050 resistor   1
+C18         4.89nF         C-EU025-030X050 C025-030X050 resistor   1
+C19         48.9nF         C-EU025-030X050 C025-030X050 resistor   1
+C20         207nF          C-EU025-030X050 C025-030X050 resistor   1
+C21         207nF          C-EU025-030X050 C025-030X050 resistor   1
+C22         100nF          C-EU025-030X050 C025-030X050 resistor   1
+C23         470nF          C-EU025-030X050 C025-030X050 resistor   1
+C24         470nF          C-EU025-030X050 C025-030X050 resistor   1
+ELECTRODES1                PINHD-1X3       1X03         pinhead    1
+IC7         INA128P        INA128P         DIL08        burr-brown 1
+IC8         LF353N         LF353N          DIL08        linear     1
+IC9         LM741P         LM741P          DIL08        linear     1
+IC10        INA128P        INA128P         DIL08        burr-brown 1
+IC11        LF353N         LF353N          DIL08        linear     1
+IC12        LM741P         LM741P          DIL08        linear     1
+JP3                        PINHD-1X12      1X12         pinhead    1
+JP5                        PINHD-1X12      1X12         pinhead    1
+JP6                        PINHD-1X2       1X02         pinhead    1
+R32         470            R-EU_0309/12    0309/12      rcl        1
+R33         1.1M           R-EU_0309/12    0309/12      rcl        1
+R35         390            R-EU_0309/12    0309/12      rcl        1
+R36         1.5M           R-EU_0309/12    0309/12      rcl        1
+R37         1k             R-EU_0309/12    0309/12      rcl        1
+R38         50             R-EU_0309/12    0309/12      rcl        1
+R39         390            R-EU_0309/12    0309/12      rcl        1
+R40         39k            R-EU_0309/12    0309/12      rcl        1
+R41         19k            R-EU_0309/12    0309/12      rcl        1
+R42         1k             R-EU_0309/12    0309/12      rcl        1
+R43         39k            R-EU_0309/12    0309/12      rcl        1
+R44         470            R-EU_0309/12    0309/12      rcl        1
+R45         82.8k          R-EU_0309/12    0309/12      rcl        1
+R46         1.1M           R-EU_0309/12    0309/12      rcl        1
+R47         600k           R-EU_0309/12    0309/12      rcl        1
+R48         1.5M           R-EU_0309/12    0309/12      rcl        1
+R49         1k             R-EU_0309/12    0309/12      rcl        1
+R50         19k            R-EU_0309/12    0309/12      rcl        1
+R51         1k             R-EU_0309/12    0309/12      rcl        1
+R52         39k            R-EU_0309/12    0309/12      rcl        1
+R53         39k            R-EU_0309/12    0309/12      rcl        1
+R56         50             R-EU_0309/12    0309/12      rcl        1
+R58         600k           R-EU_0309/12    0309/12      rcl        1
+R60         82.8k          R-EU_0309/12    0309/12      rcl        1
+R62         10k            R-EU_0309/12    0309/12      rcl        1
+RTC1                       PINHD-1X5       1X05         pinhead    1
+SD-CARD1                   PINHD-1X6       1X06         pinhead    1
+VOLTAGES1                  PINHD-1X3       1X03         pinhead    1
