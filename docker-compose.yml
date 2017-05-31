@@ -3,6 +3,10 @@ db:
   ports:
     - "27017:27017"
 
+dbseed:
+  build: ./dbseed
+  links:
+    - db
 
 app:
  build: .

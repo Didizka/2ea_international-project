@@ -1,0 +1,20 @@
+FROM node:latest
+MAINTAINER Chingiz Mizambekov 
+
+RUN mkdir -p /ecg
+WORKDIR /ecg
+
+COPY package.json /ecg/package.json
+COPY . /ecg
+RUN npm install
+
+
+EXPOSE 3000
+
+
+CMD ["npm", "start"]
+
+Mongo: export data:
+mongoexport --db ecg --collection users --jsonArray
+
+import data: mongoimport --db ecg --collection users --file mongodb-data.json --jsonArray
