@@ -15,11 +15,11 @@
                                 <li ng-click='donateGym()'>Gym membership (50€)</li>
                             </ul>
                             <p>Buy them monthly a <em>{{ donateItem }}</em></p>
-                            <input ng-model="cardNumber" type="text" placeholder="Kaartnr" />
-                              <input ng-model="cardCvc" type="text" placeholder="CVC" />
-                              <input ng-model="cardExpMonth" type="text" placeholder="MM" />
-                              <input ng-model="cardExpYear" type="text" placeholder="YYYY" />
-                              <button type="submit" ng-click='submit()'>Subscribe!</button>
+                            <input class="form-control" ng-model="cardNumber" type="text" placeholder="Kaartnr" />
+                              <input class="form-control" ng-model="cardCvc" type="text" placeholder="CVC" />
+                              <input class="form-control" ng-model="cardExpMonth" type="text" placeholder="MM" />
+                              <input class="form-control" ng-model="cardExpYear" type="text" placeholder="YYYY" />
+                              <button type="submit" ng-click='submit()' class='btn btn-success'>Subscribe!</button>
                               <p ng-show="error"><em>{{error}}</em></p>
                         </div>
                     </div>                    
