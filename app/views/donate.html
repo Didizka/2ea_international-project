@@ -2,10 +2,27 @@
     <section id="donate">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2>Donate</h2>
+                <div class="col-lg-12">
+                    <h2 class='text-center'>Donate</h2>
                     <hr class="star-primary">
-                    
+                   <p class="lead">Here you can subscribe to one of our monthly plans in order to support the developers of your favorite app.</p>
+                    <div class="row">
+                        <div class="col-lg-12">
+                        <p>Choose a monthly subscription to support the developers.</p>
+                            <ul>
+                                <li ng-click='donateCoffee()'>Coffee (5€)</li>
+                                <li ng-click='donateTShirt()'>T-Shirt (20€)</li>
+                                <li ng-click='donateGym()'>Gym membership (50€)</li>
+                            </ul>
+                            <p>Buy them monthly a <em>{{ donateItem }}</em></p>
+                            <input ng-model="cardNumber" type="text" placeholder="Kaartnr" />
+                              <input ng-model="cardCvc" type="text" placeholder="CVC" />
+                              <input ng-model="cardExpMonth" type="text" placeholder="MM" />
+                              <input ng-model="cardExpYear" type="text" placeholder="YYYY" />
+                              <button type="submit" ng-click='submit()'>Subscribe!</button>
+                              <p ng-show="error"><em>{{error}}</em></p>
+                        </div>
+                    </div>                    
                 </div>
             </div>
         </div>

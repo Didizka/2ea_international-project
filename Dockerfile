@@ -6,7 +6,7 @@ WORKDIR /ecg
 
 COPY package.json /ecg/package.json
 COPY . /ecg
-RUN npm install
+
 
 
 EXPOSE 3000

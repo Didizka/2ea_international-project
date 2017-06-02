@@ -10,8 +10,6 @@ dbseed:
 
 app:
  build: .
- volumes:
-  - .:/ecg
  ports:
   - "3000:3000"
  links:

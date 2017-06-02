@@ -61,8 +61,8 @@ var createHomeDir = function(username) {
 }
 
 // Connect to the Database
-// mongoose.connect('mongodb://localhost:27017/ecg');
-mongoose.connect('mongodb://172.17.0.2:27017/ecg');
+mongoose.connect('mongodb://localhost:27017/ecg');
+// mongoose.connect('mongodb://172.17.0.2:27017/ecg');
 
 // Import user model
 var User = require(__dirname + '/app/js/models/user');

@@ -5,7 +5,7 @@ app.controller('HospitalsController', function($scope, $http, $location, $routeP
         method:'GET',
         url:'http://datasets.antwerpen.be/v4/gis/ziekenhuisoverzicht.json'
     })
-    .then(function (res) {
+    .then((res) => {
         $scope.hospitals = res.data.data;
     });    
 

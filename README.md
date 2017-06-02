@@ -43,7 +43,7 @@ There are 3 possibilities to deploy the app from the repo:
 1. For MacOS or Linux
     * Make sure Docker is installed
     * Run "docker-compose up -d" from the rootfolder of the repo
-    * The web app is accessible at 172.17.0.3
+    * The web app is accessible at localhost:3000
 
 
 ## Hardware ##
